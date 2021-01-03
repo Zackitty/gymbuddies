@@ -20,5 +20,5 @@ from django.contrib import admin
 from gymapp import views
 urlpatterns = [
     path(r'admin/', admin.site.urls),
-    url(r'^idealweight/',views.IdealWeight)
+    path('', include('gymapp.urls'))
 ]
