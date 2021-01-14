@@ -11,11 +11,25 @@ class User(models.Model):
     goal = models.CharField(max_length=20, default="", unique=False)
 
 class Exercise(models.Model):
+    username = models.CharField(max_length=20, default="", unique=True)
+    length_in_min = models.IntegerField()
+
 
 class Friend(models.Model):
+    friend_id = models.IntegerField()
+
 
 class Loss(models.Model):
+    amount = models.IntegerField()
+    loser_id = models.IntegerField()
 
 class Gain(models.Model): 
+    amount = models.IntegerField()
+    gainer_id = models.IntegerField()
 
-class Exercise(models.Model):      
+class Lift(models.Model):  
+    name = 
+    weight = models.IntegerField()
+    one_rep_max = models.IntegerField()
+    reps = models.IntegerField()
+    lifter_id = models.IntegerField()
