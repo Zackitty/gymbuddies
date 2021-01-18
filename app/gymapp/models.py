@@ -28,7 +28,7 @@ class Gain(models.Model):
     gainer_id = models.IntegerField()
 
 class Lift(models.Model):  
-    name = 
+    name = models.CharField(max_length=20, default="", unique=True)
     weight = models.IntegerField()
     one_rep_max = models.IntegerField()
     reps = models.IntegerField()
