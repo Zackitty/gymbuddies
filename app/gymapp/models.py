@@ -16,12 +16,12 @@ class Exercise(models.Model):
     username = models.CharField(max_length=20, default="", unique=True)
     length_in_min = models.IntegerField()
     entry_date = models.DateTimeField(auto_now_add=True)
-    exerciser = models.ForeignKey(User)
+    exerciser = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Friend(models.Model):
     friend_id = models.BinaryField(primary_key=True)
     friends_id = models.IntegerField()
-    user =  models.ForeignKey(User, related_name='self')
+    user =  models.ForeignKey(User, related_name='self', on_delete=models.CASCADE)
     contact = models.ManyToManyField(User, related_name='friends', symmetrical=False)
 
     
@@ -32,14 +32,14 @@ class Loss(models.Model):
     amount = models.IntegerField()
     loser_id = models.IntegerField()
     entry_date = models.DateTimeField(auto_now_add=True)
-    loser = models.ForeignKey(User)
+    loser = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Gain(models.Model): 
     gain_id = models.BinaryField(primary_key=True)
     amount = models.IntegerField()
     gainer_id = models.IntegerField()
     entry_date = models.DateTimeField(auto_now_add=True)
-    gainer = models.ForeignKey(User)
+    gainer = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Lift(models.Model): 
     lift_id = models.BinaryField(primary_key=True) 
@@ -49,4 +49,4 @@ class Lift(models.Model):
     reps = models.IntegerField()
     lifter_id = models.IntegerField()
     entry_date = models.DateTimeField(auto_now_add=True)
-    lifter = models.ForeignKey(User)
+    lifter = models.ForeignKey(User, on_delete=models.CASCADE)
