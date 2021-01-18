@@ -5,7 +5,7 @@ class User(models.Model):
     user_id = models.BinaryField(primary_key=True)
     full_name = models.CharField(max_length=20, default="", unique=False)
     username = models.CharField(max_length=20, default="", unique=True)
-    password = = models.BinaryField(**options)
+    password = = models.BinaryField()
     weight = models.IntegerField()
     age = models.IntegerField()
     gender = models.CharField(max_length=20, default="", unique=False)
@@ -16,10 +16,15 @@ class Exercise(models.Model):
     username = models.CharField(max_length=20, default="", unique=True)
     length_in_min = models.IntegerField()
     entry_date = models.DateTimeField(auto_now_add=True)
+    exerciser = models.ForeignKey(User)
 
 class Friend(models.Model):
     friend_id = = models.BinaryField(primary_key=True)
     friends_id = models.IntegerField()
+    user =  models.ForeignKey(User, related_name='self')
+    contact = models.ManyToManyField(User, related_name='friends', symmetrical=False)
+
+    
 
 
 class Loss(models.Model):
@@ -27,12 +32,14 @@ class Loss(models.Model):
     amount = models.IntegerField()
     loser_id = models.IntegerField()
     entry_date = models.DateTimeField(auto_now_add=True)
+    loser = models.ForeignKey(User)
 
 class Gain(models.Model): 
     gain_id = = models.BinaryField(primary_key=True)
     amount = models.IntegerField()
     gainer_id = models.IntegerField()
     entry_date = models.DateTimeField(auto_now_add=True)
+    gainer = = models.ForeignKey(User)
 
 class Lift(models.Model): 
     lift_id = = models.BinaryField(primary_key=True) 
@@ -42,3 +49,4 @@ class Lift(models.Model):
     reps = models.IntegerField()
     lifter_id = models.IntegerField()
     entry_date = models.DateTimeField(auto_now_add=True)
+    lifter = models.ForeignKey(User)
