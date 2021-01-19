@@ -24,9 +24,6 @@ class Friend(models.Model):
     user =  models.ForeignKey(User, related_name='self', on_delete=models.CASCADE)
     contact = models.ManyToManyField(User, related_name='friends', symmetrical=False)
 
-    
-
-
 class Loss(models.Model):
     amount = models.IntegerField()
     entry_date = models.DateTimeField(auto_now_add=True)
