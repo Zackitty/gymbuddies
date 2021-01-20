@@ -19,18 +19,24 @@ from .serializers import UserSerializer, LiftSerializer, FriendSerializer, LossS
  
 class UserView(generics.CreateAPIView):
     queryset = User.Objects.All()
+    serializer_class = UserSerializer
 
 class LiftView(generics.CreateAPIView):
     queryset = Lift.Objects.All()
-    
+    serializer_class = LiftSerializer
+
 class FriendView(generics.CreateAPIView):
     queryset = Friend.Objects.All()
+    serializer_class = FriendSerializer
 
 class LossView(generics.CreateAPIView):
     queryset = Loss.Objects.All()
+    serializer_class = LossSerializer
 
 class GainView(generics.CreateAPIView):
     queryset = Gain.Objects.All()
+    serializer_class = GainSerializer
 
 class ExerciseView(generics.CreateAPIView):
     queryset = Exercise.Objects.All()
+    serializer_class = ExerciseSerializer
