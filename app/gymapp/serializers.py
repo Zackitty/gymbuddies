@@ -25,7 +25,7 @@ class GainSerializer(serializers.ModelSerializer):
 class LiftSerializer(serializers.ModelSerializer):
     class Meta: 
       model =  Lift
-      fields = ('id', 'name', 'weight', 
+      fields = ('name', 'weight', 
       'one_rep_max', 'reps', 'entry_date', 'lifter')
 
 class FriendSerializer(serializers.ModelSerializer):
