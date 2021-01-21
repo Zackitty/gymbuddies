@@ -7,8 +7,8 @@ urlpatterns = [
     path('lifts', LiftView.as_view()),
     path('friends', FriendView.as_view()),
     path('losses', LossView.as_view()),
-    path('gains', GainView),
-    path('exercises', ExerciseView)
+    path('gains', GainView.as_view()),
+    path('exercises', ExerciseView.as_view())
 
 
 ]
