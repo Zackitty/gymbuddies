@@ -3,7 +3,7 @@ from .models import User, Exercise, Loss, Gain, Lift, Friend
 class UserSerializer(serializers.ModelSerializer):
     class Meta: 
       model =  User
-      fields = ('id', 'full_name', 'username', 
+      fields = ('full_name', 'username', 
       'password', 'weight', 'age', 'gender', 'goal')
 
 class ExerciseSerializer(serializers.ModelSerializer):
