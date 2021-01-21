@@ -9,18 +9,18 @@ class UserSerializer(serializers.ModelSerializer):
 class ExerciseSerializer(serializers.ModelSerializer):
     class Meta:
       model =  Exercise
-      fields = ('id', 'name', 'length_in_min', 
+      fields = ('name', 'length_in_min', 
       'entry_date', 'exerciser')
 
 class LossSerializer(serializers.ModelSerializer):
     class Meta: 
       model =  Loss
-      fields = ('id', 'amount', 'entry_date', 'loser')
+      fields = ('amount', 'entry_date', 'loser')
 
 class GainSerializer(serializers.ModelSerializer):
     class Meta: 
       model =  Gain
-      fields = ('id', 'amount', 'entry_date', 'gainer') 
+      fields = ('amount', 'entry_date', 'gainer') 
 
 class LiftSerializer(serializers.ModelSerializer):
     class Meta: 
