@@ -31,4 +31,4 @@ class LiftSerializer(serializers.ModelSerializer):
 class FriendSerializer(serializers.ModelSerializer):
     class Meta: 
       model =  Friend
-      fields = ('id', 'friend_id', 'friends_id', 'user', 'contact')                      
+      fields = ('friend_id', 'friends_id', 'user', 'contact')                      
