@@ -12,8 +12,8 @@ from django.http import HttpResponse
 from django.core import serializers
 from django.conf import settings
 import json
-from .models import User, Lift, Friend, Loss, Gain, Exercise
-from .serializers import UserSerializer, LiftSerializer, FriendSerializer, LossSerializer, GainSerializer, ExerciseSerializer
+from .models import User, Lift, Friend, Loss, Gain, Exercise, LiftSet, Exerciser
+from .serializers import UserSerializer, LiftSetSerializer, LiftSerializer, FriendSerializer, LossSerializer, GainSerializer, ExerciseSerializer, ExerciserSerializer
 # Create your views here.
 
  
@@ -24,6 +24,10 @@ class UserView(generics.CreateAPIView):
 class LiftView(generics.CreateAPIView):
     queryset = Lift.objects.all()
     serializer_class = LiftSerializer
+
+class LiftSetView(generics.CreateAPIView):
+    queryset = LiftSet.objects.all()
+    serializer_class = LiftSetSerializer
 
 class FriendView(generics.CreateAPIView):
     queryset = Friend.objects.all()
@@ -40,3 +44,7 @@ class GainView(generics.CreateAPIView):
 class ExerciseView(generics.CreateAPIView):
     queryset = Exercise.objects.all()
     serializer_class = ExerciseSerializer
+
+class ExerciserView(generics.CreateAPIView):
+    queryset = Exerciser.objects.all()
+    serializer_class = ExerciserSerializer
