@@ -1,5 +1,5 @@
 from rest_framework import serializers 
-from .models import User, Exercise, Loss, Gain, Lift, Friend
+from .models import User, Exercise, Loss, Gain, LiftSet, Friend, LiftSet, Exerciser
 class UserSerializer(serializers.ModelSerializer):
     class Meta: 
       model =  User
@@ -9,8 +9,13 @@ class UserSerializer(serializers.ModelSerializer):
 class ExerciseSerializer(serializers.ModelSerializer):
     class Meta:
       model =  Exercise
-      fields = ('name', 'length_in_min', 
-      'entry_date', 'exerciser')
+      fields = ('name')
+
+class ExerciserSerializer(serializers.ModelSerializer):
+    class Meta:
+      model =  Exercise
+      fields = ('length_in_min', 
+      'entry_date', 'exerciser_id', 'exercise_id')
 
 class LossSerializer(serializers.ModelSerializer):
     class Meta: 
@@ -22,11 +27,16 @@ class GainSerializer(serializers.ModelSerializer):
       model =  Gain
       fields = ('amount', 'entry_date', 'gainer') 
 
+class LiftSetSerializer(serializers.ModelSerializer):
+    class Meta: 
+      model =  Lift
+      fields = ('weight', 
+      'one_rep_max', 'reps', 'entry_date', 'lift_name_id', 'lifter_id')
+
 class LiftSerializer(serializers.ModelSerializer):
     class Meta: 
       model =  Lift
-      fields = ('name', 'weight', 
-      'one_rep_max', 'reps', 'entry_date', 'lifter')
+      fields = ('name')
 
 class FriendSerializer(serializers.ModelSerializer):
     class Meta: 

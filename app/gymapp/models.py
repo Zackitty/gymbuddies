@@ -12,11 +12,15 @@ class User(models.Model):
     goal = models.CharField(max_length=20, default="", unique=False)
 
 class Exercise(models.Model):
-    exercise_id = models.BinaryField(primary_key=True)
-    username = models.CharField(max_length=20, default="", unique=True)
+    name = models.CharField(max_length=20, default="", unique=True)
+    exercising_id = models.BinaryField(primary_key=True)
+
+class Exerciser(models.Model):
+    ex_id = models.BinaryField(primary_key=True)
     length_in_min = models.IntegerField()
     entry_date = models.DateTimeField(auto_now_add=True)
     exerciser = models.ForeignKey(User, on_delete=models.CASCADE)
+    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
 
 class Friend(models.Model):
     friend_id = models.BinaryField(primary_key=True)
@@ -34,10 +38,15 @@ class Gain(models.Model):
     entry_date = models.DateTimeField(auto_now_add=True)
     gainer = models.ForeignKey(User, on_delete=models.CASCADE)
 
-class Lift(models.Model): 
+class Lift(models.Model):
     name = models.CharField(max_length=20, default="", unique=True)
+
+class LiftSet(models.Model): 
     weight = models.IntegerField()
     one_rep_max = models.IntegerField()
     reps = models.IntegerField()
     entry_date = models.DateTimeField(auto_now_add=True)
     lifter = models.ForeignKey(User, on_delete=models.CASCADE)
+    lift_name = models.ForeignKey(Lift, on_delete=models.CASCADE)
+
+
