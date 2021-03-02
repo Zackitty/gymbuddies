@@ -1,5 +1,5 @@
 from rest_framework import serializers 
-from .models import User, Exercise, Loss, Gain, LiftSet, Friend, LiftSet, Exerciser
+from .models import User, Exercise, Loss, Gain, Lift, Friend, LiftSet, Exerciser
 class UserSerializer(serializers.ModelSerializer):
     class Meta: 
       model =  User
