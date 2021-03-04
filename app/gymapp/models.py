@@ -2,12 +2,11 @@ from django.db import models
 
 # Create your models here.
 class User(models.Model):
-    user_id = models.BinaryField(primary_key=True)
     full_name = models.CharField(max_length=20, default="", unique=False)
     username = models.CharField(max_length=20, default="", unique=True)
     password = models.BinaryField()
-    weight = models.IntegerField()
-    age = models.IntegerField()
+    weight = models.CharField(max_length=20, default="", unique=False)
+    age = models.CharField(max_length=20, default="", unique=False)
     gender = models.CharField(max_length=20, default="", unique=False)
     goal = models.CharField(max_length=20, default="", unique=False)
 
@@ -16,14 +15,12 @@ class Exercise(models.Model):
     exercising_id = models.BinaryField(primary_key=True)
 
 class Exerciser(models.Model):
-    ex_id = models.BinaryField(primary_key=True)
     length_in_min = models.IntegerField()
     entry_date = models.DateTimeField(auto_now_add=True)
     exerciser = models.ForeignKey(User, on_delete=models.CASCADE)
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
 
 class Friend(models.Model):
-    friend_id = models.BinaryField(primary_key=True)
     friends_id = models.IntegerField()
     user =  models.ForeignKey(User, related_name='self', on_delete=models.CASCADE)
     contact = models.ManyToManyField(User, related_name='friends', symmetrical=False)

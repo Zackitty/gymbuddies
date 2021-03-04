@@ -9,7 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
 class ExerciseSerializer(serializers.ModelSerializer):
     class Meta:
       model =  Exercise
-      fields = ('name')
+      fields = ('name',)
 
 class ExerciserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -36,7 +36,7 @@ class LiftSetSerializer(serializers.ModelSerializer):
 class LiftSerializer(serializers.ModelSerializer):
     class Meta: 
       model =  Lift
-      fields = ('name')
+      fields = ('name',)
 
 class FriendSerializer(serializers.ModelSerializer):
     class Meta: 
