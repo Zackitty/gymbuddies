@@ -26,13 +26,14 @@ class LiftView(generics.CreateAPIView):
     serializer_class = LiftSerializer
   
 
-class GetLift(generics.ListAPIView):
-    serializer_class = LiftSerializer
-    def get_queryset(path):
-        print("this.....pathh...." + path.path)
-        qs = Lift.objects.all()
-        qs = qs.filter(name=path)
-        return qs
+
+def getLift(request, path):
+    print("this.....pathh...." + path)
+    print(request)
+    qs = Lift.objects.get(name=path)
+    print(qs)
+    serialized_obj = serializers.serialize('json', [ qs, ])
+    return HttpResponse(serialized_obj, content_type="application/x-javascript")
     
     
     
