@@ -28,8 +28,6 @@ class LiftView(generics.CreateAPIView):
 
 
 def getLift(request, path):
-    print("this.....pathh...." + path)
-    print(request)
     qs = Lift.objects.get(name=path)
     print(qs)
     serialized_obj = serializers.serialize('json', [ qs, ])
