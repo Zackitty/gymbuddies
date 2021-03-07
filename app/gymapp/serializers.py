@@ -29,7 +29,7 @@ class GainSerializer(serializers.ModelSerializer):
 
 class LiftSetSerializer(serializers.ModelSerializer):
     class Meta: 
-      model =  Lift
+      model =  LiftSet
       fields = ('weight', 
       'one_rep_max', 'reps', 'entry_date', 'lift_name_id', 'lifter_id')
 

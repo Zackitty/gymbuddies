@@ -77,8 +77,6 @@ def getLift(request, path):
     if request.method == 'GET':
         qs = Lift.objects.get(name=path)
         serialized_obj = serializers.serialize('json', [ qs, ])
-        jsOb = serialized_obj[1]
-        print(qs.name)
         return HttpResponse(serialized_obj, content_type="application/x-javascript")
     if request.method == 'POST':
         qs = Lift.objects.get(name=path)
@@ -87,11 +85,37 @@ def getLift(request, path):
         qs.save()
         return HttpResponse(qs)
 
-class LiftSetView(generics.CreateAPIView):
+
+class LiftSetView(generics.ListCreateAPIView):
     queryset = LiftSet.objects.all()
     serializer_class = LiftSetSerializer
     
-    
+    class Meta:
+        model = LiftSet
+        fields = ('weight', 'one_rep_max', 
+        'reps', 'entry_date', 'lift_name_id', 'lifter_id')
+
+
+def getMyLifts(request, id1):
+    if request.method == 'GET':
+        queryset = LiftSet.objects.all().filter(lifter=id1) 
+        queryArray = []
+        for key in queryset:
+            queryArray.append(serializers.serialize('json', [ key, ]))
+        return HttpResponse(queryArray, content_type="application/x-javascript")
+
+def getMyLiftsForDay(request, id1, id2):
+    if request.method == 'GET': 
+        qs = LiftSet.objects.get(lifter=id1, entry_date=id2) 
+        serialized_obj = serializers.serialize('json', [ qs, ])
+        return HttpResponse(serialized_obj, content_type="application/x-javascript")
+
+def getLiftSet(request, id1, id2):
+    if request.method == 'GET':    
+        qs = LiftSet.objects.get(lifter=id1, lift_name=id2) 
+        serialized_obj = serializers.serialize('json', [ qs, ])
+        return HttpResponse(serialized_obj, content_type="application/x-javascript")
+
 
 class FriendView(generics.CreateAPIView):
     queryset = Friend.objects.all()
