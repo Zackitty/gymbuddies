@@ -18,21 +18,53 @@ from .models import User, Lift, Friend, Loss, Gain, Exercise, LiftSet, Exerciser
 from .serializers import UserSerializer, LiftSetSerializer, LiftSerializer, FriendSerializer, LossSerializer, GainSerializer, ExerciseSerializer, ExerciserSerializer
 # Create your views here.
 
-class UserView(generics.CreateAPIView):
+class UserView(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    class Meta:
+        
+        model = User
+        fields = ('full_name', 'username', 
+        'password', 'weight', 'age', 'gender', 'goal')
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, request):
+        print('heygirl')
+        hashed_password = bcrypt.hashpw(self.request.POST.get('password').encode('utf-8'), bcrypt.gensalt(14))
+        user = User(
+        full_name=self.request.POST.get('full_name'),
+        username=self.request.POST.get('username'),
+        password=hashed_password,
+        weight=self.request.POST.get('weight'),
+        age=self.request.POST.get('age'),
+        gender=self.request.POST.get('gender'),
+        goal=self.request.POST.get('goal')
+        )
+        user.save()
+        return HttpResponse(user)
 
 def getUser(request, path):
     if request.method == 'GET':
-        qs = Lift.objects.get(name=path)
+        qs = Lift.objects.get(username=path)
         serialized_obj = serializers.serialize('json', [ qs, ])
-        jsOb = serialized_obj[1]
-        print(qs.name)
         return HttpResponse(serialized_obj, content_type="application/x-javascript")
     if request.method == 'POST':
-        qs = Lift.objects.get(name=path)
-        name = request.POST.get("name")
-        qs.name = name
+        hashed_password = bcrypt.hashpw(request.POST.get('password').encode('utf-8'), bcrypt.gensalt(14))
+        qs = Lift.objects.get(username=path)
+        full_name=request.POST.get('full_name'),
+        username=request.POST.get('username'),
+        password=hashed_password,
+        weight=request.POST.get('weight'),
+        age=request.POST.get('age'),
+        gender=request.POST.get('gender'),
+        goal=request.POST.get('goal')
+        qs.username = username
+        qs.full_name = full_name
+        qs.password = password
+        qs.weight = weight
+        qs.age = age
+        qs.gender = gender
+        qs.goal = goal
         qs.save()
         return HttpResponse(qs)
 
