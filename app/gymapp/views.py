@@ -105,10 +105,12 @@ def getMyLifts(request, id1):
         return HttpResponse(queryArray, content_type="application/x-javascript")
 
 def getMyLiftsForDay(request, id1, id2):
-    if request.method == 'GET': 
-        qs = LiftSet.objects.get(lifter=id1, entry_date=id2) 
-        serialized_obj = serializers.serialize('json', [ qs, ])
-        return HttpResponse(serialized_obj, content_type="application/x-javascript")
+ if request.method == 'GET':
+        queryset = LiftSet.objects.all().filter(lifter=id1, entry_date=id2) 
+        queryArray = []
+        for key in queryset:
+            queryArray.append(serializers.serialize('json', [ key, ]))
+        return HttpResponse(queryArray, content_type="application/x-javascript")
 
 def getLiftSet(request, id1, id2):
     if request.method == 'GET':    
@@ -120,6 +122,18 @@ def getLiftSet(request, id1, id2):
 class FriendView(generics.CreateAPIView):
     queryset = Friend.objects.all()
     serializer_class = FriendSerializer
+
+def getFriends(request,id1, id2):
+    if request.method == 'GET':
+        queryset = LiftSet.objects.all().filter(user_id=id1) 
+        queryArray = []
+        for key in queryset:
+            queryArray.append(serializers.serialize('json', [ key, ]))
+        return HttpResponse(queryArray, content_type="application/x-javascript")
+    if request.method == 'POST':
+        friendship = Friend(friends_id=id2, user_id=id2)
+        friendship.save()
+        return HttpResponse
 
 class LossView(generics.CreateAPIView):
     queryset = Loss.objects.all()
