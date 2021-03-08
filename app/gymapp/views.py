@@ -155,11 +155,22 @@ def getLoss(request, id1, id2):
 
 def userLoss(request, id):
         if request.method == 'GET':   
-            queryset = Loss.objects.all().filter(loser_id=id1) 
+            queryset = Loss.objects.all().filter(loser_id=id) 
             queryArray = []
             for key in queryset:
                 queryArray.append(serializers.serialize('json', [ key, ]))
             return HttpResponse(queryArray, content_type="application/x-javascript")
+        if request.method == 'POST':   
+            qs = Loss.objects.all().filter(loser_id=id).last()
+            userQs = User.objects.get(id=id)
+            amount=request.POST.get('amount'),
+            entry_date = request.POST.get('one_rep_max'),
+            reps=request.POST.get('reps'),
+            entry_date=request.POST.get('entry_date')
+
+            userQs.weight = userQs.weight - amount 
+
+            
 
 class GainView(generics.CreateAPIView):
     queryset = Gain.objects.all()
