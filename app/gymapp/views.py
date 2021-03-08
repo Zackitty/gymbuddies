@@ -89,11 +89,8 @@ def getLift(request, path):
 class LiftSetView(generics.ListCreateAPIView):
     queryset = LiftSet.objects.all()
     serializer_class = LiftSetSerializer
-    
-    class Meta:
-        model = LiftSet
-        fields = ('weight', 'one_rep_max', 
-        'reps', 'entry_date', 'lift_name_id', 'lifter_id')
+
+
 
 
 def getMyLifts(request, id1):
@@ -105,7 +102,7 @@ def getMyLifts(request, id1):
         return HttpResponse(queryArray, content_type="application/x-javascript")
 
 def getMyLiftsForDay(request, id1, id2):
- if request.method == 'GET':
+    if request.method == 'GET':
         queryset = LiftSet.objects.all().filter(lifter=id1, entry_date=id2) 
         queryArray = []
         for key in queryset:
@@ -117,7 +114,18 @@ def getLiftSet(request, id1, id2):
         qs = LiftSet.objects.get(lifter=id1, lift_name=id2) 
         serialized_obj = serializers.serialize('json', [ qs, ])
         return HttpResponse(serialized_obj, content_type="application/x-javascript")
-
+    if request.method == 'POST':
+        weight=request.POST.get('weight'),
+        one_rep_max=request.POST.get('one_rep_max'),
+        reps=request.POST.get('reps'),
+        entry_date=request.POST.get('entry_date'),
+        liftSet = LiftSet(
+            weight=weight, one_rep_max=one_rep_max,
+            reps=reps, entry_date=entry_date,
+            lift_name_id=id2, lifter_id=id1
+        )
+        liftSet.save()
+        return HttpResponse(liftSet)
 
 class FriendView(generics.CreateAPIView):
     queryset = Friend.objects.all()
@@ -138,6 +146,20 @@ def getFriends(request,id1, id2):
 class LossView(generics.CreateAPIView):
     queryset = Loss.objects.all()
     serializer_class = LossSerializer
+
+def getLoss(request, id1, id2):
+    if request.method == 'GET':
+        qs = Loss.objects.get(loser_id=id1, id=id2) 
+        serialized_obj = serializers.serialize('json', [ qs, ])
+        return HttpResponse(serialized_obj, content_type="application/x-javascript")
+
+def userLoss(request, id):
+        if request.method == 'GET':   
+            queryset = Loss.objects.all().filter(loser_id=id1) 
+            queryArray = []
+            for key in queryset:
+                queryArray.append(serializers.serialize('json', [ key, ]))
+            return HttpResponse(queryArray, content_type="application/x-javascript")
 
 class GainView(generics.CreateAPIView):
     queryset = Gain.objects.all()
