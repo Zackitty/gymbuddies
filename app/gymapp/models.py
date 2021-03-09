@@ -47,7 +47,15 @@ class LiftSet(models.Model):
     lift_name = models.ForeignKey(Lift, on_delete=models.CASCADE)
 
 
-class DailyWeight(models.Model):
+class TodaysWeight(models.Model):
     weight = models.IntegerField()
     entry_date = models.DateTimeField(auto_now_add=True)
     userId = models.ForeignKey(User, on_delete=models.CASCADE)
+
+class TotalLoss(models.Model):
+    total_loss = models.IntegerField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+class TotalGain(models.Model):
+    total_gain = models.IntegerField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)

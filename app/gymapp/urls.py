@@ -10,11 +10,14 @@ urlpatterns = [
     path('users/<int:id1>/lifts/date/<int:id2>', getMyLiftsForDay),
     path('users/<int:id1>/friends/<int:id2>', getFriends),
     path('users/<int:id>/loss', userLoss),  
-    path('users/<int:id>/dailyweight', userWeight), 
+    path('users/<int:id1>/loss/<int:id2>', getLoss),
+    path('users/<int:id>/totalLoss', getTotalLoss),  
+    path('users/<int:id>/gain', userGain), 
+    path('users/<int:id1>/gain/<int:id2>', getGain), 
+    path('users/<int:id>/totalgain', getTotalGain),  
     path('lifts', LiftView.as_view()),
     path('lifts/<path>', getLift),
     path('liftsets', LiftView.as_view()),          
-    path('gains', GainView.as_view()),
     path('exercises', ExerciseView.as_view()),
     path('exercisers', ExerciseView.as_view())
 

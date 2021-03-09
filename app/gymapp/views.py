@@ -13,9 +13,10 @@ from django.core import serializers
 from django.conf import settings
 import json
 import bcrypt
+import requests
 from django.views.decorators.csrf import csrf_exempt
-from .models import User, Lift, Friend, Loss, Gain, Exercise, LiftSet, Exerciser, DailyWeight
-from .serializers import UserSerializer, LiftSetSerializer, LiftSerializer, FriendSerializer, LossSerializer, GainSerializer, ExerciseSerializer, ExerciserSerializer, DailyWeightSerializer
+from .models import User, Lift, Friend, Loss, Gain, Exercise, LiftSet, Exerciser, TodaysWeight, TotalGain, TotalLoss
+from .serializers import UserSerializer, LiftSetSerializer, LiftSerializer, FriendSerializer, LossSerializer, GainSerializer, ExerciseSerializer, ExerciserSerializer, TodaysWeightSerializer, TotalGainSerializer, TotalLossSerializer
 # Create your views here.
 
 class UserView(generics.ListCreateAPIView):
@@ -123,11 +124,11 @@ def getLiftSet(request, id1, id2):
             weight=weight, one_rep_max=one_rep_max,
             reps=reps, entry_date=entry_date,
             lift_name_id=id2, lifter_id=id1
-        )
+        ).save()
         liftSet.save()
         return HttpResponse(liftSet)
 
-class FriendView(generics.CreateAPIView):
+class FriendView(generics.ListCreateAPIView):
     queryset = Friend.objects.all()
     serializer_class = FriendSerializer
 
@@ -143,7 +144,7 @@ def getFriends(request,id1, id2):
         friendship.save()
         return HttpResponse(friendship)
 
-class LossView(generics.CreateAPIView):
+class LossView(generics.ListCreateAPIView):
     queryset = Loss.objects.all()
     serializer_class = LossSerializer
 
@@ -156,14 +157,14 @@ def getLoss(request, id1, id2):
 @csrf_exempt
 def userLoss(request, id):
         if request.method == 'GET':   
-            queryset = Loss.objects.all().filter(loser_id=id) 
+            queryset = Loss.objects.all().filter(loser_id=int(id)) 
             queryArray = []
             for key in queryset:
                 queryArray.append(serializers.serialize('json', [ key, ]))
             return HttpResponse(queryArray, content_type="application/x-javascript")
         if request.method == 'POST':   
             qs = Loss.objects.all().filter(loser_id=id).last()
-            userQs = User.objects.get(id=id)
+            userQs = User.objects.get(id=int(id))
             amount=int(request.POST.get('amount'))
             entry_date=request.POST.get('entry_date')
             loss = Loss(
@@ -177,22 +178,47 @@ def userLoss(request, id):
 
             
 
-class GainView(generics.CreateAPIView):
+class GainView(generics.ListCreateAPIView):
     queryset = Gain.objects.all()
     serializer_class = GainSerializer
 
-class ExerciseView(generics.CreateAPIView):
+def getGain(request, id1, id2):
+    if request.method == 'GET':
+        qs = Gain.objects.get(loser_id=id1, id=id2) 
+        serialized_obj = serializers.serialize('json', [ qs, ])
+        return HttpResponse(serialized_obj, content_type="application/x-javascript")
+
+def userGain(request, id):
+        if request.method == 'GET':   
+            queryset = User.objects.all().filter(gainer_id=int(id)) 
+            queryArray = []
+            for key in queryset:
+                queryArray.append(serializers.serialize('json', [ key, ]))
+            return HttpResponse(queryArray, content_type="application/x-javascript")
+        if request.method == 'POST':   
+            qs = Gain.objects.all().filter(gainer_id=id).last()
+            userQs = User.objects.get(id=int(id))
+            amount=int(request.POST.get('amount'))
+            entry_date=request.POST.get('entry_date')
+            gain = Gain(
+            amount=amount, entry_date=entry_date,
+            gainer_id=id
+        )
+            gain.save()
+            userQs.weight = userQs.weight + amount
+            userQs.save() 
+            return HttpResponse(gain)
+
+class ExerciseView(generics.ListCreateAPIView):
     queryset = Exercise.objects.all()
     serializer_class = ExerciseSerializer
 
-class ExerciserView(generics.CreateAPIView):
+class ExerciserView(generics.ListCreateAPIView):
     queryset = Exerciser.objects.all()
     serializer_class = ExerciserSerializer
 
-class DailyWeight(generics.ListCreateAPIView):
-    queryset = DailyWeight.objects.all()
-    serializer_class = DailyWeightSerializer
 
+@csrf_exempt
 def userWeight(request, id):
     if request.method == 'GET':
         queryset = DailyWeight.objects.all().filter(user_id=id) 
@@ -202,7 +228,64 @@ def userWeight(request, id):
         return HttpResponse(queryArray, content_type="application/x-javascript")
     if request.method == 'POST':
         userQs = User.objects.get(id=id)
+        newWeight = request.POST.get('weight')
+        entry_date = request.POST.get('entry_date')
+        print(entry_date)
+        if userQs.goal == 'loss':
+                amount = int(userQs.weight) - int(newWeight)
+                url = f'http://127.0.0.1:8000/api/users/{int(id)}/loss'
+                lossObj = {"amount":  amount, "entry_date": entry_date,
+                "loser_id": int(id) }
+                x = requests.post(url, data = lossObj)
+                thisweight = TodaysWeight(weight=newWeight, entry_date=entry_date, 
+                userId_id=id)
+                thisweight.save()
+                return HttpResponse(x, thisweight)
+        if userQs.goal == 'gain':
+                amount = int(newWeight) - int(userQs.weight)
+                url = f'http://127.0.0.1:8000/api/users/{id}/gain'
+                gainObj = {"amount":  amount, "entry_date": entry_date,
+                "gainer_id": int(id) }
+                x = requests.post(url, data = lossObj)
+                thisweight = TodaysWeight(weight=newWeight, entry_date=entry_date, 
+                userId_id=id)
+                thisweight.save()
+                return HttpResponse(x, thisweight)      
+        dailyweight = TodaysWeight(
+            weight=newWeight, entry_date=entry_date,
+                    userId_id=id)
+        dailyweight.save()
+        return HttpResponse(dailyweight)
 
-def getWeights(request, id1, id2):
+
+class TotalGainView(generics.ListCreateAPIView):
+    queryset = Exerciser.objects.all()
+    serializer_class = ExerciserSerializer
+
+def getTotalGain(request, id):
+      if request.method == 'GET':
+        totalGain = 0
+        queryset = Gain.objects.all().filter(user_id=id) 
+        userQs = User.objects.get(id=id)
+        for key in queryset:
+            totalGain += key.amount
+        gainTotal = TotalGain(total_gain=totalGain, user_id=id) 
+        gainTotal.save()  
+        return HttpResponse(gainTotal)
+    
+    
+
+class TotalLossView(generics.ListCreateAPIView):
+    queryset = Exerciser.objects.all()
+    serializer_class = ExerciserSerializer
+
+def getTotalLoss(request, id):
     if request.method == 'GET':
-        
+        totalLoss = 0
+        queryset = Loss.objects.all().filter(user_id=id) 
+        userQs = User.objects.get(id=id)
+        for key in queryset:
+            totalLoss += key.amount
+        lossTotal = TotalLoss(total_loss=totalLoss, user_id=id) 
+        lossTotal.save()  
+        return HttpResponse(lossTotal)
