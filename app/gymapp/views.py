@@ -42,7 +42,8 @@ class UserView(generics.ListCreateAPIView):
         goal=self.request.POST.get('goal')
         )
         user.save()
-        return HttpResponse(user)
+        jsonUser = serializers.serialize('json', [ user, ])
+        return HttpResponse(jsonUser, content_type="application/x-javascript")    
 
 def getUser(request, path):
     if request.method == 'GET':
@@ -67,7 +68,8 @@ def getUser(request, path):
         qs.gender = gender
         qs.goal = goal
         qs.save()
-        return HttpResponse(qs)
+        jsonQs = serializers.serialize('json', [ qs, ])
+        return HttpResponse(jsonQs, content_type="application/x-javascript")    
 
 class LiftView(generics.ListCreateAPIView):
     queryset = Lift.objects.all()
@@ -84,8 +86,8 @@ def getLift(request, path):
         name = request.POST.get("name")
         qs.name = name
         qs.save()
-        return HttpResponse(qs)
-
+        jsonQs = serializers.serialize('json', [ qs, ])
+        return HttpResponse(jsonQs, content_type="application/x-javascript")    
 
 class LiftSetView(generics.ListCreateAPIView):
     queryset = LiftSet.objects.all()
@@ -126,7 +128,9 @@ def getLiftSet(request, id1, id2):
             lift_name_id=id2, lifter_id=id1
         ).save()
         liftSet.save()
-        return HttpResponse(liftSet)
+        jsonLiftSet= serializers.serialize('json', [ liftSet, ])
+        return HttpResponse(jsonLiftSet, content_type="application/x-javascript")    
+        
 
 class FriendView(generics.ListCreateAPIView):
     queryset = Friend.objects.all()
@@ -142,7 +146,8 @@ def getFriends(request,id1, id2):
     if request.method == 'POST':
         friendship = Friend(friends_id=id2, user_id=id2)
         friendship.save()
-        return HttpResponse(friendship)
+        jsonFriend= serializers.serialize('json', [ friendship, ])
+        return HttpResponse(jsonFriend, content_type="application/x-javascript")    
 
 class LossView(generics.ListCreateAPIView):
     queryset = Loss.objects.all()
@@ -174,7 +179,9 @@ def userLoss(request, id):
             loss.save()
             userQs.weight = userQs.weight - amount
             userQs.save() 
-            return HttpResponse(loss)
+            jsonLoss = serializers.serialize('json', [ thisweight, ])
+            return HttpResponse(jsonLoss, content_type="application/x-javascript")    
+            
 
             
 
@@ -207,11 +214,26 @@ def userGain(request, id):
             gain.save()
             userQs.weight = userQs.weight + amount
             userQs.save() 
-            return HttpResponse(gain)
+            jsonGain = serializers.serialize('json', [ gain, ])
+            return HttpResponse(jsonGain, content_type="application/x-javascript")    
+    
 
 class ExerciseView(generics.ListCreateAPIView):
     queryset = Exercise.objects.all()
     serializer_class = ExerciseSerializer
+
+def getExercise(request, path):
+    if request.method == 'GET':
+        qs = Exercise.objects.get(name=path)
+        serialized_obj = serializers.serialize('json', [ qs, ])
+        return HttpResponse(serialized_obj, content_type="application/x-javascript")
+    if request.method == 'POST':
+        qs = Exercise.objects.get(name=path)
+        name = request.POST.get("name")
+        qs.name = name
+        qs.save()
+        jsonQs = serializers.serialize('json', [ qs, ])
+        return HttpResponse(jsonQs, content_type="application/x-javascript")    
 
 class ExerciserView(generics.ListCreateAPIView):
     queryset = Exerciser.objects.all()
@@ -240,7 +262,8 @@ def userWeight(request, id):
                 thisweight = TodaysWeight(weight=newWeight, entry_date=entry_date, 
                 userId_id=id)
                 thisweight.save()
-                return HttpResponse(x, thisweight)
+                jsonWeight = serializers.serialize('json', [ thisweight, ])
+                return HttpResponse([x, jsonWeight], content_type="application/x-javascript")    
         if userQs.goal == 'gain':
                 amount = int(newWeight) - int(userQs.weight)
                 url = f'http://127.0.0.1:8000/api/users/{id}/gain'
@@ -250,12 +273,15 @@ def userWeight(request, id):
                 thisweight = TodaysWeight(weight=newWeight, entry_date=entry_date, 
                 userId_id=id)
                 thisweight.save()
-                return HttpResponse(x, thisweight)      
+                jsonWeight = serializers.serialize('json', [ thisweight, ])
+                return HttpResponse([x, jsonWeight], content_type="application/x-javascript")    
         dailyweight = TodaysWeight(
             weight=newWeight, entry_date=entry_date,
                     userId_id=id)
         dailyweight.save()
-        return HttpResponse(dailyweight)
+        jsonWeight = serializers.serialize('json', [ thisweight, ])
+        return HttpResponse([jsonWeight], content_type="application/x-javascript")    
+        
 
 
 class TotalGainView(generics.ListCreateAPIView):
@@ -271,7 +297,8 @@ def getTotalGain(request, id):
             totalGain += key.amount
         gainTotal = TotalGain(total_gain=totalGain, user_id=id) 
         gainTotal.save()  
-        return HttpResponse(gainTotal)
+        jsonGain = serializers.serialize('json', [ gainTotal, ])
+        return HttpResponse(jsonGain, content_type="application/x-javascript")
     
     
 
@@ -282,10 +309,12 @@ class TotalLossView(generics.ListCreateAPIView):
 def getTotalLoss(request, id):
     if request.method == 'GET':
         totalLoss = 0
-        queryset = Loss.objects.all().filter(user_id=id) 
+        queryset = Loss.objects.all().filter(loser_id=id) 
         userQs = User.objects.get(id=id)
         for key in queryset:
             totalLoss += key.amount
         lossTotal = TotalLoss(total_loss=totalLoss, user_id=id) 
         lossTotal.save()  
-        return HttpResponse(lossTotal)
+        jsonLoss = serializers.serialize('json', [ lossTotal, ])
+        return HttpResponse(jsonLoss, content_type="application/x-javascript")
+     
