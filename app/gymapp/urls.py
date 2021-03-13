@@ -23,7 +23,7 @@ urlpatterns = [
     path('liftsets', LiftView.as_view()),          
     path('exercises', ExerciseView.as_view()),
     path('exercises/<path>', getExercise),
-    path('exercisers', ExerciserView.as_view())
+    path('exercisers', ExercisercView.as_view())
 
 
 ]
