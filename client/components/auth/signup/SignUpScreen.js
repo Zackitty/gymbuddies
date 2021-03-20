@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useState, useDispatch} from 'react';
 import {  View, Text, TextInput, Button } from 'react-native';
 
 const SignUpScreen = ({ navigation, route }) => {
@@ -49,7 +49,7 @@ const SignUpScreen = ({ navigation, route }) => {
             <Picker.Item label="Loss" value="Loss" />
             <Picker.Item label="Gain" value="Gain" />
           </Picker>
-        <Button onPress={handleSignUp}></Button>
+        <Button title="Sign Up" onPress={handleSignUp}></Button>
   </View>
   )
 };

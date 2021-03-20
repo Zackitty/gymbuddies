@@ -1,9 +1,14 @@
-import React, {Component} from 'react';
+import React, {Component } from 'react';
 import {  View, Text, TextInput, Button } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 
 const SignInScreen = (props) => {
-  
-  
+
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+
+
+  const dispatch = useDispatch();
   const handleSignInButtonPress = async (e) => {
     e.preventDefault()
     dispatch(signIn(username, password))
@@ -20,13 +25,16 @@ const SignInScreen = (props) => {
   return ( 
   <View>
        <TextInput 
-          placeholder="Username" />
+          placeholder="Username" 
+          onChangeText={setUsername}
+          value={username} />
         <TextInput
           secureTextEntry={true}
           placeholder="Password"
-        />
-        <Button onPress={handleSignInButtonPress}></Button>
-        <Button onPress={handleGuestOnPress}></Button>
+          onChangeText={setPassword}
+          value={password} />
+        <Button title="Sign In" onPress={handleSignInButtonPress}></Button>
+        <Button title="Guest Sign In" onPress={handleGuestOnPress}></Button>
   </View>
   )
 };
