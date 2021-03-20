@@ -1,4 +1,5 @@
-import React, {Component, useState, useDispatch} from 'react';
+import React, {Component, useState} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {  View, Text, TextInput, Button } from 'react-native';
 
 const SignUpScreen = ({ navigation, route }) => {
