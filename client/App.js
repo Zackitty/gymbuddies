@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import HomeScreen from './components/auth/home/HomeScreen'
 import ProfileScreen from './components/auth/profile/ProfileScreen'
+import SignUpScreen from './components/auth/signup/SignUpScreen'
+import SignInScreen from './components/auth/signin/SignInScreen'
 import SplashScreen from './components/SplashScreen'
 import { NavigationContainer } from '@react-navigation/native' 
 import 'react-native-gesture-handler';
@@ -17,6 +19,8 @@ export default function App() {
         <Stack.Screen name="Home" component={HomeScreen}/>
         <Stack.Screen name="Splash" component={SplashScreen} />
         <Stack.Screen name="Profile" component={ProfileScreen} />
+        <Stack.Screen name="SignUp" component={SignInScreen} />
+        <Stack.Screen name="SignIn" component={SignUpScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
