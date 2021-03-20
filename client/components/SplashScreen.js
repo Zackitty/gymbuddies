@@ -11,15 +11,15 @@ return (
         source={require('../images/gymbuddies.jpeg')}
       />
      <Button
-      title="Go to Jane's profile"
+      title="Sign In"
       onPress={() =>
-        navigation.navigate('SignIn', { name: 'Jane' })
+        navigation.navigate('SignIn')
       }
     />
      <Button
-      title="Go to Jane's profile"
+      title="Sign Up"
       onPress={() =>
-        navigation.navigate('SignUp', { name: 'Jane' })
+        navigation.navigate('SignUp')
       }
     />
   </View>

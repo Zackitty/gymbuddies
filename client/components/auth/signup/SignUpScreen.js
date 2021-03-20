@@ -1,9 +1,56 @@
 import React, {Component} from 'react';
-import {  View, Text } from 'react-native';
+import {  View, Text, TextInput, Button } from 'react-native';
 
 const SignUpScreen = ({ navigation, route }) => {
+  const [full_name, setFullName] = useState('')
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('');
+  const [age, setAge] = useState('');
+  const [gender, setGender] = useState('');
+  const [goal, setGoal] = useState('');
+  const dispatch = useDispatch();
+  
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    
+    dispatch(signUp(full_name, username, password, age,
+  gender, goal))
+ 
+  }
+
   return ( 
-  <Text>This is {route.params.name}'s profile</Text>
+    <View>
+       <TextInput 
+          placeholder="Full Name"
+          onChangeText={setFullName}
+          value={full_name} />
+          <TextInput 
+          placeholder="Username"
+          onChangeText={setUsername}
+          value={username} /> 
+           <TextInput 
+          placeholder="Password"
+          onChangeText={setPassword}
+          value={password} />
+          <TextInput 
+          placeholder="Age"
+          onChangeText={setAge}
+          value={age} />
+          <Picker
+            selectedValue={gender}
+            onValueChange={currentGender => setGender(currentGender)}>
+            <Picker.Item label="Male" value="Male" />
+            <Picker.Item label="Female" value="Female" />
+            <Picker.Item label="Non-Binary" value="Non-Binary" />
+          </Picker>
+          <Picker
+            selectedValue={goal}
+            onValueChange={currentGoal => setGender(currentGoal)}>
+            <Picker.Item label="Loss" value="Loss" />
+            <Picker.Item label="Gain" value="Gain" />
+          </Picker>
+        <Button onPress={handleSignUp}></Button>
+  </View>
   )
 };
 
