@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-import {  View, Text, Button } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 
 const SplashScreen = ({ navigation }) => {
 
 return (
   <View style={styles.container}>
-     <Image
+     {/* <Image
         style={styles.img}
-        source={require('@expo/snack-static/react-native-logo.png')}
-      />
+        source={require('')}
+      /> */}
      <Button
       title="Go to Jane's profile"
       onPress={() =>
@@ -18,7 +18,7 @@ return (
      <Button
       title="Go to Jane's profile"
       onPress={() =>
-        navigation.navigate('SignUp', { name: 'Jane' })
+        navigation.navigate('Profile', { name: 'Jane' })
       }
     />
   </View>
@@ -32,9 +32,6 @@ container: {
   alignItems: 'center',
   justifyContent: 'center',
 },
-img: {
-  size: 25;
-}
 });
 
 export default SplashScreen;
