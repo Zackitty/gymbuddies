@@ -45,7 +45,7 @@ const SignUpScreen = ({ navigation, route }) => {
           </Picker>
           <Picker
             selectedValue={goal}
-            onValueChange={currentGoal => setGender(currentGoal)}>
+            onValueChange={currentGoal => setGoal(currentGoal)}>
             <Picker.Item label="Loss" value="Loss" />
             <Picker.Item label="Gain" value="Gain" />
           </Picker>
