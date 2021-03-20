@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {  View, Text, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, Image } from 'react-native';
+
 
 const SplashScreen = ({ navigation }) => {
 
