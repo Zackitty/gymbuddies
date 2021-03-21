@@ -1,10 +1,11 @@
 
 from django.urls import path
-from .views import UserView, LiftView, LiftSetView, FriendView, LossView, GainView, ExerciseView, ExerciserView, getLift, getUser, getMyLiftsForDay, getMyLifts, getFriends, getLiftSet, userLoss, userWeight, getLoss, getTotalLoss, userGain, getGain, getTotalGain, getExercise,  getMyExercisersForDay, getExercisers
+from .views import UserView, LiftView, LiftSetView, FriendView, LossView, GainView, ExerciseView, ExerciserView, getLift, getUser, getMyLiftsForDay, getMyLifts, getFriends, getLiftSet, userLoss, userWeight, getLoss, getTotalLoss, userGain, getGain, getTotalGain, getExercise,  getMyExercisersForDay, getExercisers, userSignIn
 
 urlpatterns = [
     path('users', UserView.as_view()),
     path('users/<path>', getUser),
+    path('users/signin', userSignIn),
     path('users/<int:id1>/lifts', getMyLifts),
     path('users/<int:id1>/lifts/<int:id2>', getLiftSet),
     path('users/<int:id1>/lifts/date/<int:id2>', getMyLiftsForDay),

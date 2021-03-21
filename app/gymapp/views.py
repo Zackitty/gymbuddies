@@ -19,6 +19,7 @@ from .models import User, Lift, Friend, Loss, Gain, Exercise, LiftSet, Exerciser
 from .serializers import UserSerializer, LiftSetSerializer, LiftSerializer, FriendSerializer, LossSerializer, GainSerializer, ExerciseSerializer, ExerciserSerializer, TodaysWeightSerializer, TotalGainSerializer, TotalLossSerializer
 # Create your views here.
 
+
 class UserView(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -29,6 +30,7 @@ class UserView(generics.ListCreateAPIView):
         'password', 'weight', 'age', 'gender', 'goal')
         extra_kwargs = {'password': {'write_only': True}}
 
+    @csrf_exempt
     def create(self, request):
         print('heygirl')
         hashed_password = bcrypt.hashpw(self.request.POST.get('password').encode('utf-8'), bcrypt.gensalt(14))
@@ -45,6 +47,7 @@ class UserView(generics.ListCreateAPIView):
         jsonUser = serializers.serialize('json', [ user, ])
         return HttpResponse(jsonUser, content_type="application/x-javascript")    
 
+@csrf_exempt
 def getUser(request, path):
     if request.method == 'GET':
         qs = Lift.objects.get(username=path)
@@ -52,7 +55,7 @@ def getUser(request, path):
         return HttpResponse(serialized_obj, content_type="application/x-javascript")
     if request.method == 'POST':
         hashed_password = bcrypt.hashpw(request.POST.get('password').encode('utf-8'), bcrypt.gensalt(14))
-        qs = Lift.objects.get(username=path)
+        qs = User.objects.get(username=path)
         full_name=request.POST.get('full_name'),
         username=request.POST.get('username'),
         password=hashed_password,
@@ -74,6 +77,19 @@ def getUser(request, path):
 class LiftView(generics.ListCreateAPIView):
     queryset = Lift.objects.all()
     serializer_class = LiftSerializer
+
+@csrf_exempt
+def userSignIn():
+    if request.method == 'POST':
+        hashed_password = bcrypt.hashpw(request.POST.get('password').encode('utf-8'), bcrypt.gensalt(14))
+        qs = User.objects.get(username=path)
+        full_name=request.POST.get('username')
+        password=hashed_password
+        if password == qs.password:
+            return HttpResponse
+            
+
+
 
 @csrf_exempt
 def getLift(request, path):

@@ -1,7 +1,7 @@
 import React, {Component, useState } from 'react';
 import {  View, Text, TextInput, Button } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { signIn} from '../../../store/auth'
 const SignInScreen = (props) => {
 
   const [username, setUsername] = useState('')
@@ -27,12 +27,14 @@ const SignInScreen = (props) => {
        <TextInput 
           placeholder="Username" 
           onChangeText={setUsername}
-          value={username} />
+          value={username}
+          autoCapitalize={'none'} />
         <TextInput
           secureTextEntry={true}
           placeholder="Password"
           onChangeText={setPassword}
-          value={password} />
+          value={password}
+          autoCapitalize={'none'} />
         <Button title="Sign In" onPress={handleSignInButtonPress}></Button>
         <Button title="Guest Sign In" onPress={handleGuestOnPress}></Button>
   </View>

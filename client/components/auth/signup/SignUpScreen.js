@@ -17,6 +17,8 @@ const SignUpScreen = ({ navigation, route }) => {
     
     dispatch(signUp(full_name, username, password, age,
   gender, goal))
+  
+    navigation.navigate('Home')
  
   }
 

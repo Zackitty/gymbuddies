@@ -10,6 +10,7 @@
 
  
  //SIGN IN 
+ 
  export const signIn = (username, password) => async dispatch => {
    try {
      //Retrieve Information from Server
@@ -17,6 +18,7 @@
        method: 'post',
        headers: { 'Content-Type': 'application/json' },
        body: JSON.stringify({ username, password }),
+      
      });
  
      if (!response.ok) {
@@ -54,7 +56,7 @@
      // }
 
  
-     const response = await fetch(`${apiUrl}/users/signup`, {
+     const response = await fetch(`${apiUrl}/users`, {
        method: 'post',
        body: formData
      });
