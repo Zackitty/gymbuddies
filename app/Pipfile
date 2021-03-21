@@ -9,6 +9,9 @@ verify_ssl = true
 psycopg2 = "*"
 bcrypt = "*"
 requests = "*"
+django = "*"
+install = "*"
+djangorestframework-jsonapi = "*"
 
 [requires]
 python_version = "3.9"

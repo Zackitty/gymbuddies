@@ -1,6 +1,6 @@
 
 from django.urls import path
-from .views import UserView, LiftView, LiftSetView, FriendView, LossView, GainView, ExerciseView, ExerciserView, getLift, getUser, getMyLiftsForDay, getMyLifts, getFriends, getLiftSet, userLoss, userWeight, getLoss, getTotalLoss, userGain, getGain, getTotalGain, getExercise, getMyExercisesForDay, getExercisers
+from .views import UserView, LiftView, LiftSetView, FriendView, LossView, GainView, ExerciseView, ExerciserView, getLift, getUser, getMyLiftsForDay, getMyLifts, getFriends, getLiftSet, userLoss, userWeight, getLoss, getTotalLoss, userGain, getGain, getTotalGain, getExercise,  getMyExercisersForDay, getExercisers
 
 urlpatterns = [
     path('users', UserView.as_view()),
@@ -23,7 +23,7 @@ urlpatterns = [
     path('liftsets', LiftView.as_view()),          
     path('exercises', ExerciseView.as_view()),
     path('exercises/<path>', getExercise),
-    path('exercisers', ExercisercView.as_view())
+    path('exercisers', ExerciserView.as_view())
 
 
 ]

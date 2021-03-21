@@ -261,7 +261,7 @@ def getExercisers(request, id1, id2):
         )
         exerciser.save()
         jsonExerciser= serializers.serialize('json', [ liftSet, ])
-        return HttpResponse(jsonExerciser content_type="application/x-javascript")    
+        return HttpResponse(jsonExerciser, content_type="application/x-javascript")    
 
 @csrf_exempt
 def userWeight(request, id):

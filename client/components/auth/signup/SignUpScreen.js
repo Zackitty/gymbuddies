@@ -1,6 +1,7 @@
 import React, {Component, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {  View, Text, TextInput, Button } from 'react-native';
+import { signUp} from '../../../store/auth'
+import {  View, Text, TextInput, Button, Picker } from 'react-native';
 
 const SignUpScreen = ({ navigation, route }) => {
   const [full_name, setFullName] = useState('')
