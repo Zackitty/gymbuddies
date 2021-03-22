@@ -30,15 +30,18 @@ const SignUpScreen = ({ navigation, route }) => {
        <TextInput 
           placeholder="Full Name"
           onChangeText={setFullName}
-          value={full_name} />
+          value={full_name} 
+          autoCapitalize={'none'}/>
           <TextInput 
           placeholder="Username"
           onChangeText={setUsername}
-          value={username} /> 
+          value={username} 
+          autoCapitalize={'none'}/> 
            <TextInput 
           placeholder="Password"
           onChangeText={setPassword}
-          value={password} />
+          value={password}
+          autoCapitalize={'none'} />
           <TextInput 
           placeholder="Age"
           onChangeText={setAge}
@@ -61,7 +64,6 @@ const SignUpScreen = ({ navigation, route }) => {
             <Picker.Item label="Loss" value="Loss" />
             <Picker.Item label="Gain" value="Gain" />
           </Picker>
-          <Button title='ZConsole' onPress={console.log(gender)} />
         <Button title="Sign Up" onPress={handleSignUp}></Button>
   </View>
   )
