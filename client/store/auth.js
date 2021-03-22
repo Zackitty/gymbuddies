@@ -40,7 +40,7 @@
  }
  
  //SIGN UP 
- export const signUp = (username, full_name, weight, age,
+ export const signUp = (username, full_name, age, weight,
   gender, password, goal) => async dispatch => {
    try {
      const formData = new FormData();
