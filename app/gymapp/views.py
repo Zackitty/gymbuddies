@@ -32,17 +32,23 @@ class UserView(generics.ListCreateAPIView):
 
     @csrf_exempt
     def create(self, request):
-        print('heygirl')
-        hashed_password = bcrypt.hashpw(self.request.POST.get('password').encode('utf-8'), bcrypt.gensalt(14))
-        user = User(
-        full_name=self.request.POST.get('full_name'),
-        username=self.request.POST.get('username'),
-        password=hashed_password,
-        weight=self.request.POST.get('weight'),
-        age=self.request.POST.get('age'),
-        gender=self.request.POST.get('gender'),
+       
+       
+        
+        full_name=self.request.POST.get('full_name')
+        username=self.request.POST.get('username')
+        password = self.request.POST.get('password')
+        weight=self.request.POST.get('weight')
+        age=self.request.POST.get('age')
+        gender=self.request.POST.get('gender')
         goal=self.request.POST.get('goal')
-        )
+        errors = validations_signup(username, full_name, age, weight,
+            gender, password, goal)
+        if len(errors) > 0:
+            return HttpResponse(errors, content_type="application/x-javascript") 
+        hashed_password = bcrypt.hashpw(self.request.POST.get('password').encode('utf-8'), bcrypt.gensalt(14))
+        user = User(username=username, full_name=full_name, age=age, weight=weight,
+            gender=gender, password=hashed_password, goal=goal)
         user.save()
         jsonUser = serializers.serialize('json', [ user, ])
         return HttpResponse(jsonUser, content_type="application/x-javascript")    
@@ -356,4 +362,22 @@ def getTotalLoss(request, id):
         lossTotal.save()  
         jsonLoss = serializers.serialize('json', [ lossTotal, ])
         return HttpResponse(jsonLoss, content_type="application/x-javascript")
-     
+
+def validations_signup(username, full_name, age, weight,
+      gender, password, goal):
+    errors = []
+    print(age)
+    username_found = User.objects.get(username=username)
+    if(username_found):
+        errors.append('Account already exists with this User Name')
+    if not username:
+        errors.append('User Name is missing') 
+    if not full_name:
+        errors.append('Full Name is missing')      
+    if not password:
+        errors.append('Password is missing') 
+    if len(full_name) > 20:
+        errors.append('Name is too long')
+    if len(username) > 20:
+        errors.append('User Name is too long')
+    return errors    
