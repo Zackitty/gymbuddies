@@ -2,7 +2,7 @@ import React, {Component, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { signUp} from '../../../store/auth'
 import ErrorBox from '../errorbox/ErrorBox'
-import {  View, Text, TextInput, Button, Picker } from 'react-native';
+import {  View, Text, TextInput, Button, Picker, AsyncStorage } from 'react-native';
 
 const SignUpScreen = ({ navigation, route }) => {
   const [full_name, setFullName] = useState('')
@@ -14,13 +14,18 @@ const SignUpScreen = ({ navigation, route }) => {
   const [goal, setGoal] = useState('Loss');
   const dispatch = useDispatch();
   const { authErrors } = useSelector(state => state.currentUser)
+  
+  
+  
   const handleSignUp = async (e) => {
     e.preventDefault();
-    
     dispatch(signUp(username, full_name, age, weight,
       gender, password, goal))
-  
-    navigation.navigate('Home')
+    if (!authErrors){
+      navigation.navigate('Home')
+    }
+
+      
  
   }
 

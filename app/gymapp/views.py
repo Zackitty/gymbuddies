@@ -45,7 +45,7 @@ class UserView(generics.ListCreateAPIView):
         errors = validations_signup(username, full_name, age, weight,
             gender, password, goal)
         if len(errors) > 0:
-            return HttpResponse(errors, content_type="application/x-javascript") 
+            return Response({'errors': errors}, 401)
         hashed_password = bcrypt.hashpw(self.request.POST.get('password').encode('utf-8'), bcrypt.gensalt(14))
         user = User(username=username, full_name=full_name, age=age, weight=weight,
             gender=gender, password=hashed_password, goal=goal)
@@ -367,8 +367,7 @@ def validations_signup(username, full_name, age, weight,
       gender, password, goal):
     errors = []
     print(age)
-    username_found = User.objects.get(username=username)
-    if(username_found):
+    if User.objects.filter(username=username).exists():
         errors.append('Account already exists with this User Name')
     if not username:
         errors.append('User Name is missing') 
@@ -380,4 +379,11 @@ def validations_signup(username, full_name, age, weight,
         errors.append('Name is too long')
     if len(username) > 20:
         errors.append('User Name is too long')
+    for char in weight:
+            if not char.isdigit():
+                errors.append('Weight Must Be A Number') 
+    for char in age:
+        if not char.isdigit():
+            errors.append('Age Must Be A Number')             
+                
     return errors    

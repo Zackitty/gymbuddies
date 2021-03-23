@@ -1,6 +1,6 @@
  //REQUISITE IMPORTS HERE
  import { apiUrl } from '../config';
-
+import {AsyncStorage } from 'react-native'
  //ACTION TYPES AND LOCAL STORAGE ASSIGNMENTS
  const SET_USER = 'change/auth/SET_USER';
  const REMOVE_USER = 'change/auth/REMOVE_USER';
@@ -27,8 +27,8 @@
      //Place token in Local Storage, update Redux State
      const { access_token, id} = await response.json();
  
-     localStorage.setItem(SESSION_TOKEN, access_token);
-     localStorage.setItem(USER_ID, id);
+     await AsyncStorage.setItem(SESSION_TOKEN, access_token);
+     await AsyncStorage.setItem(USER_ID, id);
    
      dispatch(setUser(access_token, id));
    
@@ -65,12 +65,19 @@
        throw response
      }
      //Place token in Local Storage, update Redux State
-     const { access_token, id  } = await response.json();
-     localStorage.setItem(SESSION_TOKEN, access_token);
-     localStorage.setItem(USER_ID, id);
-     dispatch(setUser(access_token, id));
+    //  
+    
+    //  await AsyncStorage.setItem(SESSION_TOKEN, access_token);
+    //  await AsyncStorage.setItem(USER_ID, id);
+     let errord = await AsyncStorage.getItem('Errored');
+     if (errord){
+     await AsyncStorage.removeItem('Errored')
+     }
+    //  dispatch(setUser(access_token, id));
+
    }
    catch (err) {
+    await AsyncStorage.setItem('Errored', 'Errored');
      const errJSON = await err.json()
      dispatch(handleAuthErrors(errJSON))
    }
@@ -88,8 +95,8 @@
  
  //SIGN OUT
  export const signOut = () => async (dispatch) => {
-   localStorage.removeItem(SESSION_TOKEN);
-   localStorage.removeItem(USER_ID);
+  await AsyncStorage.removeItem(SESSION_TOKEN);
+  await AsyncStorage.removeItem(USER_ID);
    dispatch(removeUser())
  }
 
