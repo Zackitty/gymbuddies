@@ -89,8 +89,11 @@ def userSignIn():
     if request.method == 'POST':
         hashed_password = bcrypt.hashpw(request.POST.get('password').encode('utf-8'), bcrypt.gensalt(14))
         qs = User.objects.get(username=path)
-        full_name=request.POST.get('username')
+        username=request.POST.get('username')
         password=hashed_password
+        errors = validations_signup(username, )
+        if len(errors) > 0:
+            return Response({'errors': errors}, 401)
         if password == qs.password:
             return HttpResponse
             
@@ -387,3 +390,16 @@ def validations_signup(username, full_name, age, weight,
             errors.append('Age Must Be A Number')             
                 
     return errors    
+
+def validations_signup(username, password):
+    errors = []
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt(14))
+    if not username:
+        errors.append('User Name is missing') 
+    if not User.objects.filter(username=username).exists():
+        errors.append('No Account With This User Name Exists')
+    if User.objects.filter(username=username).exists():
+        user = User.objects.filter(username=username)
+        if hashed_password != user.password:
+            errors.append('Wrong Username Password Combination')
+    return errors
