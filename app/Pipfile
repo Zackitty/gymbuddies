@@ -13,6 +13,7 @@ django = "*"
 install = "*"
 djangorestframework-jsonapi = "*"
 django-cors-headers = "*"
+crypto = "*"
 
 [requires]
 python_version = "3.9"

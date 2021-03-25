@@ -13,11 +13,13 @@ from django.core import serializers
 from django.conf import settings
 import json
 import bcrypt
+import crypto
 import requests
 from django.views.decorators.csrf import csrf_exempt
 from ..models import User, Lift, Friend, Exercise, LiftSet
 from ..serializers import UserSerializer, FriendSerializer
 from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
+from django.contrib.auth import authenticate
 
 
 class UserView(generics.ListCreateAPIView):
@@ -143,15 +145,15 @@ def validations_signup(username, full_name, age, weight,
 def validations_signin(username, password):
     errors = []
     qs = User.objects.get(username=username)
-    jsonPassword = json.dumps(qs.password, separators=(',', ':'))
-    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt(14))
+    print(qs.username)
+    password_match = bcrypt.checkpw(password.encode('utf-8'), qs.password.tobytes())
+    
     if not username:
         errors.append('User Name is missing') 
+    if not userwithpassword:
+        errors.append('Wrong Username Password Combination')
     if not User.objects.filter(username=username).exists():
         errors.append('No Account With This User Name Exists')
-    if User.objects.filter(username=username).exists():
-        user = User.objects.filter(username=username)
-        if hashed_password != jsonPassword:
-            
-            errors.append('Wrong Username Password Combination')
+    if not password_match: 
+        errors.append('Password is incorrect')
     return errors
