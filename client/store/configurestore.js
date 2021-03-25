@@ -4,11 +4,13 @@ import { persistStore, persistReducer } from 'redux-persist'
 import rootReducer from './rootreducer'
 import storage from 'redux-persist/lib/storage' 
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const persistConfig = {
   key: 'root',
-  storage: storage,
+  storage: AsyncStorage,
+  version: 0,
   stateReconciler: autoMergeLevel2 // see "Merge Process" section for details.
  };
 

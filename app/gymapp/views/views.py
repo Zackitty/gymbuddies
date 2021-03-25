@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.shortcuts import render
 from django.http import Http404
 from rest_framework.views import APIView
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, renderer_classes
 from rest_framework.response import Response
 from rest_framework import status, generics
 from django.http import HttpResponse
@@ -17,6 +17,7 @@ import requests
 from django.views.decorators.csrf import csrf_exempt
 from .models import User, Lift, Friend, Loss, Gain, Exercise, LiftSet, Exerciser, TodaysWeight, TotalGain, TotalLoss
 from .serializers import UserSerializer, LiftSetSerializer, LiftSerializer, FriendSerializer, LossSerializer, GainSerializer, ExerciseSerializer, ExerciserSerializer, TodaysWeightSerializer, TotalGainSerializer, TotalLossSerializer
+from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
 # Create your views here.
 
 
@@ -85,17 +86,20 @@ class LiftView(generics.ListCreateAPIView):
     serializer_class = LiftSerializer
 
 @csrf_exempt
-def userSignIn():
+@api_view(('POST',))
+@renderer_classes([JSONRenderer])
+def userSignIn(request):
     if request.method == 'POST':
-        hashed_password = bcrypt.hashpw(request.POST.get('password').encode('utf-8'), bcrypt.gensalt(14))
-        qs = User.objects.get(username=path)
+        password = request.POST.get('password')
         username=request.POST.get('username')
-        password=hashed_password
-        errors = validations_signup(username, )
+        print(username)
+        qs = User.objects.get(username=username)
+        
+        errors = validations_signin(username, password)
         if len(errors) > 0:
             return Response({'errors': errors}, 401)
-        if password == qs.password:
-            return HttpResponse
+        jsonUser = serializers.serialize('json', [ qs, ])
+        return HttpResponse(jsonUser, content_type="application/x-javascript")  
             
 
 
@@ -391,8 +395,10 @@ def validations_signup(username, full_name, age, weight,
                 
     return errors    
 
-def validations_signup(username, password):
+def validations_signin(username, password):
     errors = []
+    qs = User.objects.get(username=username)
+    jsonPassword = json.dumps(qs.password, separators=(',', ':'))
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt(14))
     if not username:
         errors.append('User Name is missing') 
@@ -400,6 +406,7 @@ def validations_signup(username, password):
         errors.append('No Account With This User Name Exists')
     if User.objects.filter(username=username).exists():
         user = User.objects.filter(username=username)
-        if hashed_password != user.password:
+        if hashed_password != jsonPassword:
+            
             errors.append('Wrong Username Password Combination')
     return errors

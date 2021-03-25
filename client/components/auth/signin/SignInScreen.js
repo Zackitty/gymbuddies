@@ -6,24 +6,27 @@ const SignInScreen = (props) => {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-
+  const { authErrors } = useSelector(state => state.currentUser)
 
   const dispatch = useDispatch();
   const handleSignInButtonPress = async (e) => {
     e.preventDefault()
     dispatch(signIn(username, password))
-    navigation.navigate('HomeScreen')
+    if (!authErrors){
+      navigation.navigate('Home')
+    }
   }
 
   const handleGuestOnPress = async (e) => {
     e.preventDefault()
     dispatch(signIn("Demo", "password"))
-    navigation.navigate('HomeScreen')
+    navigation.navigate('Home')
   }
  
 
   return ( 
   <View>
+     {authErrors && <ErrorBox />}
        <TextInput 
           placeholder="Username" 
           onChangeText={setUsername}
@@ -31,7 +34,7 @@ const SignInScreen = (props) => {
           autoCapitalize={'none'} />
         <TextInput
           secureTextEntry={true}
-          placeholder="Password"
+          placeholder="password"
           onChangeText={setPassword}
           value={password}
           autoCapitalize={'none'} />

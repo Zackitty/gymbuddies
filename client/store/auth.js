@@ -1,6 +1,6 @@
  //REQUISITE IMPORTS HERE
  import { apiUrl } from '../config';
-import {AsyncStorage } from 'react-native'
+ import AsyncStorage from '@react-native-async-storage/async-storage';
  //ACTION TYPES AND LOCAL STORAGE ASSIGNMENTS
  const SET_USER = 'change/auth/SET_USER';
  const REMOVE_USER = 'change/auth/REMOVE_USER';
@@ -13,11 +13,14 @@ import {AsyncStorage } from 'react-native'
  
  export const signIn = (username, password) => async dispatch => {
    try {
-     //Retrieve Information from Server
+     
+     const formData = new FormData();
+     formData.append("username", username)
+     formData.append("password", password)
      const response = await fetch(`${apiUrl}/users/signin`, {
        method: 'post',
        headers: { 'Content-Type': 'application/json' },
-       body: JSON.stringify({ username, password }),
+       body: formData
       
      });
  
@@ -26,9 +29,7 @@ import {AsyncStorage } from 'react-native'
      }
      //Place token in Local Storage, update Redux State
      const { access_token, id} = await response.json();
- 
-     await AsyncStorage.setItem(SESSION_TOKEN, access_token);
-     await AsyncStorage.setItem(USER_ID, id);
+
    
      dispatch(setUser(access_token, id));
    
@@ -66,14 +67,14 @@ import {AsyncStorage } from 'react-native'
      }
      //Place token in Local Storage, update Redux State
     //  
-    
-    //  await AsyncStorage.setItem(SESSION_TOKEN, access_token);
-    //  await AsyncStorage.setItem(USER_ID, id);
-     let errord = await AsyncStorage.getItem('Errored');
+    const { access_token, id } = await response.json();
+     await AsyncStorage.setItem(SESSION_TOKEN, access_token);
+     await AsyncStorage.setItem(USER_ID, id);
+     const errord = await AsyncStorage.getItem('Errored');
      if (errord){
      await AsyncStorage.removeItem('Errored')
      }
-    //  dispatch(setUser(access_token, id));
+     dispatch(setUser(access_token, id));
 
    }
    catch (err) {
@@ -87,10 +88,10 @@ import {AsyncStorage } from 'react-native'
  export const fetchUserDetails = (access_token, id) => async dispatch => {
    const res = await fetch(`${apiUrl}/users/${id}`, {
      headers: {
-       'Authorization': `Bearer ${localStorage.getItem('SESSION_TOKEN')}`,
+       'Authorization': `Bearer ${AsyncStorage.getItem('SESSION_TOKEN')}`,
      }
    })
-   dispatch(setUser(access_token, id, ))
+   dispatch(setUser(access_token, id))
  }
  
  //SIGN OUT

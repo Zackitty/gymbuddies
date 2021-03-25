@@ -1,10 +1,12 @@
 
 from django.urls import path
-from .views import UserView, LiftView, LiftSetView, FriendView, LossView, GainView, ExerciseView, ExerciserView, getLift, getUser, getMyLiftsForDay, getMyLifts, getFriends, getLiftSet, userLoss, userWeight, getLoss, getTotalLoss, userGain, getGain, getTotalGain, getExercise,  getMyExercisersForDay, getExercisers, userSignIn
-
+from .views.userviews import UserView, FriendView, getUser, getFriends, userSignIn
+from .views.liftviews import LiftView, LiftSetView, getMyLiftsForDay, getMyLifts, getLiftSet, getLift
+from .views.weightviews import LossView, GainView, userLoss, userWeight, getLoss, getTotalLoss, userGain, getGain, getTotalGain
+from .views.exerciseviews import ExerciseView, ExerciserView, getExercise,  getMyExercisersForDay, getExercisers
 urlpatterns = [
     path('users', UserView.as_view()),
-    path('users/<path>', getUser),
+    path('users/<path>/get', getUser),
     path('users/signin', userSignIn),
     path('users/<int:id1>/lifts', getMyLifts),
     path('users/<int:id1>/lifts/<int:id2>', getLiftSet),
