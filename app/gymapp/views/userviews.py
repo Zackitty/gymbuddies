@@ -150,8 +150,6 @@ def validations_signin(username, password):
     
     if not username:
         errors.append('User Name is missing') 
-    if not userwithpassword:
-        errors.append('Wrong Username Password Combination')
     if not User.objects.filter(username=username).exists():
         errors.append('No Account With This User Name Exists')
     if not password_match: 

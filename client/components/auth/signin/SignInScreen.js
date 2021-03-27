@@ -1,8 +1,9 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {Component, useState } from 'react';
 import {  View, Text, TextInput, Button } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { signIn} from '../../../store/auth'
-const SignInScreen = (props) => {
+const SignInScreen = ({ navigation, route }) => {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -12,9 +13,9 @@ const SignInScreen = (props) => {
   const handleSignInButtonPress = async (e) => {
     e.preventDefault()
     dispatch(signIn(username, password))
-    if (!authErrors){
-      navigation.navigate('Home')
-    }
+    // if (!authErrors){
+    //   navigation.navigate('Home')
+    // }
   }
 
   const handleGuestOnPress = async (e) => {
@@ -22,7 +23,19 @@ const SignInScreen = (props) => {
     dispatch(signIn("Demo", "password"))
     navigation.navigate('Home')
   }
- 
+
+  const addButton = async (e) => {
+
+    await AsyncStorage.setItem('item_key', "hello")
+    console.log('........this worked!......')
+  }
+  const checkButton = async (e) => {
+      
+     
+          let value = await AsyncStorage.getItem('item_key');
+        console.log(value)
+      
+  }
 
   return ( 
   <View>
@@ -40,6 +53,8 @@ const SignInScreen = (props) => {
           autoCapitalize={'none'} />
         <Button title="Sign In" onPress={handleSignInButtonPress}></Button>
         <Button title="Guest Sign In" onPress={handleGuestOnPress}></Button>
+        <Button title="Add" onPress={addButton}></Button>
+        <Button title="Check" onPress={checkButton}></Button>
   </View>
   )
 };

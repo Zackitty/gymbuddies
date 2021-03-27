@@ -28,10 +28,14 @@
        throw response;
      }
      //Place token in Local Storage, update Redux State
-     const { access_token, id} = await response.json();
-
+  const blank = await response.json()
+ let thisUser = blank[0]
+ const id =thisUser.pk.toString()
+     
+    
+    await AsyncStorage.setItem(USER_ID, id);
    
-     dispatch(setUser(access_token, id));
+     dispatch(setUser( id));
    
    }
    catch (err) {
@@ -67,14 +71,16 @@
      }
      //Place token in Local Storage, update Redux State
     //  
-    const { access_token, id } = await response.json();
-     await AsyncStorage.setItem(SESSION_TOKEN, access_token);
+    const blank = await response.json()
+    let thisUser = blank[0]
+    const id = thisUser.pk.toString()
+    
      await AsyncStorage.setItem(USER_ID, id);
      const errord = await AsyncStorage.getItem('Errored');
      if (errord){
      await AsyncStorage.removeItem('Errored')
      }
-     dispatch(setUser(access_token, id));
+     dispatch(setUser( id));
 
    }
    catch (err) {
@@ -85,27 +91,23 @@
  }
  
  //FETCH USER DETAILS 
- export const fetchUserDetails = (access_token, id) => async dispatch => {
+ export const fetchUserDetails = (id) => async dispatch => {
    const res = await fetch(`${apiUrl}/users/${id}`, {
-     headers: {
-       'Authorization': `Bearer ${AsyncStorage.getItem('SESSION_TOKEN')}`,
-     }
    })
-   dispatch(setUser(access_token, id))
+   dispatch(setUser( id))
  }
  
  //SIGN OUT
  export const signOut = () => async (dispatch) => {
-  await AsyncStorage.removeItem(SESSION_TOKEN);
+
   await AsyncStorage.removeItem(USER_ID);
    dispatch(removeUser())
  }
 
  
  //ACTION CREATOR FUNCTIONS
- export const setUser = (access_token, id) => ({
+ export const setUser = ( id) => ({
    type: SET_USER,
-   access_token,
    id: Number(id),
    // blocks
  });
@@ -127,7 +129,6 @@
    switch (action.type) {
      case SET_USER: {
        return {
-         token: action.access_token,
          id: action.id,
          needSignIn: false,
        }

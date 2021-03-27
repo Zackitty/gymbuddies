@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
-
+import { useSelector } from 'react-redux';
 
 const SplashScreen = ({ navigation }) => {
-
+  const { needSignIn } = useSelector(state => state.currentUser)
+  if (!needSignIn){
+    console.log("this one's for the girls")
+  }
 return (
   <View style={styles.container}>
      <Image
