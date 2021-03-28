@@ -3,6 +3,7 @@ import React, {Component, useState } from 'react';
 import {  View, Text, TextInput, Button } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { signIn} from '../../../store/auth'
+import ErrorBox from '../errorbox/ErrorBox'
 const SignInScreen = ({ navigation, route }) => {
 
   const [username, setUsername] = useState('')

@@ -108,11 +108,12 @@ def userSignIn(request):
         password = request.POST.get('password')
         username=request.POST.get('username')
         print(username)
-        qs = User.objects.get(username=username)
+    
         
         errors = validations_signin(username, password)
         if len(errors) > 0:
             return Response({'errors': errors}, 401)
+        qs = User.objects.get(username=username)    
         jsonUser = serializers.serialize('json', [ qs, ])
         return HttpResponse(jsonUser, content_type="application/x-javascript")  
            
@@ -121,6 +122,9 @@ def validations_signup(username, full_name, age, weight,
       gender, password, goal):
     errors = []
     print(age)
+    if not username or not User.objects.filter(username=username).exists():
+        errors.append('User Name is missing') 
+        return errors
     if User.objects.filter(username=username).exists():
         errors.append('Account already exists with this User Name')
     if not username:
@@ -144,12 +148,12 @@ def validations_signup(username, full_name, age, weight,
 
 def validations_signin(username, password):
     errors = []
+    if not username or not User.objects.filter(username=username).exists():
+        errors.append('User Name is missing') 
+        return errors
     qs = User.objects.get(username=username)
     print(qs.username)
     password_match = bcrypt.checkpw(password.encode('utf-8'), qs.password.tobytes())
-    
-    if not username:
-        errors.append('User Name is missing') 
     if not User.objects.filter(username=username).exists():
         errors.append('No Account With This User Name Exists')
     if not password_match: 
