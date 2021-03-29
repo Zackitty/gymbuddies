@@ -8,6 +8,12 @@ import SignUpScreen from './components/auth/signup/SignUpScreen'
 import SignInScreen from './components/auth/signin/SignInScreen'
 import SplashScreen from './components/SplashScreen'
 import FriendScreen from './components/friendship/FriendScreen'
+import SearchScreen from './components/search/SearchScreen'
+import GainsScreen from './components/weight/gains/GainsScreen'
+import LossesScreen from './components/weight/loss/LossesScreen'
+import WeightScreen from './components/weight/weight/WeightScreen'
+import LiftScreen from './components/workouts/lift/LiftScreen'
+import ExerciseScreen from './components/workouts/exercise/ExerciseScreen'
 import { NavigationContainer } from '@react-navigation/native' 
 import 'react-native-gesture-handler';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -26,8 +32,13 @@ export default function App() {
             <Stack.Screen name="Profile" component={ProfileScreen} />
             <Stack.Screen name="SignUp" component={SignUpScreen} />
             <Stack.Screen name="SignIn" component={SignInScreen} />
-            <Stack.Screen name="Profile" component={ProfileScreen} />
             <Stack.Screen name="Friends" component={FriendScreen} />
+            <Stack.Screen name="Search" component={SearchScreen} />
+            <Stack.Screen name="Gains" component={GainsScreen} />
+            <Stack.Screen name="Losses" component={LossesScreen} />
+            <Stack.Screen name="Weight" component={WeightScreen} />
+            <Stack.Screen name="Lift" component={LiftScreen} />
+            <Stack.Screen name="Exercise" component={ExerciseScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>

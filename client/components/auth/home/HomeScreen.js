@@ -59,7 +59,18 @@ const HomeScreen = ({ navigation }) => {
         navigation.navigate('Weight')
       }
     />
-
+     <Button
+      title="Exercise"
+      onPress={() =>
+        navigation.navigate('Exercise')
+      }
+    />
+     <Button
+      title="Lift"
+      onPress={() =>
+        navigation.navigate('Lift')
+      }
+    />
     </View>
   );
 };
