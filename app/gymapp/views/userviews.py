@@ -56,9 +56,9 @@ class UserView(generics.ListCreateAPIView):
         return HttpResponse(jsonUser, content_type="application/x-javascript")    
 
 @csrf_exempt
-def getUser(request, path):
+def getUser(request, id):
     if request.method == 'GET':
-        qs = Lift.objects.get(username=path)
+        qs = User.objects.get(id=id)
         serialized_obj = serializers.serialize('json', [ qs, ])
         return HttpResponse(serialized_obj, content_type="application/x-javascript")
     if request.method == 'POST':

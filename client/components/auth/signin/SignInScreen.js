@@ -72,8 +72,6 @@ const SignInScreen = ({ navigation, route }) => {
           autoCapitalize={'none'} />
         <Button title="Sign In" onPress={handleSignInButtonPress}></Button>
         <Button title="Guest Sign In" onPress={handleGuestOnPress}></Button>
-        <Button title="Add" onPress={addButton}></Button>
-        <Button title="Check" onPress={checkButton}></Button>
   </View>
   )
 };

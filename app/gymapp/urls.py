@@ -6,7 +6,7 @@ from .views.weightviews import LossView, GainView, userLoss, userWeight, getLoss
 from .views.exerciseviews import ExerciseView, ExerciserView, getExercise,  getMyExercisersForDay, getExercisers
 urlpatterns = [
     path('users', UserView.as_view()),
-    path('users/<path>/get', getUser),
+    path('users/<int:id>/get', getUser),
     path('users/signin', userSignIn),
     path('users/<int:id1>/lifts', getMyLifts),
     path('users/<int:id1>/lifts/<int:id2>', getLiftSet),
