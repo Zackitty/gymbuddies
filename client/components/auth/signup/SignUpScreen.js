@@ -1,7 +1,8 @@
-import React, {Component, useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { signUp} from '../../../store/auth'
 import ErrorBox from '../errorbox/ErrorBox'
+import { CommonActions } from '@react-navigation/native';
 import {  View, Text, TextInput, Button, Picker, AsyncStorage } from 'react-native';
 
 const SignUpScreen = ({ navigation, route }) => {
@@ -13,19 +14,18 @@ const SignUpScreen = ({ navigation, route }) => {
   const [gender, setGender] = useState('Male');
   const [goal, setGoal] = useState('Loss');
   const dispatch = useDispatch();
-  const { authErrors } = useSelector(state => state.currentUser)
+  const { authErrors, needSignIn } = useSelector(state => state.currentUser)
   
-  
+  // useEffect(() => {
+  //   if (!needSignIn) {
+  //     navigation.navigate('Home')
+  //   }
+  // }, [needSignIn])
   
   const handleSignUp = async (e) => {
     e.preventDefault();
     dispatch(signUp(username, full_name, age, weight,
       gender, password, goal))
-    if (!authErrors){
-      navigation.navigate('Home')
-    }
-
-      
  
   }
 

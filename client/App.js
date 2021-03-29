@@ -7,6 +7,7 @@ import ProfileScreen from './components/auth/profile/ProfileScreen'
 import SignUpScreen from './components/auth/signup/SignUpScreen'
 import SignInScreen from './components/auth/signin/SignInScreen'
 import SplashScreen from './components/SplashScreen'
+import FriendScreen from './components/friendship/FriendScreen'
 import { NavigationContainer } from '@react-navigation/native' 
 import 'react-native-gesture-handler';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -20,11 +21,13 @@ export default function App() {
       <PersistGate  loading={null} persistor={persistor}>
         <NavigationContainer>
           <Stack.Navigator>
-            <Stack.Screen name="Home" component={HomeScreen}/>
             <Stack.Screen name="Splash" component={SplashScreen} />
+            <Stack.Screen name="Home" component={HomeScreen}/>
             <Stack.Screen name="Profile" component={ProfileScreen} />
             <Stack.Screen name="SignUp" component={SignUpScreen} />
             <Stack.Screen name="SignIn" component={SignInScreen} />
+            <Stack.Screen name="Profile" component={ProfileScreen} />
+            <Stack.Screen name="Friends" component={FriendScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>

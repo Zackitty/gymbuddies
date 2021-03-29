@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { useSelector } from 'react-redux';
+import { CommonActions } from '@react-navigation/native';
+
 
 const SplashScreen = ({ navigation }) => {
-  const { needSignIn } = useSelector(state => state.currentUser)
-  if (!needSignIn){
-    console.log("this one's for the girls")
-  }
+  const { authErrors, needSignIn } = useSelector(state => state.currentUser)
+  
 return (
   <View style={styles.container}>
      <Image
@@ -14,9 +14,9 @@ return (
         source={require('../images/gymbuddies.jpeg')}
       />
      <Button
-      title="Sign In"
+      title="Profile"
       onPress={() =>
-        navigation.navigate('SignIn')
+        navigation.navigate('Profile')
       }
     />
      <Button
