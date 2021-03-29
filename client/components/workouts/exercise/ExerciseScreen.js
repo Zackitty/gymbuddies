@@ -7,7 +7,9 @@ const ExerciseScreen = ({ navigation, route }) => {
 
 return (
 
-
+<View>
+  
+  </View>
 
 )
 

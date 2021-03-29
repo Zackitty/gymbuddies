@@ -5,11 +5,9 @@ import { CommonActions } from '@react-navigation/native';
 
 const LossesScreen = ({ navigation, route }) => {
 
-return (
-
-
-
-)
+return (<View>
+  
+</View>)
 
 }
   export default LossesScreen;

@@ -6,7 +6,9 @@ import { CommonActions } from '@react-navigation/native';
 const LiftScreen = ({ navigation, route }) => {
 
 return (
-
+<View>
+  
+  </View>
 
 
 )

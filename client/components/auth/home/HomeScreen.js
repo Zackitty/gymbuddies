@@ -38,7 +38,7 @@ const HomeScreen = ({ navigation }) => {
     <Button
       title="My Profile"
       onPress={() =>
-        navigation.navigate('Profile', { name: 'Jane' })
+        navigation.navigate('Profile')
       }
     ></Button>
     <Button

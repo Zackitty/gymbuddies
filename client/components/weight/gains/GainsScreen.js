@@ -7,7 +7,9 @@ const GainsScreen = ({ navigation, route }) => {
 
 return (
 
-
+<View>
+  
+  </View>
 
 )
 

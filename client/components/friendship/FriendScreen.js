@@ -7,7 +7,9 @@ const FriendScreen = ({ navigation, route }) => {
 
 return (
 
-
+<View>
+  
+  </View>
 
 )
 

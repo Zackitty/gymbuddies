@@ -7,7 +7,9 @@ const SearchScreen = ({ navigation, route }) => {
 
 return (
 
-
+<View>
+  
+  </View>
 
 )
 

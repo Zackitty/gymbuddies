@@ -7,7 +7,9 @@ const WeightScreen = ({ navigation, route }) => {
 
 return (
 
-
+<View>
+  
+  </View>
 
 )
 

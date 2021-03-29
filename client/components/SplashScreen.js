@@ -14,9 +14,9 @@ return (
         source={require('../images/gymbuddies.jpeg')}
       />
      <Button
-      title="Profile"
+      title="Sign In"
       onPress={() =>
-        navigation.navigate('Profile')
+        navigation.navigate('SignIn')
       }
     />
      <Button
