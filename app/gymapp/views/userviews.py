@@ -63,13 +63,13 @@ def getUser(request, id):
         return HttpResponse(serialized_obj, content_type="application/x-javascript")
     if request.method == 'POST':
         hashed_password = bcrypt.hashpw(request.POST.get('password').encode('utf-8'), bcrypt.gensalt(14))
-        qs = User.objects.get(username=path)
-        full_name=request.POST.get('full_name'),
-        username=request.POST.get('username'),
-        password=hashed_password,
-        weight=request.POST.get('weight'),
-        age=request.POST.get('age'),
-        gender=request.POST.get('gender'),
+        qs = User.objects.get(id=id)
+        full_name=request.POST.get('full_name')
+        username=request.POST.get('username')
+        password=hashed_password
+        weight=int(request.POST.get('weight'))
+        age=int(request.POST.get('age'))
+        gender=request.POST.get('gender')
         goal=request.POST.get('goal')
         qs.username = username
         qs.full_name = full_name
