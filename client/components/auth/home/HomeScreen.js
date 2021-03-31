@@ -47,6 +47,12 @@ const HomeScreen = ({ navigation }) => {
         navigation.navigate('Friends')
       }
     />
+         <Button
+      title="Discover Friends"
+      onPress={() =>
+        navigation.navigate('DiscoverFriends')
+      }
+    />
        <Button
       title="Search"
       onPress={() =>

@@ -3,15 +3,15 @@ import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { useSelector } from 'react-redux';
 import { CommonActions } from '@react-navigation/native';
 
-const FriendScreen = ({ navigation, route }) => {
+const FriendBox = ({ navigation, route }) => {
 
 return (
 
-<View>
+  <View>
   
   </View>
 
 )
 
 }
-  export default FriendScreen;
+  export default FriendBox;

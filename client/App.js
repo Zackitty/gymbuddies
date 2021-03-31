@@ -7,7 +7,8 @@ import ProfileScreen from './components/auth/profile/ProfileScreen'
 import SignUpScreen from './components/auth/signup/SignUpScreen'
 import SignInScreen from './components/auth/signin/SignInScreen'
 import SplashScreen from './components/SplashScreen'
-import FriendScreen from './components/friendship/FriendScreen'
+import FriendScreen from './components/friendship/friends/FriendScreen'
+import DiscoverFriendsScreen from './components/friendship/discoverfriends/DiscoverFriendsScreen'
 import SearchScreen from './components/search/SearchScreen'
 import GainsScreen from './components/weight/gains/GainsScreen'
 import LossesScreen from './components/weight/loss/LossesScreen'
@@ -33,6 +34,7 @@ export default function App() {
             <Stack.Screen name="SignUp" component={SignUpScreen} />
             <Stack.Screen name="SignIn" component={SignInScreen} />
             <Stack.Screen name="Friends" component={FriendScreen} />
+            <Stack.Screen name="DiscoverFriends" component={DiscoverFriendsScreen} />
             <Stack.Screen name="Search" component={SearchScreen} />
             <Stack.Screen name="Gains" component={GainsScreen} />
             <Stack.Screen name="Losses" component={LossesScreen} />
