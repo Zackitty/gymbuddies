@@ -59,3 +59,16 @@ class TotalLoss(models.Model):
 class TotalGain(models.Model):
     total_gain = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+class Activity(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    total_gainz = models.ForeignKey(TotalGain, on_delete=models.CASCADE)
+    total_lozz = models.ForeignKey(TotalLoss, on_delete=models.CASCADE)
+    todayz_weight = models.ForeignKey(TodaysWeight, on_delete=models.CASCADE)
+    lift_zet = models.ForeignKey(LiftSet, on_delete=models.CASCADE)
+    liftz = models.ForeignKey(Lift, on_delete=models.CASCADE)
+    gainz = models.ForeignKey(Gain, on_delete=models.CASCADE)
+    lozz = models.ForeignKey(Loss, on_delete=models.CASCADE)
+    addfriend = models.ForeignKey(Friend, on_delete=models.CASCADE)
+    exercize = models.ForeignKey(Exercise, on_delete=models.CASCADE)
+    exercizes = models.ForeignKey(Exerciser, on_delete=models.CASCADE)
