@@ -97,7 +97,7 @@ def getFriends(request,id1, id2):
     if request.method == 'POST':
         friendship = Friend(friends_id=id2, user_id=id1)
         friendship.save()
-        activity = Activity(addfriend_id=is2)
+        activity = Activity(addfriend_id=id2)
         activity.save()
 
         jsonFriend= serializers.serialize('json', [ friendship, ])

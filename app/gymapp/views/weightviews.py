@@ -50,6 +50,8 @@ def userLoss(request, id):
             loss.save()
             userQs.weight = userQs.weight - amount
             userQs.save() 
+            activity = Activity(lozz_id=loss.id)
+            activity.save()
             jsonLoss = serializers.serialize('json', [ thisweight, ])
             return HttpResponse(jsonLoss, content_type="application/x-javascript")    
             
@@ -85,6 +87,8 @@ def userGain(request, id):
             gain.save()
             userQs.weight = userQs.weight + amount
             userQs.save() 
+            activity = Activity(gainz_id=gain.id)
+            activity.save()
             jsonGain = serializers.serialize('json', [ gain, ])
             return HttpResponse(jsonGain, content_type="application/x-javascript")    
 
@@ -127,6 +131,8 @@ def userWeight(request, id):
             weight=newWeight, entry_date=entry_date,
                     userId_id=id)
         dailyweight.save()
+        activity = Activity(todayz_weight_id=dailyweight.id)
+        activity.save()
         jsonWeight = serializers.serialize('json', [ thisweight, ])
         return HttpResponse([jsonWeight], content_type="application/x-javascript")    
         
@@ -145,6 +151,8 @@ def getTotalGain(request, id):
             totalGain += key.amount
         gainTotal = TotalGain(total_gain=totalGain, user_id=id) 
         gainTotal.save()  
+        activity = Activity(total_gainz_id=gainTotal.id)
+        activity.save()
         jsonGain = serializers.serialize('json', [ gainTotal, ])
         return HttpResponse(jsonGain, content_type="application/x-javascript")
     
@@ -163,5 +171,7 @@ def getTotalLoss(request, id):
             totalLoss += key.amount
         lossTotal = TotalLoss(total_loss=totalLoss, user_id=id) 
         lossTotal.save()  
+        activity = Activity(total_lozz_id=lossTotal.id)
+        activity.save()
         jsonLoss = serializers.serialize('json', [ lossTotal, ])
         return HttpResponse(jsonLoss, content_type="application/x-javascript")
