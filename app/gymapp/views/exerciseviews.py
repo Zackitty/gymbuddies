@@ -15,7 +15,7 @@ import json
 import bcrypt
 import requests
 from django.views.decorators.csrf import csrf_exempt
-from ..models import Exercise, Exerciser
+from ..models import Exercise, Exerciser, Activity
 from ..serializers import ExerciseSerializer, ExerciserSerializer
 from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
 # Create your views here.

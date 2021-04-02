@@ -15,7 +15,7 @@ import json
 import bcrypt
 import requests
 from django.views.decorators.csrf import csrf_exempt
-from ..models import  Lift, LiftSet
+from ..models import  Lift, LiftSet, Activity
 from ..serializers import LiftSetSerializer, LiftSerializer
 from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
 

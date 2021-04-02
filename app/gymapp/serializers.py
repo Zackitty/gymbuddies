@@ -1,5 +1,5 @@
 from rest_framework import serializers 
-from .models import User, Exercise, Loss, Gain, Lift, Friend, LiftSet, Exerciser, TodaysWeight, TotalGain, TotalLoss
+from .models import User, Exercise, Loss, Gain, Lift, Friend, LiftSet, Exerciser, TodaysWeight, TotalGain, TotalLoss, Activity
 class UserSerializer(serializers.ModelSerializer):
     class Meta: 
       model =  User
@@ -57,3 +57,10 @@ class TotalLossSerializer(serializers.ModelSerializer):
     class Meta: 
       model =  TotalLoss
       fields = ('total_loss', 'user_id') 
+
+class ActivitySerializer(serializers.ModelSerializer):
+    class Meta: 
+      model =  TotalLoss
+      fields = ('addfriend_id', 'exercize_id', 'exercizes_id', 'gainz_id'
+        'lift_zet_id', 'liftz_id', 'lozz_id', 'todayz_weight_id',
+        'total_gainz_id', 'total_lozz_id', 'user_id') 

@@ -15,7 +15,7 @@ import json
 import bcrypt
 import requests
 from django.views.decorators.csrf import csrf_exempt
-from ..models import User, Loss, Gain, TodaysWeight, TotalGain, TotalLoss
+from ..models import User, Loss, Gain, TodaysWeight, TotalGain, TotalLoss, Activity
 from ..serializers import UserSerializer, LossSerializer, GainSerializer, TodaysWeightSerializer, TotalGainSerializer, TotalLossSerializer
 from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
 # Create your views here.
