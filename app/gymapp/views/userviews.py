@@ -16,8 +16,8 @@ import bcrypt
 import crypto
 import requests
 from django.views.decorators.csrf import csrf_exempt
-from ..models import User, Lift, Friend, Exercise, LiftSet
-from ..serializers import UserSerializer, FriendSerializer
+from ..models import User, Lift, Friend, Exercise, LiftSet, Activity
+from ..serializers import UserSerializer, FriendSerializer, ActivitySerializer
 from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
 from django.contrib.auth import authenticate
 
@@ -161,3 +161,11 @@ def validations_signin(username, password):
     return errors
 
 
+class ActivityView(generics.ListCreateAPIView):
+    queryset = Activity.objects.all()
+    serializer_class = ActivitySerializer
+
+def friendActivity(request, id):
+    qA = Activity.objects.filter(id=id1)
+    jsonUser = serializers.serialize('json', [ qs, ])
+    return HttpResponse(jsonUser, content_type="application/x-javascript")
