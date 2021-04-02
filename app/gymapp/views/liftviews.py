@@ -24,7 +24,16 @@ class LiftView(generics.ListCreateAPIView):
     queryset = Lift.objects.all()
     serializer_class = LiftSerializer
 
+@csrf_exempt
+def createLift(request):
+    name = request.POST.get('name')
+    lift = Lift(name=name)
+    lift.save()
+    print(lift.id)
+    jsonQs = serializers.serialize('json', [ lift, ])
+    return HttpResponse(jsonQs, content_type="application/x-javascript")    
 
+ 
 @csrf_exempt
 def getLift(request, path):
     if request.method == 'GET':
@@ -78,6 +87,7 @@ def getLiftSet(request, id1, id2):
             lift_name_id=id2, lifter_id=id1
         )
         liftSet.save()
+        
         jsonLiftSet= serializers.serialize('json', [ liftSet, ])
         return HttpResponse(jsonLiftSet, content_type="application/x-javascript")    
         
