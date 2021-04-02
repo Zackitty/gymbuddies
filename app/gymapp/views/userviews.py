@@ -16,7 +16,7 @@ import bcrypt
 import crypto
 import requests
 from django.views.decorators.csrf import csrf_exempt
-from ..models import User, Lift, Friend, Exercise, LiftSet, Activity
+from ..models import User, Lift, Friend, Loss, Gain, Exercise, LiftSet, Exerciser, TodaysWeight, TotalGain, TotalLoss, Activity
 from ..serializers import UserSerializer, FriendSerializer, ActivitySerializer
 from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
 from django.contrib.auth import authenticate
@@ -89,14 +89,17 @@ class FriendView(generics.ListCreateAPIView):
 
 def getFriends(request,id1, id2):
     if request.method == 'GET':
-        queryset = LiftSet.objects.all().filter(user_id=id1) 
+        queryset = Friend.objects.all().filter(user_id=id1) 
         queryArray = []
         for key in queryset:
             queryArray.append(serializers.serialize('json', [ key, ]))
         return HttpResponse(queryArray, content_type="application/x-javascript")
     if request.method == 'POST':
-        friendship = Friend(friends_id=id2, user_id=id2)
+        friendship = Friend(friends_id=id2, user_id=id1)
         friendship.save()
+        activity = Activity(addfriend_id=is2)
+        activity.save()
+
         jsonFriend= serializers.serialize('json', [ friendship, ])
         return HttpResponse(jsonFriend, content_type="application/x-javascript")            
 
@@ -166,6 +169,32 @@ class ActivityView(generics.ListCreateAPIView):
     serializer_class = ActivitySerializer
 
 def friendActivity(request, id):
-    qA = Activity.objects.filter(id=id1)
-    jsonUser = serializers.serialize('json', [ qs, ])
-    return HttpResponse(jsonUser, content_type="application/x-javascript")
+    queryset = Activity.objects.all().filter(user_id=id) 
+        queryArray = []
+        for key in queryset:
+            if key.addfriend_id:
+                friendKey = Friend.objects.all().filter(user_id=id, friends_id=key.addfriend_id)
+                queryArray.append(serializers.serialize('json', [ friendKey, key.id ]))
+            if key.exercizes_id:
+                exercizesKey = Exerciser.objects.all().filter(exerciser_id=id, exercise_id=key.exercizes_id)
+                queryArray.append(serializers.serialize('json', [ exercizesKey, key.id ]))
+            if key.gainz_id:
+                gainzKey = Gain.objects.all().filter(gainer_id=id, id=key.gainz_id)
+                queryArray.append(serializers.serialize('json', [ gainzKey, key.id ]))
+            if key.lift_zet_id:
+                liftZetKey = LiftSet.objects.all().filter(lifter_name_id=id, lifter_id=key.lift_zet_id)
+                queryArray.append(serializers.serialize('json', [ liftZetKey, key.id ]))
+            if key.lozz_id: 
+                lozzKey = Loss.objects.all().filter(loser_id=id, id=key.lozz_id)
+                queryArray.append(serializers.serialize('json', [ lozzKey, key.id ]))
+            if key.todayz_weight_id:
+                todayWeightKey = TodaysWeight.objects.all().filter(user_id_id=id, id=key.todayz_weight_id)
+                queryArray.append(serializers.serialize('json', [ todayWeightKey, key.id ]))
+            if key.total_gainz_id:
+                totalGainzKey = TotalGain.objects.all().filter(user_id=id, id=key.total_gainz_id)
+                queryArray.append(serializers.serialize('json', [ totalGainzKey, key.id ]))
+            if key.total_lozz_id:
+                totalLozzKey = TotalLoss.objects.all().filter(user_id=id, id=key.total_lozz_id)
+                queryArray.append(serializers.serialize('json', [ totalLozzKey, key.id ]))
+        return HttpResponse(queryArray, content_type="application/x-javascript")
+    

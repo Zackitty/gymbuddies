@@ -45,6 +45,8 @@ def getExercisers(request, id1, id2):
             exercise_id=id2, exerciser_id=id1
         )
         exerciser.save()
+        activity = Activity(exercizes_id=excerciser.id)
+        activity.save()
         jsonExerciser= serializers.serialize('json', [ exerciser, ])
         return HttpResponse(jsonExerciser, content_type="application/x-javascript")    
 
