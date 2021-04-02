@@ -28,7 +28,7 @@ urlpatterns = [
     path('exercises', ExerciseView.as_view()),
     path('exercises/<path>', getExercise),
     path('exercisers', ExerciserView.as_view()),
-    path('activity', friendActivity),
+    path('activity/<int:id>', friendActivity),
   
 
 
