@@ -87,7 +87,7 @@ def getLiftSet(request, id1, id2):
             lift_name_id=id2, lifter_id=id1
         )
         liftSet.save()
-        activity = Activity(lift_zet_id=liftSet.id)
+        activity = Activity(lift_zet_id=liftSet.id, user_id=id1)
         activity.save()
         
         jsonLiftSet= serializers.serialize('json', [ liftSet, ])
