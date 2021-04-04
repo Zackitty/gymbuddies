@@ -5,7 +5,7 @@ import { CommonActions } from '@react-navigation/native';
 
 const FriendBox = ({ username, weight, age, gender, goal }) => {
 const handleAdd = async(e) => {
-  
+ 
 }
 return (
 
