@@ -88,13 +88,7 @@ class FriendView(generics.ListCreateAPIView):
     serializer_class = FriendSerializer
 
 @csrf_exempt
-def getFriends(request,id1, id2):
-    if request.method == 'GET':
-        queryset = Friend.objects.all().filter(user_id=id1) 
-        queryArray = []
-        for key in queryset:
-            queryArray.append(serializers.serialize('json', [ key, ]))
-        return HttpResponse(queryArray, content_type="application/x-javascript")
+def makeFriends(request,id1, id2):
     if request.method == 'POST':
         friendship = Friend(friends_id=id2, user_id=id1)
         friendship.save()
@@ -103,6 +97,17 @@ def getFriends(request,id1, id2):
 
         jsonFriend= serializers.serialize('json', [ friendship, ])
         return HttpResponse(jsonFriend, content_type="application/x-javascript")            
+
+@csrf_exempt
+def getFriends(request, id):
+    if request.method == 'GET':
+        queryset = Friend.objects.all().filter(user_id=id) 
+        queryArray = []
+      
+        for key in queryset:
+            queryArray.append(key)
+        jsonQuery = serializers.serialize('json', queryArray)
+        return HttpResponse(jsonQuery, content_type="application/x-javascript")
 
 @csrf_exempt
 @api_view(('POST',))
@@ -202,4 +207,8 @@ def friendActivity(request, id):
                 totalLozzKey = TotalLoss.objects.get(user_id=id, id=key.total_lozz_id)
                 queryArray.append([key.id, serializers.serialize('json', [ totalLozzKey,])])
         return HttpResponse(queryArray, content_type="application/x-javascript")
-    
+
+def getUserId(request, username):
+    user = User.objects.get(username=username)
+    return HttpResponse(user.id, content_type="application/x-javascript")
+

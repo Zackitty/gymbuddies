@@ -26,7 +26,7 @@ return (
   <View>
    {friendsScroll && (
      <ScrollView>
-     {friendsScroll.map((friend, i) => <FriendBox key={i} age={friend.age} username={friend.username} gender={friend.gender} goal={friend.goal} weight={friend.weight}></FriendBox>)}
+     {friendsScroll.map((friend, i) => <FriendBox key={i} userid={friend} age={friend.age} username={friend.username} gender={friend.gender} goal={friend.goal} weight={friend.weight}></FriendBox>)}
      </ScrollView>
    )}
   </View>
