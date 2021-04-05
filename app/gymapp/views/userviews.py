@@ -131,9 +131,6 @@ def validations_signup(username, full_name, age, weight,
       gender, password, goal):
     errors = []
     print(age)
-    if not username or not User.objects.filter(username=username).exists():
-        errors.append('User Name is missing') 
-        return errors
     if User.objects.filter(username=username).exists():
         errors.append('Account already exists with this User Name')
     if not username:

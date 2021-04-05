@@ -68,6 +68,7 @@ def getGain(request, id1, id2):
         serialized_obj = serializers.serialize('json', [ qs, ])
         return HttpResponse(serialized_obj, content_type="application/x-javascript")
 
+@csrf_exempt
 def userGain(request, id):
         if request.method == 'GET':   
             queryset = User.objects.all().filter(gainer_id=int(id)) 
@@ -121,7 +122,7 @@ def userWeight(request, id):
                 url = f'http://127.0.0.1:8000/api/users/{id}/gain'
                 gainObj = {"amount":  amount, "entry_date": entry_date,
                 "gainer_id": int(id) }
-                x = requests.post(url, data = lossObj)
+                x = requests.post(url, data = gainObj)
                 thisweight = TodaysWeight(weight=newWeight, entry_date=entry_date, 
                 userId_id=id)
                 thisweight.save()

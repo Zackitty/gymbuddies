@@ -71,16 +71,17 @@ def getMyLiftsForDay(request, id1, id2):
             queryArray.append(serializers.serialize('json', [ key, ]))
         return HttpResponse(queryArray, content_type="application/x-javascript")
 
+@csrf_exempt
 def getLiftSet(request, id1, id2):
     if request.method == 'GET':    
         qs = LiftSet.objects.get(lifter=id1, lift_name=id2) 
         serialized_obj = serializers.serialize('json', [ qs, ])
         return HttpResponse(serialized_obj, content_type="application/x-javascript")
     if request.method == 'POST':
-        weight=request.POST.get('weight'),
-        one_rep_max=request.POST.get('one_rep_max'),
-        reps=request.POST.get('reps'),
-        entry_date=request.POST.get('entry_date'),
+        weight=int(request.POST.get('weight'))
+        one_rep_max=request.POST.get('one_rep_max')
+        reps=request.POST.get('reps')
+        entry_date=request.POST.get('entry_date')
         liftSet = LiftSet(
             weight=weight, one_rep_max=one_rep_max,
             reps=reps, entry_date=entry_date,

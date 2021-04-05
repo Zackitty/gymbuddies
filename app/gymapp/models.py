@@ -12,7 +12,6 @@ class User(models.Model):
 
 class Exercise(models.Model):
     name = models.CharField(max_length=20, default="", unique=True)
-    exercising_id = models.BinaryField(primary_key=True)
 
 class Exerciser(models.Model):
     length_in_min = models.IntegerField()
