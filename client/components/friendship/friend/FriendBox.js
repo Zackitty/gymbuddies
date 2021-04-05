@@ -7,22 +7,40 @@ import { apiUrl } from '../../../config';
 const FriendBox = ({ username, weight, age, gender, goal, userid }) => {
     const [friends, setFriends] =  useState([])
     const [friendId, setFriendId] = useState([])
+    const [isFriend, setIsFriend] = useState(false)
     const { id } = useSelector(state => state.currentUser)
    
     useEffect(() => {
-      fetch(`${apiUrl}/users/${id}/friends`)
-      .then(res => res.json())
-      .then(data => console.log(data))
-
-      fetch(`${apiUrl}/getusers/${username}`)
-      .then(res => res.json())
-      .then(data => setFriendId(data))
+      handleEffect()
     }, [])
   
-  
+    const handleEffect = async(e) => {
+      await fetch(`${apiUrl}/users/${id}/friends`)
+      .then(res => res.json())
+      .then(data => setFriends(data))
+      
+
+      await fetch(`${apiUrl}/getusers/${username}`)
+      .then(res => res.json())
+      .then(data => setFriendId(data))
+    
+      await  friendsHandler()
+    }
+
     const handleAdd = async(e) => {
     fetch(`${apiUrl}/users/${id}/friends/${friendId}`, 
     {method: 'post'})
+  
+}
+
+const friendsHandler = async(e) => {
+
+  for (let i=0; i < friends.length; i++) {
+    if(friends[i].fields.friends_id === friendId){
+      setIsFriend(true)
+    }
+   
+  }
   
 }
 return (
@@ -33,10 +51,20 @@ return (
     <Text>{weight}</Text>
     <Text>{gender}</Text>
     <Text>{goal}</Text>
-    { 
-    <Button title="Add Friend" onPress={handleAdd}></Button>
-    }
+    <View>
+      { !isFriend && (
+      <Button title="Add Friend" onPress={handleAdd}></Button>
+                    )
+      }
+      {
+        isFriend&& (
+          <Button title='Friend Added!'></Button>
+        )
+      }
+    </View>
+    
   </View>
+ 
 
 )
 

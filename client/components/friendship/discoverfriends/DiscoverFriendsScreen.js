@@ -19,8 +19,8 @@ const DiscoverFriendsScreen = ({ navigation, route }) => {
    
     const fetchScroll = async(data) => {
       await setFriendsScroll(data)
-     
     }
+    
 return (
 
   <View>
