@@ -24,28 +24,29 @@ class ExerciserView(generics.ListCreateAPIView):
     queryset = Exerciser.objects.all()
     serializer_class = ExerciserSerializer
 
-def getMyExercisersForDay(request, id1, id2):
-    if request.method == 'GET':
-        queryset = Exerciser.objects.all().filter(exerciser_id=id1, entry_date=id2) 
-        queryArray = []
-        for key in queryset:
-            queryArray.append(serializers.serialize('json', [ key, ]))
-        return HttpResponse(queryArray, content_type="application/x-javascript")
+# def getMyExercisersForDay(request, id1, id2):
+#     if request.method == 'GET':
+#         queryset = Exerciser.objects.all().filter(exerciser_id=id1, entry_date=id2) 
+#         queryArray = []
+#         for key in queryset:
+#             queryArray.append(serializers.serialize('json', [ key, ]))
+#         return HttpResponse(queryArray, content_type="application/x-javascript")
 
+@csrf_exempt
 def getExercisers(request, id1, id2):
     if request.method == 'GET':    
         qs = Exerciser.objects.get(exerciser_id=id1, exercise_id=id2) 
         serialized_obj = serializers.serialize('json', [ qs, ])
         return HttpResponse(serialized_obj, content_type="application/x-javascript")
     if request.method == 'POST':
-        length_in_min=request.POST.get('length_in_min'),
-        entry_date=request.POST.get('entry_date'),
+        length_in_min=int(request.POST.get('length_in_min'))
+        entry_date=request.POST.get('entry_date')
         exerciser = Exerciser(
             length_in_min=length_in_min, entry_date=entry_date,
             exercise_id=id2, exerciser_id=id1
         )
         exerciser.save()
-        activity = Activity(exercizes_id=excerciser.id, user_id=id1)
+        activity = Activity(exercizes_id=exerciser.id, user_id=id1)
         activity.save()
         jsonExerciser= serializers.serialize('json', [ exerciser, ])
         return HttpResponse(jsonExerciser, content_type="application/x-javascript")    
@@ -54,6 +55,7 @@ class ExerciseView(generics.ListCreateAPIView):
     queryset = Exercise.objects.all()
     serializer_class = ExerciseSerializer
 
+@csrf_exempt
 def getExercise(request, path):
     if request.method == 'GET':
         qs = Exercise.objects.get(name=path)

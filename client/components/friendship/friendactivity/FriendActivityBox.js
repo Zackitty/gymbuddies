@@ -20,51 +20,57 @@ return (
   
   <View>
     <Text>{props.name}</Text> 
-    {props.addedFriend & (
+    {props.friend & (
       <View>
-        <Text>added{props.friendName} as a friend!</Text>
+        <Text>added{props.friend.friendName} as a friend!</Text>
       </View>
     )}
     {
       props.exerciser & (
         <View>
-          did {props.ex}
+          did {props.execercise.name} for {props.exerciser.length_in_min} minutes!
         </View>
       )
     }
     {
-      gain & (
+      props.gain & (
         <View>
+          gained {props.gain.amount} lbs!
         </View>
       )
     }
     {
-      liftSet& (
+      props.liftset& (
         <View>
+          did a {props.lift.name} lifting {props.liftset.weight} lbs for {props.liftset.reps}!
         </View>
       )
     }
     {
-      loss & (
+      props.loss & (
         <View>
+          lost {props.loss.amount} lbs!
         </View>
       )
     }
     {
-      totalGain & (
+      props.totalgain & (
         <View>
+          has gained a total of {props.totalgain}
         </View>
       )
     }
     {
-      totalLoss & (
+      props.totalloss & (
         <View>
+           has lost a total of {props.totalloss}
         </View>
       )
     }
     {
-      weight & (
+      props.user.weight & (
         <View>
+          weighed {props.user.weight} lbs today!
         </View>
       )
     }

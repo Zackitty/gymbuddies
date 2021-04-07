@@ -143,10 +143,11 @@ class TotalGainView(generics.ListCreateAPIView):
     queryset = TotalGain.objects.all()
     serializer_class = TotalGainSerializer
 
+@csrf_exempt
 def getTotalGain(request, id):
       if request.method == 'GET':
         totalGain = 0
-        queryset = Gain.objects.all().filter(user_id=id) 
+        queryset = Gain.objects.all().filter(gainer_id=id) 
         userQs = User.objects.get(id=id)
         for key in queryset:
             totalGain += key.amount
@@ -163,6 +164,7 @@ class TotalLossView(generics.ListCreateAPIView):
     queryset = TotalLoss.objects.all()
     serializer_class = TotalLossSerializer
 
+@csrf_exempt
 def getTotalLoss(request, id):
     if request.method == 'GET':
         totalLoss = 0
@@ -176,3 +178,5 @@ def getTotalLoss(request, id):
         activity.save()
         jsonLoss = serializers.serialize('json', [ lossTotal, ])
         return HttpResponse(jsonLoss, content_type="application/x-javascript")
+
+
