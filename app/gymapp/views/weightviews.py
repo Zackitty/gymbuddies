@@ -151,19 +151,15 @@ class TotalGainView(generics.ListCreateAPIView):
 @csrf_exempt
 def getTotalGain(request, id):
       if request.method == 'GET':
-        totalGain = 0
-        queryset = Gain.objects.all().filter(gainer_id=id) 
-        userQs = User.objects.get(id=id)
-        for key in queryset:
-            totalGain += key.amount
-        gainTotal = TotalGain(total_gain=totalGain, user_id=id) 
-        gainTotal.save()  
-        activity = Activity(total_gainz_id=gainTotal.id, user_id=id)
+        userFirst = TodaysWeight.objects.filter(userId_id=id).order_by('id').first()
+        userLast = TodaysWeight.objects.filter(userId_id=id).order_by('id').last()
+        gainTotal = userLast.weight - userFirst.weight
+        totalgain = TotalGain(total_gain=gainTotal, user_id=id)
+        totalgain.save()  
+        activity = Activity(total_gainz_id=totalgain.id, user_id=id)
         activity.save()
-        jsonGain = serializers.serialize('json', [ gainTotal, ])
-        return HttpResponse(jsonGain, content_type="application/x-javascript")
-    
-    
+        jsongain = serializers.serialize('json', [ totalgain, ])
+        return HttpResponse(jsongain, content_type="application/x-javascript")
 
 class TotalLossView(generics.ListCreateAPIView):
     queryset = TotalLoss.objects.all()
@@ -172,16 +168,15 @@ class TotalLossView(generics.ListCreateAPIView):
 @csrf_exempt
 def getTotalLoss(request, id):
     if request.method == 'GET':
-        totalLoss = 0
-        queryset = Loss.objects.all().filter(loser_id=id) 
-        userQs = User.objects.get(id=id)
-        for key in queryset:
-            totalLoss += key.amount
-        lossTotal = TotalLoss(total_loss=totalLoss, user_id=id) 
-        lossTotal.save()  
-        activity = Activity(total_lozz_id=lossTotal.id, user_id=id)
+        
+        userFirst = TodaysWeight.objects.filter(userId_id=id).order_by('id').first()
+        userLast = TodaysWeight.objects.filter(userId_id=id).order_by('id').last()
+        lossTotal = userFirst.weight - userLast.weight
+        totalloss = TotalLoss(total_loss=lossTotal, user_id=id)
+        totalloss.save()  
+        activity = Activity(total_lozz_id=totalloss.id, user_id=id)
         activity.save()
-        jsonLoss = serializers.serialize('json', [ lossTotal, ])
+        jsonLoss = serializers.serialize('json', [ totalloss, ])
         return HttpResponse(jsonLoss, content_type="application/x-javascript")
 
 
