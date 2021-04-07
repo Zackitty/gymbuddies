@@ -91,6 +91,7 @@ def userGain(request, id):
             activity = Activity(gainz_id=gain.id, user_id=id)
             activity.save()
             jsonGain = serializers.serialize('json', [ gain, ])
+            
             return HttpResponse(jsonGain, content_type="application/x-javascript")    
 
 @csrf_exempt
@@ -116,7 +117,9 @@ def userWeight(request, id):
                 userId_id=id)
                 thisweight.save()
                 jsonWeight = serializers.serialize('json', [ thisweight, ])
-                return HttpResponse([x, jsonWeight], content_type="application/x-javascript")    
+                totalUrl = f'http://127.0.0.1:8000/api/users/{int(id)}/totalloss'
+                trl = requests.get(totalUrl)
+                return HttpResponse([x, jsonWeight, trl], content_type="application/x-javascript")    
         if userQs.goal == 'gain':
                 amount = int(newWeight) - int(userQs.weight)
                 url = f'http://127.0.0.1:8000/api/users/{id}/gain'
@@ -127,7 +130,9 @@ def userWeight(request, id):
                 userId_id=id)
                 thisweight.save()
                 jsonWeight = serializers.serialize('json', [ thisweight, ])
-                return HttpResponse([x, jsonWeight], content_type="application/x-javascript")    
+                totalUrl = f'http://127.0.0.1:8000/api/users/{int(id)}/totalgain'
+                trl = requests.get(totalUrl)
+                return HttpResponse([x, jsonWeight, trl], content_type="application/x-javascript")    
         dailyweight = TodaysWeight(
             weight=newWeight, entry_date=entry_date,
                     userId_id=id)
