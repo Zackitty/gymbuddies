@@ -182,14 +182,15 @@ def friendActivity(request, id):
             if key.addfriend_id:
                 friendKey = Friend.objects.get(user_id=id, friends_id=key.addfriend_id)
                 queryArray.append([key.id, serializers.serialize('json', [ friendKey,])])
+                
             if key.exercizes_id:
-                exercizesKey = Exerciser.objects.get(exerciser_id=id, exercise_id=key.exercizes_id)
+                exercizesKey = Exerciser.objects.get(id=key.exercizes_id)
                 queryArray.append([key.id, serializers.serialize('json', [ exercizesKey, ])])
             if key.gainz_id:
                 gainzKey = Gain.objects.get(gainer_id=id, id=key.gainz_id)
                 queryArray.append([key.id, serializers.serialize('json', [ gainzKey, ])])
             if key.lift_zet_id:
-                liftZetKey = LiftSet.objects.get(lifter_name_id=id, lifter_id=key.lift_zet_id)
+                liftZetKey = LiftSet.objects.get(id=key.lift_zet_id)
                 queryArray.append([key.id, serializers.serialize('json', [ liftZetKey, ])])
             if key.lozz_id: 
                 lozzKey = Loss.objects.get(loser_id=id, id=key.lozz_id)

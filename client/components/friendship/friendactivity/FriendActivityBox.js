@@ -19,58 +19,38 @@ return (
 <View>
   
   <View>
-    <Text>{props.name}</Text> 
-    {props.friend & (
+    <Text>{props.user.username}</Text> 
+    {props.friend && (
       <View>
         <Text>added{props.friend.friendName} as a friend!</Text>
       </View>
     )}
     {
-      props.exerciser & (
+      props.exerciser && (
         <View>
           did {props.execercise.name} for {props.exerciser.length_in_min} minutes!
         </View>
       )
     }
     {
-      props.gain & (
-        <View>
-          gained {props.gain.amount} lbs!
-        </View>
-      )
-    }
-    {
-      props.liftset& (
+      props.liftset &&  (
         <View>
           did a {props.lift.name} lifting {props.liftset.weight} lbs for {props.liftset.reps}!
         </View>
       )
     }
+  
     {
-      props.loss & (
+      props.user.gain && (
         <View>
-          lost {props.loss.amount} lbs!
+           weighed {props.user.weight} lbs today! They gained {props.gain.amount} lbs making a total of {props.totalgain.amount} lbs!
         </View>
       )
     }
     {
-      props.totalgain & (
+      props.user.loss && (
         <View>
-          has gained a total of {props.totalgain}
-        </View>
-      )
-    }
-    {
-      props.totalloss & (
-        <View>
-           has lost a total of {props.totalloss}
-        </View>
-      )
-    }
-    {
-      props.user.weight & (
-        <View>
-          weighed {props.user.weight} lbs today!
+          weighed {props.user.weight} lbs today! They lost {props.loss.amount} lbs making a total of {props.totalloss.amount} lbs!
         </View>
       )
     }

@@ -7,7 +7,7 @@ import { fetchUsers } from '../../../store/users';
 import { apiUrl } from '../../../config';
 
 const DiscoverFriendsScreen = ({ navigation, route }) => {
-    const [friendsScroll, setFriendsScroll] = useState([])
+    const [discoverFriendsScroll, setDiscoverFriendsScroll] = useState([])
     const dispatch = useDispatch();
     
       useEffect(() => {
@@ -18,15 +18,15 @@ const DiscoverFriendsScreen = ({ navigation, route }) => {
     
    
     const fetchScroll = async(data) => {
-      await setFriendsScroll(data)
+      await setDiscoverFriendsScroll(data)
     }
     
 return (
 
   <View>
-   {friendsScroll && (
+   {discoverFriendsScroll && (
      <ScrollView>
-     {friendsScroll.map((friend, i) => <FriendBox key={i} userid={friend} age={friend.age} username={friend.username} gender={friend.gender} goal={friend.goal} weight={friend.weight}></FriendBox>)}
+     {discoverFriendsScroll.map((friend, i) => <FriendBox key={i} userid={friend} age={friend.age} username={friend.username} gender={friend.gender} goal={friend.goal} weight={friend.weight}></FriendBox>)}
      </ScrollView>
    )}
   </View>
