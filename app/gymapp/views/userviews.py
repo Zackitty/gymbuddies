@@ -171,40 +171,51 @@ class ActivityView(generics.ListCreateAPIView):
     queryset = Activity.objects.all()
     serializer_class = ActivitySerializer
 
-@csrf_exempt
-def friendActivity(request, id):
+# @csrf_exempt
+# def friendActivity(request, id):
 
-    if request.method == 'GET':
-        qs = Activity.objects.all().filter(user_id=id)
+#     if request.method == 'GET':
+#         qs = Activity.objects.all()
        
-        queryArray = []
-        for key in qs:
-            if key.addfriend_id:
-                friendKey = Friend.objects.get(user_id=id, friends_id=key.addfriend_id)
-                queryArray.append([key.id, serializers.serialize('json', [ friendKey,])])
-                
-            if key.exercizes_id:
-                exercizesKey = Exerciser.objects.get(id=key.exercizes_id)
-                queryArray.append([key.id, serializers.serialize('json', [ exercizesKey, ])])
-            if key.gainz_id:
-                gainzKey = Gain.objects.get(gainer_id=id, id=key.gainz_id)
-                queryArray.append([key.id, serializers.serialize('json', [ gainzKey, ])])
-            if key.lift_zet_id:
-                liftZetKey = LiftSet.objects.get(id=key.lift_zet_id)
-                queryArray.append([key.id, serializers.serialize('json', [ liftZetKey, ])])
-            if key.lozz_id: 
-                lozzKey = Loss.objects.get(loser_id=id, id=key.lozz_id)
-                queryArray.append([key.id, serializers.serialize('json', [ lozzKey, ])])
-            if key.todayz_weight_id:
-                todayWeightKey = TodaysWeight.objects.get(user_id_id=id, id=key.todayz_weight_id)
-                queryArray.append([key.id, serializers.serialize('json', [ todayWeightKey,])])
-            if key.total_gainz_id:
-                totalGainzKey = TotalGain.objects.get(user_id=id, id=key.total_gainz_id)
-                queryArray.append([key.id, serializers.serialize('json', [ totalGainzKey,])])
-            if key.total_lozz_id:
-                totalLozzKey = TotalLoss.objects.get(user_id=id, id=key.total_lozz_id)
-                queryArray.append([key.id, serializers.serialize('json', [ totalLozzKey,])])
-        return HttpResponse(queryArray, content_type="application/x-javascript")
+#         # queryArray = {}
+#         # for key in qs:
+#         #     if key.addfriend_id:
+#         #         friendKey = Friend.objects.get(user_id=key.user_id, friends_id=key.addfriend_id)
+#         #         serializedFriends = serializers.serialize("json", [ friendKey,])
+#         #         queryArray["serializedFriends"] = serializedFriends
+#         #     if key.exercizes_id:
+#         #         exercizesKey = Exerciser.objects.get(id=key.exercizes_id)
+#         #         serializedExerciser  = serializers.serialize("json", [ exercizesKey, ])
+#         #         queryArray["serializedExerciser"] = serializedExerciser
+#         #     if key.gainz_id:
+#         #         gainzKey = Gain.objects.get(id=key.gainz_id, gainer_id=key.user_id)
+#         #         print(gainzKey)
+#         #         gainzSerializer = serializers.serialize("json", [gainzKey,])
+#         #         print(gainzSerializer)
+#         #         queryArray["gainzSerializer"] = gainzSerializer
+#         #     if key.lift_zet_id:
+#         #         liftZetKey = LiftSet.objects.get(id=key.lift_zet_id)
+#         #         liftZetSerializer = serializers.serialize("json", [ liftZetKey, ])
+#         #         queryArray["liftZetSerializer"] = liftZetSerializer
+#         #     if key.lozz_id: 
+#         #         lozzKey = Loss.objects.get(id=key.lozz_id)
+#         #         lozzSerializer = serializers.serialize("json", [ lozzKey, ])
+#         #         queryArray["lozzSerializer"] = lozzSerializer
+#         #     if key.todayz_weight_id:
+#         #         todayWeightKey = TodaysWeight.objects.get(id=key.todayz_weight_id)
+#         #         todayWeightSerializer = serializers.serialize("json", [ todayWeightKey, ])
+#         #         queryArray["todayWeightSerializer"] = todayWeightSerializer
+#         #     if key.total_gainz_id:
+#         #         totalGainzKey = TotalGain.objects.get(id=key.total_gainz_id)
+#         #         serializedTotalGains = serializers.serialize("json", [ totalGainzKey,])
+#         #         queryArray["serializedTotalGains"] = serializedTotalGains
+#         #     if key.total_lozz_id:
+#         #         totalLozzKey = TotalLoss.objects.get(id=key.total_lozz_id)
+#         #         totalLozzSerializer = serializers.serialize("json", [ totalLozzKey, ])
+#         #         queryArray["totalLozzSerializer"] = totalLozzSerializer
+#         x = serializers.serialize("json", [qs,])
+
+#         return HttpResponse(x, content_type="application/x-javascript")
 
 def getUserId(request, username):
     user = User.objects.get(username=username)
