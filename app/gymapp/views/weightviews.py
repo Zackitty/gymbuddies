@@ -75,7 +75,7 @@ def getGain(request, id1, id2):
         serialized_obj = serializers.serialize('json', [ qs, ])
         return HttpResponse(serialized_obj, content_type="application/x-javascript")
 
-def getGain(request, id):
+def getAGain(request, id):
     if request.method == 'GET':
         qs = Gain.objects.get(id=id) 
         serialized_obj = serializers.serialize('json', [ qs, ])
