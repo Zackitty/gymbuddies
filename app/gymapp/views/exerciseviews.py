@@ -33,6 +33,13 @@ class ExerciserView(generics.ListCreateAPIView):
 #         return HttpResponse(queryArray, content_type="application/x-javascript")
 
 @csrf_exempt
+def getAnExerciser(request, id):
+    if request.method == 'GET':   
+        qs = Exerciser.objects.get(id=id)
+        serialized_obj = serializers.serialize('json', [ qs, ])
+        return HttpResponse(serialized_obj, content_type="application/x-javascript")
+
+@csrf_exempt
 def getExercisers(request, id1, id2):
     if request.method == 'GET':    
         qs = Exerciser.objects.get(exerciser_id=id1, exercise_id=id2) 
@@ -56,13 +63,13 @@ class ExerciseView(generics.ListCreateAPIView):
     serializer_class = ExerciseSerializer
 
 @csrf_exempt
-def getExercise(request, path):
+def getExercise(request, id):
     if request.method == 'GET':
-        qs = Exercise.objects.get(name=path)
+        qs = Exercise.objects.get(id=id)
         serialized_obj = serializers.serialize('json', [ qs, ])
         return HttpResponse(serialized_obj, content_type="application/x-javascript")
     if request.method == 'POST':
-        qs = Exercise.objects.get(name=path)
+        qs = Exercise.objects.get(id=id)
         name = request.POST.get("name")
         qs.name = name
         qs.save()

@@ -89,6 +89,10 @@ class FriendView(generics.ListCreateAPIView):
 
 @csrf_exempt
 def makeFriends(request,id1, id2):
+    if request.method == 'GET':
+      querySet = Friend.objects.get(user_id=id1, friends_id=id2) 
+      qs = serializers.serialize("json", [querySet,])
+      return HttpResponse(qs, content_type="application/x-javascript")
     if request.method == 'POST':
         friendship = Friend(friends_id=id2, user_id=id1)
         friendship.save()

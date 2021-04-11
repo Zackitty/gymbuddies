@@ -35,9 +35,9 @@ def createLift(request):
 
  
 @csrf_exempt
-def getLift(request, path):
+def getLift(request, id):
     if request.method == 'GET':
-        qs = Lift.objects.get(name=path)
+        qs = Lift.objects.get(id=id)
         serialized_obj = serializers.serialize('json', [ qs, ])
         return HttpResponse(serialized_obj, content_type="application/x-javascript")
     if request.method == 'POST':
@@ -93,4 +93,10 @@ def getLiftSet(request, id1, id2):
         
         jsonLiftSet= serializers.serialize('json', [ liftSet, ])
         return HttpResponse(jsonLiftSet, content_type="application/x-javascript")    
-        
+
+@csrf_exempt
+def getALiftSet(request, id):
+    if request.method == 'GET':    
+        qs = LiftSet.objects.get(id=id) 
+        serialized_obj = serializers.serialize('json', [ qs, ])
+        return HttpResponse(serialized_obj, content_type="application/x-javascript")

@@ -31,6 +31,13 @@ def getLoss(request, id1, id2):
         return HttpResponse(serialized_obj, content_type="application/x-javascript")
 
 @csrf_exempt
+def aUserLoss(request, id):
+      if request.method == 'GET':
+        qs = Loss.objects.get(id=id) 
+        serialized_obj = serializers.serialize('json', [ qs, ])
+        return HttpResponse(serialized_obj, content_type="application/x-javascript")
+
+@csrf_exempt
 def userLoss(request, id):
         if request.method == 'GET':   
             queryset = Loss.objects.all().filter(loser_id=int(id)) 
@@ -64,7 +71,13 @@ class GainView(generics.ListCreateAPIView):
 
 def getGain(request, id1, id2):
     if request.method == 'GET':
-        qs = Gain.objects.get(loser_id=id1, id=id2) 
+        qs = TotalGain.objects.get(loser_id=id1, id=id2) 
+        serialized_obj = serializers.serialize('json', [ qs, ])
+        return HttpResponse(serialized_obj, content_type="application/x-javascript")
+
+def getGain(request, id):
+    if request.method == 'GET':
+        qs = Gain.objects.get(id=id) 
         serialized_obj = serializers.serialize('json', [ qs, ])
         return HttpResponse(serialized_obj, content_type="application/x-javascript")
 
@@ -93,6 +106,13 @@ def userGain(request, id):
             jsonGain = serializers.serialize('json', [ gain, ])
             
             return HttpResponse(jsonGain, content_type="application/x-javascript")    
+
+@csrf_exempt
+def userTodayWeight(request, id):
+        if request.method == 'GET':
+            qs = TodaysWeight.objects.get(id=id) 
+            serialized_obj = serializers.serialize('json', [ qs, ])
+            return HttpResponse(serialized_obj, content_type="application/x-javascript")
 
 @csrf_exempt
 def userWeight(request, id):
@@ -160,6 +180,21 @@ def getTotalGain(request, id):
         activity.save()
         jsongain = serializers.serialize('json', [ totalgain, ])
         return HttpResponse(jsongain, content_type="application/x-javascript")
+
+@csrf_exempt
+def getATotalGain(request, id):
+       if request.method == 'GET':
+            qs = TotalGain.objects.get(id=id) 
+            serialized_obj = serializers.serialize('json', [ qs, ])
+            return HttpResponse(serialized_obj, content_type="application/x-javascript")
+
+@csrf_exempt
+def getATotalLoss(request, id):
+       if request.method == 'GET':
+            qs = TotalLoss.objects.get(id=id) 
+            serialized_obj = serializers.serialize('json', [ qs, ])
+            return HttpResponse(serialized_obj, content_type="application/x-javascript")
+
 
 class TotalLossView(generics.ListCreateAPIView):
     queryset = TotalLoss.objects.all()
