@@ -10,8 +10,19 @@ const FriendActivityBox = (props) => {
   // const [liftSet, setLiftSet] = useState(false)
   // const [loss, setLoss] = useState(false)
   // const [totalGain, setTotalGain] = useState(false)
-  // const [totalLoss, setTotalLoss] = useState(false)
-  // const [weight, setWeight] = useState(false)
+  const [show, setShow] = useState(false)
+  useEffect(() => {
+
+    if (props.user && (props.exercise || props.liftset || props.gain 
+      || props.totalgain || props.loss || props.totalloss || todaysweight))
+      {setShow(true)}
+
+
+  }, [])
+ 
+
+
+
 
 
 return (
@@ -26,53 +37,53 @@ return (
       </View>
     )}
     {
-      props.exerciser && (
-        <View>
-          did {props.execercise.name} for {props.exerciser.length_in_min} minutes!
-        </View>
+      props.exercise && (
+        <Text>
+          did {props.exercise.name} for {props.exerciser.length_in_min} minutes!
+        </Text>
       )
     }
     {
       props.liftset &&  (
-        <View>
+        <Text>
           did a {props.lift.name} lifting {props.liftset.weight} lbs for {props.liftset.reps}!
-        </View>
+        </Text>
       )
     }
   
     {
       props.gain && (
-        <View>
+        <Text>
        gained {props.gain.amount} lbs! 
-        </View>
+        </Text>
       )
     }
       {
       props.totalgain && (
-        <View>
+        <Text>
             has gained a total of {props.totalgain.amount} lbs!
-        </View>
+        </Text>
       )
     }
     {
-      props.user.loss && (
-        <View>
+      props.loss && (
+        <Text>
           lost {props.loss.amount} lbs!
-        </View>
+        </Text>
       )
     }
      {
       props.totalloss && (
-        <View>
-          has lot a total of {props.totalloss.amount} lbs!
-        </View>
+        <Text>
+          has lot a total of {props.totalloss.total_loss} lbs!
+        </Text>
       )
     }
       {
       props.todaysweight && (
-        <View>
+        <Text>
           weighed {props.todaysweight} lbs today! 
-        </View>
+        </Text>
       )
     }
   </View>

@@ -47,9 +47,9 @@ const FriendScreen = ({ navigation, route }) => {
         .then(data => keyObj["user"] = data[0].fields)
       
         if (data[key].addfriend_id){
-            await fetch(`${apiUrl}/users/${data[key].user_id}/friends/${key.addfriend_id}`)
+            await fetch(`${apiUrl}/users/${key.addfriend_id}`)
             .then(res => res.json())
-            .then(data =>  keyObj["friend"] = data[0].fields)
+            .then(data =>  keyObj["friend"] = data[0].fields.username)
                     }
         if (data[key].exercizes_id){
             await fetch(`${apiUrl}/exercisers/${data[key].exercizes_id}`)
@@ -110,45 +110,47 @@ return (
     {activityScroll && (
           <View>
         {activityScroll.map((activity, i) => 
-        <View>
+       
+        <View key ={i}>
+          
           {activity["friend"] && (
             <View>
-            <FriendActivityBox key={i} user={activity["user"]} age={friend.age} username={friend.username} gender={friend.gender} goal={friend.goal} weight={friend.weight}/>
+            <FriendActivityBox key={i} user={activity["user"]} friend={activity["friend"]} />
             </View>
           )}
-          {keyObj['liftset'] && (
+          {activity['liftset'] && (
              <View>
-             <FriendActivityBox key={i} user={activity["user"]} liftset={keyObj['liftset']} lift={keyObj['lift']}/>
+             <FriendActivityBox key={i} user={activity["user"]} liftset={activity['liftset']} lift={activity['lift']}/>
              </View>
           )}
-          {keyObj['loss'] && (
+          {activity['loss'] && (
              <View>
-             <FriendActivityBox key={i} user={activity["user"]} loss={keyObj['loss']}/>
+             <FriendActivityBox key={i} user={activity["user"]} loss={activity['loss']}/>
              </View>
           )}
-          {keyObj['totalloss'] && (
+          {activity['totalloss'] && (
              <View>
-             <FriendActivityBox key={i} user={activity["user"]} totalloss={keyObj['totalloss']}/>
+             <FriendActivityBox key={i} user={activity["user"]} totalloss={activity['totalloss']}/>
              </View>
           )}
-          {keyObj['totalgain'] && (
+          {activity['totalgain'] && (
              <View>
-             <FriendActivityBox key={i} user={activity["user"]} totalgain={keyObj['totalgain']}/>
+             <FriendActivityBox key={i} user={activity["user"]} totalgain={activity['totalgain']}/>
              </View>
           )}
-          {keyObj['gain'] && (
+          {activity['gain'] && (
              <View>
-             <FriendActivityBox key={i} user={activity["user"]} gain={keyObj['gain']}/>
+             <FriendActivityBox key={i} user={activity["user"]} gain={activity['gain']}/>
              </View>
           )}
-          {keyObj['todaysweight'] && (
+          {activity['todaysweight'] && (
              <View>
              <FriendActivityBox key={i} user={activity["user"]} todaysweight={activity["todaysweight"]}/>
              </View>
           )}
-          {keyObj['exerciser'] && (
+          {activity['exerciser'] && (
              <View>
-             <FriendActivityBox key={i} user={activity["user"]} exercise={activity['exercise']} exerciser={keyObj['exerciser']}/>
+             <FriendActivityBox key={i} user={activity["user"]} exercise={activity['exercise']} exerciser={activity['exerciser']}/>
              </View>
           )}
           </View>
