@@ -26,7 +26,7 @@ urlpatterns = [
     path('users/gain/<int:id>', getAGain),
     path('users/<int:id1>/gain/<int:id2>', getGain), 
     path('users/<int:id>/totalgain', getTotalGain),  
-    path('users/totalgain/<int:id', getATotalGain), 
+    path('users/totalgain/<int:id>', getATotalGain), 
     path('lifts', LiftView.as_view()),
     path('lift/create', createLift),
     path('lifts/<int:id>', getLift),

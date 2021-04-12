@@ -185,6 +185,7 @@ def getTotalGain(request, id):
 def getATotalGain(request, id):
        if request.method == 'GET':
             qs = TotalGain.objects.get(id=id) 
+            print(qs)
             serialized_obj = serializers.serialize('json', [ qs, ])
             return HttpResponse(serialized_obj, content_type="application/x-javascript")
 

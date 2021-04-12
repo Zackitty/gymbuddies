@@ -41,16 +41,37 @@ return (
     }
   
     {
-      props.user.gain && (
+      props.gain && (
         <View>
-           weighed {props.user.weight} lbs today! They gained {props.gain.amount} lbs making a total of {props.totalgain.amount} lbs!
+       gained {props.gain.amount} lbs! 
+        </View>
+      )
+    }
+      {
+      props.totalgain && (
+        <View>
+            has gained a total of {props.totalgain.amount} lbs!
         </View>
       )
     }
     {
       props.user.loss && (
         <View>
-          weighed {props.user.weight} lbs today! They lost {props.loss.amount} lbs making a total of {props.totalloss.amount} lbs!
+          lost {props.loss.amount} lbs!
+        </View>
+      )
+    }
+     {
+      props.totalloss && (
+        <View>
+          has lot a total of {props.totalloss.amount} lbs!
+        </View>
+      )
+    }
+      {
+      props.todaysweight && (
+        <View>
+          weighed {props.todaysweight} lbs today! 
         </View>
       )
     }

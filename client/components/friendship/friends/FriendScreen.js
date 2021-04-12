@@ -43,80 +43,61 @@ const FriendScreen = ({ navigation, route }) => {
      
         keyObj = {}
         await fetch(`${apiUrl}/users/${data[key].user_id}/get`)
-      .then(res => res.json())
-      .then(data1 => setUserProp(data1))
-       keyObj["user"] = userProp
+        .then(res => res.json())
+        .then(data => keyObj["user"] = data[0].fields)
+      
         if (data[key].addfriend_id){
-                      await fetch(`${apiUrl}/users/${data[key].user_id}/friends/${key.addfriend_id}`)
-                      .then(res => res.json())
-                      .then(data => setFriendProp(data[0].fields))
-                      keyObj["friend"] = friendProp
-                    
+            await fetch(`${apiUrl}/users/${data[key].user_id}/friends/${key.addfriend_id}`)
+            .then(res => res.json())
+            .then(data =>  keyObj["friend"] = data[0].fields)
                     }
-
-                  //     if (data[key].exercizes_id){
-        
-                  //     await fetch(`${apiUrl}/exercisers/${data[key].exercizes_id}`)
-                  //     .then(res => res.json())
-                  //     .then(data => setExerciserProp(data[0].fields))
-                  //     await console.log(exerciserProp)
-                  //     await fetch(`${apiUrl}/exercises/${exerciserProp.exercise}`)
-                  //     .then(res => res.json())
-                  //     .then(data => setExerciseProp(data[0].fields))
-                  //     keyObj['exerciser'] = exerciserProp 
-                  //     keyObj['exercise'] = exerciseProp
-                  // }
-                  //     if (data[key].gainz_id){
-                  //     await fetch(`${apiUrl}/users/gain/${data[key].gainz_id}`)
-                  //   .then(res => res.json())
-                  //   .then(data => setGainProp(data[0].fields))
-                  //   keyObj['gain'] = gainProp
-                    
-                  // }
-                  // if (data[key].lift_zet_id){
-                     
-                  //     await fetch(`${apiUrl}/liftsets/${data[key].lift_zet_id}`)
-                  //     .then(res => res.json())
-                  //      .then(data =>  setLiftSetProp(data[0].fields))
-                  //      console.log(liftSetProp)
-                  //      await fetch(`${apiUrl}/lifts/${liftSetProp.lift_name}`)
-                  //     .then(res => res.json())
-                  //      .then(data => setLiftProp(data[0].fields))
-                  //      keyObj['liftset'] = liftSetProp
-                  //      keyObj['lift'] = liftProp
-                  // }    
-                  // if (data[key].lozz_id){
-                     
-                  //     await fetch(`${apiUrl}/users/loss/${data[key].lozz_id}`)
-                  //     .then(res => res.json())
-                  //   .then(data => setLossProp(data[0].fields))
-                  //   keyObj['loss'] = lossProp
-                  // }    
-      //             if (data[key].todayz_weight_id){
-  
-      //                 await fetch(`${apiUrl}/users/dailyweight/${data[key].todayz_weight_id}`)
-      //                 .then(res => res.json())
-      //                 .then(data =>  setTodaysWeightProp(data[0].fields))
-      //                 keyObj['todaysweight'] = todaysWeightProp
-      //             }
-      //             if (data[key].total_gainz_id){
-              
-      //                 await fetch(`${apiUrl}/users/totalgain/${data[key].total_gainz_id}`)
-      //                 .then(res => res.json())
-      //                 .then(data => setTotalGainProp(data[0].fields))
-      //                 keyObj['totalgain'] = totalGainProp
-      //             }    
-      //             if (data[key].total_lozz_id){
-
-      //                await fetch(`${apiUrl}/users/totalloss/${data[key].total_lozz_id}`)
-      //               .then(res => res.json())
-      //               .then(data =>  setTotalLossProp(data[0].fields))
-      //               keyObj['totalloss'] = totalLossProp
-      //             }
-      //             queryArray.push(keyObj)
-                }
-                    
-                console.log(queryArray)
+        if (data[key].exercizes_id){
+            await fetch(`${apiUrl}/exercisers/${data[key].exercizes_id}`)
+            .then(res => res.json())
+            .then(data => keyObj['exerciser']  = data[0].fields)
+                      
+            await fetch(`${apiUrl}/exercises/${keyObj['exerciser'].exercise}`)
+            .then(res => res.json())
+            .then(data => keyObj['exercise'] = data[0].fields)    
+                    }
+        if (data[key].gainz_id){
+            await fetch(`${apiUrl}/users/gain/${data[key].gainz_id}`)
+            .then(res => res.json())
+            .then(data => keyObj['gain'] = data[0].fields)  
+                  }
+        if (data[key].lift_zet_id){         
+            await fetch(`${apiUrl}/liftsets/${data[key].lift_zet_id}`)
+            .then(res => res.json())
+            .then(data =>   keyObj['liftset'] =data[0].fields)
+                  
+            await fetch(`${apiUrl}/lifts/${keyObj['liftset'].lift_name}`)
+            .then(res => res.json())
+            .then(data =>  keyObj['lift'] = data[0].fields)    
+                  }    
+        if (data[key].lozz_id){               
+            await fetch(`${apiUrl}/users/loss/${data[key].lozz_id}`)
+            .then(res => res.json())
+            .then(data => keyObj['loss'] = data[0].fields)
+                  }    
+        if (data[key].todayz_weight_id){
+            await fetch(`${apiUrl}/users/dailyweight/${data[key].todayz_weight_id}`)
+            .then(res => res.json())
+            .then(data =>  keyObj['todaysweight'] = data[0].fields)           
+                  }
+        if (data[key].total_gainz_id){
+            await fetch(`${apiUrl}/users/totalgain/${data[key].total_gainz_id}`)
+            .then(res => res.json())
+            .then(data =>data['totalgain'] = data[0].fields)               
+                  }    
+        if (data[key].total_lozz_id){  
+            await fetch(`${apiUrl}/users/totalloss/${data[key].total_lozz_id}`)
+            .then(res => res.json())
+            .then(data =>  keyObj['totalloss'] = data[0].fields)  
+                  }
+        queryArray.push(keyObj)
+                  }
+        setActivityScroll(queryArray)
+           
   }
   // const fetchFriendsScroll = async(data) => {
   //   // await setFriendsScroll(data)
@@ -126,24 +107,53 @@ const FriendScreen = ({ navigation, route }) => {
 return (
 
   <View>
-    {friendsScroll && (
-   <View>
-        {/* {  && (
+    {activityScroll && (
           <View>
-        {friendsScroll.map((friend, i) => <FriendActivityBox key={i} userid={friend} age={friend.age} username={friend.username} gender={friend.gender} goal={friend.goal} weight={friend.weight}></FriendBox>)}
-        </View>)} */}
-        {/* { && (
-          <View>
-        {friendsScroll.map((friend, i) => <FriendActivityBox key={i} userid={friend} age={friend.age} username={friend.username} gender={friend.gender} goal={friend.goal} weight={friend.weight}></FriendBox>)}
-        </View>)}
-        { && (
-          <View>
-        {friendsScroll.map((friend, i) => <FriendActivityBox key={i} userid={friend} age={friend.age} username={friend.username} gender={friend.gender} goal={friend.goal} weight={friend.weight}></FriendBox>)}
-        </View>)}
-        { && (
-          <View>
-        {friendsScroll.map((friend, i) => <FriendActivityBox key={i} userid={friend} age={friend.age} username={friend.username} gender={friend.gender} goal={friend.goal} weight={friend.weight}></FriendBox>)}
-        </View>)} */}
+        {activityScroll.map((activity, i) => 
+        <View>
+          {activity["friend"] && (
+            <View>
+            <FriendActivityBox key={i} user={activity["user"]} age={friend.age} username={friend.username} gender={friend.gender} goal={friend.goal} weight={friend.weight}/>
+            </View>
+          )}
+          {keyObj['liftset'] && (
+             <View>
+             <FriendActivityBox key={i} user={activity["user"]} liftset={keyObj['liftset']} lift={keyObj['lift']}/>
+             </View>
+          )}
+          {keyObj['loss'] && (
+             <View>
+             <FriendActivityBox key={i} user={activity["user"]} loss={keyObj['loss']}/>
+             </View>
+          )}
+          {keyObj['totalloss'] && (
+             <View>
+             <FriendActivityBox key={i} user={activity["user"]} totalloss={keyObj['totalloss']}/>
+             </View>
+          )}
+          {keyObj['totalgain'] && (
+             <View>
+             <FriendActivityBox key={i} user={activity["user"]} totalgain={keyObj['totalgain']}/>
+             </View>
+          )}
+          {keyObj['gain'] && (
+             <View>
+             <FriendActivityBox key={i} user={activity["user"]} gain={keyObj['gain']}/>
+             </View>
+          )}
+          {keyObj['todaysweight'] && (
+             <View>
+             <FriendActivityBox key={i} user={activity["user"]} todaysweight={activity["todaysweight"]}/>
+             </View>
+          )}
+          {keyObj['exerciser'] && (
+             <View>
+             <FriendActivityBox key={i} user={activity["user"]} exercise={activity['exercise']} exerciser={keyObj['exerciser']}/>
+             </View>
+          )}
+          </View>
+            )}
+      
         </View>
     )}
   </View>
