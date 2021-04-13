@@ -5,13 +5,13 @@ import { CommonActions } from '@react-navigation/native';
 
 const GainsScreen = ({ navigation, route }) => {
   const [discoverFriendsScroll, setDiscoverFriendsScroll] = useState([])
-  
+
   useEffect(() => {
     gainsFeed()
   }, [])
 
 const gainsFeed = async (e) => {
-  await fetch(`${apiUrl}/users/totalloss/${data[key].total_lozz_id}`)
+  await fetch(`${apiUrl}/users/${id}/gain`)
   .then(res => res.json())
   .then(data =>  keyObj['totalloss'] = data[0].fields)   
 }

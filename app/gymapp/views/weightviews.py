@@ -69,9 +69,9 @@ class GainView(generics.ListCreateAPIView):
     queryset = Gain.objects.all()
     serializer_class = GainSerializer
 
-def getGain(request, id1, id2):
+def getGain(request, id):
     if request.method == 'GET':
-        qs = TotalGain.objects.get(loser_id=id1, id=id2) 
+        qs = Gain.objects.filter(gainer_id=id) 
         serialized_obj = serializers.serialize('json', [ qs, ])
         return HttpResponse(serialized_obj, content_type="application/x-javascript")
 
