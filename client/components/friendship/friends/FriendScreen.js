@@ -30,12 +30,16 @@ const FriendScreen = ({ navigation, route }) => {
     const fetchFriends = async(e) => {
       const friends = {}
       let friendData = []
+
       await fetch(`${apiUrl}/users/${id}/friends`)
       .then(res => res.json())
-      .then(data => friendData = data[0].fields)
+      .then(data => friendData = data)
      for (key in friendData){
-     friends[key.friends_id] = key.friends_id
+      friends[friendData[key].fields.friends_id] = friendData[key].fields.friends_id
+    //  friends[key.fields.friends_id] = key.fields.friends_id
      }
+
+   
      fetchActivity(friends)
     }
 
@@ -51,10 +55,12 @@ const FriendScreen = ({ navigation, route }) => {
     }
 
   const activityHandler = async(data, friends) => {
+
    queryArray = []
 
     for(key in data){
-      if (friends[key.user_id]) {
+      
+      if (friends[data[key].user_id]) {
         keyObj = {}
         await fetch(`${apiUrl}/users/${data[key].user_id}/get`)
         .then(res => res.json())
