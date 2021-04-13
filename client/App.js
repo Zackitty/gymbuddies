@@ -13,8 +13,10 @@ import SearchScreen from './components/search/SearchScreen'
 import GainsScreen from './components/weight/gains/GainsScreen'
 import LossesScreen from './components/weight/loss/LossesScreen'
 import WeightScreen from './components/weight/weight/WeightScreen'
-import LiftScreen from './components/workouts/lift/LiftScreen'
-import ExerciseScreen from './components/workouts/exercise/ExerciseScreen'
+import TotalLossScreen from './components/weight/totalloss/TotalLossScreen'
+import TotalGainScreen from './components/weight/totalgain/TotalGainScreen'
+import LiftScreen from './components/workouts/lift/lift/LiftScreen'
+import ExerciseScreen from './components/workouts/exercise/exercise/ExerciseScreen'
 import { NavigationContainer } from '@react-navigation/native' 
 import 'react-native-gesture-handler';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -41,6 +43,8 @@ export default function App() {
             <Stack.Screen name="Weight" component={WeightScreen} />
             <Stack.Screen name="Lift" component={LiftScreen} />
             <Stack.Screen name="Exercise" component={ExerciseScreen} />
+            <Stack.Screen name="TotalLoss" component={TotalLossScreen} />
+            <Stack.Screen name="TotalGain" component={TotalGainScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>

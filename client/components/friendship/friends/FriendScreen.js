@@ -32,7 +32,7 @@ const FriendScreen = ({ navigation, route }) => {
       let friendData = []
       await fetch(`${apiUrl}/users/${id}/friends`)
       .then(res => res.json())
-      .then(data => friendData = data[0].fields))
+      .then(data => friendData = data[0].fields)
      for (key in friendData){
      friends[key.friends_id] = key.friends_id
      }

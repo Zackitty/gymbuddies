@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { useSelector } from 'react-redux';
 import { CommonActions } from '@react-navigation/native';
 
-const TotalGainScreen = ({ navigation, route }) => {
+const TotalLossScreen = ({ navigation, route }) => {
 
 return (
 
@@ -14,4 +14,4 @@ return (
 )
 
 }
-  export default TotalGainScreen;
+  export default TotalLossScreen;
