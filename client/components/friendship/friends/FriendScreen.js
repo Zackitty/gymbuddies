@@ -24,23 +24,37 @@ const FriendScreen = ({ navigation, route }) => {
   
   
     useEffect(() => {
-      fetchFetch()
+      fetchFriends()
     }, [])
 
-    const fetchFetch = async(data) => {
+    const fetchFriends = async(e) => {
+      const friends = {}
+      let friendData = []
+      await fetch(`${apiUrl}/users/${id}/friends`)
+      .then(res => res.json())
+      .then(data => friendData = data[0].fields))
+     for (key in friendData){
+     friends[key.friends_id] = key.friends_id
+     }
+     fetchActivity(friends)
+    }
+
+    const fetchActivity = async(friends) => {
+    
+
     await fetch(`${apiUrl}/activity`)
     .then(res => res.json())
-    .then(data => activityHandler(data))
+    .then(data => activityHandler(data, friends))
     // await fetch(`${apiUrl}/users/${id}/get`)
     // .then(res => res.json())
     // .then(data => console.log(data))
     }
 
-  const activityHandler = async(data) => {
+  const activityHandler = async(data, friends) => {
    queryArray = []
 
     for(key in data){
-     
+      if (friends[key.user_id]) {
         keyObj = {}
         await fetch(`${apiUrl}/users/${data[key].user_id}/get`)
         .then(res => res.json())
@@ -96,6 +110,7 @@ const FriendScreen = ({ navigation, route }) => {
                   }
         queryArray.push(keyObj)
                   }
+                }
         setActivityScroll(queryArray)
            
   }
