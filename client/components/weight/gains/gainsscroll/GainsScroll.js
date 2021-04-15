@@ -3,8 +3,8 @@ import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { useSelector } from 'react-redux';
 import { CommonActions } from '@react-navigation/native';
 
-const GainsScreen = ({ navigation, route }) => {
-  const [discoverFriendsScroll, setDiscoverFriendsScroll] = useState([])
+const GainsScroll = ({ navigation, route }) => {
+  const [gainsScroll, setGainsScroll] = useState([])
 
   useEffect(() => {
     gainsFeed()
@@ -13,8 +13,9 @@ const GainsScreen = ({ navigation, route }) => {
 const gainsFeed = async (e) => {
   await fetch(`${apiUrl}/users/${id}/gain`)
   .then(res => res.json())
-  .then(data =>  keyObj['totalloss'] = data[0].fields)   
+  .then(data =>  console.log(data[0].fields))   
 }
+
 return (
 
 <View>
@@ -25,4 +26,4 @@ return (
 )
 
 }
-  export default GainsScreen;
+  export default GainsScroll;

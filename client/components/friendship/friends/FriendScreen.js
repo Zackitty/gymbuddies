@@ -7,22 +7,8 @@ import FriendActivityBox from "../friendactivity/FriendActivityBox"
 const FriendScreen = ({ navigation, route }) => {
 
   const {id} = useSelector(state => state.currentUser)
-  const [friendsScroll, setFriendsScroll] = useState([])
   const [activityScroll, setActivityScroll] = useState([])
-  const [weightProp, setWeightProp] = useState([])
-  const [userProp, setUserProp] = useState([])
-  const [todaysWeightProp, setTodaysWeightProp] = useState([])
-  const [liftSetProp, setLiftSetProp] = useState([])
-  const [liftProp, setLiftProp] = useState([])
-  const [lossProp, setLossProp] = useState([])
-  const [gainProp, setGainProp] = useState([])
-  const [totalLossProp, setTotalLossProp] = useState([])
-  const [totalGainProp, setTotalGainProp] = useState([])
-  const [exerciseProp, setExerciseProp] = useState([])
-  const [exerciserProp, setExerciserProp] = useState([])
-  const [friendProp, setFriendProp] = useState([])
-  
-  
+
     useEffect(() => {
       fetchFriends()
     }, [])
@@ -36,7 +22,6 @@ const FriendScreen = ({ navigation, route }) => {
       .then(data => friendData = data)
      for (key in friendData){
       friends[friendData[key].fields.friends_id] = friendData[key].fields.friends_id
-    //  friends[key.fields.friends_id] = key.fields.friends_id
      }
 
    

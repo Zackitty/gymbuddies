@@ -10,11 +10,7 @@ import SplashScreen from './components/SplashScreen'
 import FriendScreen from './components/friendship/friends/FriendScreen'
 import DiscoverFriendsScreen from './components/friendship/discoverfriends/DiscoverFriendsScreen'
 import SearchScreen from './components/search/SearchScreen'
-import GainsScreen from './components/weight/gains/GainsScreen'
-import LossesScreen from './components/weight/loss/LossesScreen'
 import WeightScreen from './components/weight/weight/WeightScreen'
-import TotalLossScreen from './components/weight/totalloss/TotalLossScreen'
-import TotalGainScreen from './components/weight/totalgain/TotalGainScreen'
 import LiftScreen from './components/workouts/lift/lift/LiftScreen'
 import ExerciseScreen from './components/workouts/exercise/exercise/ExerciseScreen'
 import { NavigationContainer } from '@react-navigation/native' 
@@ -38,13 +34,9 @@ export default function App() {
             <Stack.Screen name="Friends" component={FriendScreen} />
             <Stack.Screen name="DiscoverFriends" component={DiscoverFriendsScreen} />
             <Stack.Screen name="Search" component={SearchScreen} />
-            <Stack.Screen name="Gains" component={GainsScreen} />
-            <Stack.Screen name="Losses" component={LossesScreen} />
             <Stack.Screen name="Weight" component={WeightScreen} />
             <Stack.Screen name="Lift" component={LiftScreen} />
             <Stack.Screen name="Exercise" component={ExerciseScreen} />
-            <Stack.Screen name="TotalLoss" component={TotalLossScreen} />
-            <Stack.Screen name="TotalGain" component={TotalGainScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>

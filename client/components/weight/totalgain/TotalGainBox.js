@@ -3,10 +3,8 @@ import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { useSelector } from 'react-redux';
 import { CommonActions } from '@react-navigation/native';
 
-const WeightScreen = ({ navigation, route }) => {
+const TotalGainBox = ({ navigation, route }) => {
 
-
-  
 return (
 
 <View>
@@ -16,4 +14,4 @@ return (
 )
 
 }
-  export default WeightScreen;
+  export default TotalGainBox;
