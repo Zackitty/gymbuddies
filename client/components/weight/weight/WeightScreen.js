@@ -58,16 +58,9 @@ const handleSubmission = async(e) => {
     stringWeight += weightNumber2
     stringWeight += weightNumber3
 
-    stringDate += dateNumber1
-    stringDate += dateNumber2
-    stringDate += dateNumber3 
-    stringDate += dateNumber4
-    stringDate += dateNumber5
-    stringDate += dateNumber6
-
     const formData = new FormData();
     formData.append("weight", stringWeight)
-    formData.append("entry_date", stringDate)
+
 
     await fetch(`${apiUrl}/users/${id}/dailyweight`, {
       method: 'post',
@@ -75,10 +68,7 @@ const handleSubmission = async(e) => {
     });
 }
 
-const datechecker = async (e) => {
-const getDate = Date.prototype.getDate()
-  console.log(getDate)
-}
+
 return (
 
   <View>
@@ -131,83 +121,10 @@ return (
             <Picker.Item label="8" value="8" />
             <Picker.Item label="9" value="9" />
           </Picker>
-        <Text>Enter Date:</Text>
-        <Picker selectedValue={dateNumber1}
-            onValueChange={currentNumber => setDateNumber1(currentNumber)} 
-                  >
-            <Picker.Item label="0" value="0" />
-            <Picker.Item label="1" value="1" />
-            
-          </Picker>
-          <Picker selectedValue={dateNumber2}
-            onValueChange={currentNumber => setDateNumber2(currentNumber)} 
-                  >
-            <Picker.Item label="0" value="0" />
-            <Picker.Item label="1" value="1" />
-            <Picker.Item label="2" value="2" />
-            <Picker.Item label="3" value="3" />
-            <Picker.Item label="4" value="4" />
-            <Picker.Item label="5" value="5" />
-            <Picker.Item label="6" value="6" />
-            <Picker.Item label="7" value="7" />
-            <Picker.Item label="8" value="8" />
-            <Picker.Item label="9" value="9" />
-          </Picker>
-          <Text>/</Text>
-          <Picker selectedValue={dateNumber3}
-            onValueChange={currentNumber => setDateNumber3(currentNumber)} 
-                  >
-            <Picker.Item label="0" value="0" />
-            <Picker.Item label="1" value="1" />
-            <Picker.Item label="2" value="2" />
-            <Picker.Item label="3" value="3" />
-          </Picker>
-          <Picker selectedValue={dateNumber4}
-            onValueChange={currentNumber => setDateNumber4(currentNumber)} 
-                  >
-            <Picker.Item label="0" value="0" />
-            <Picker.Item label="1" value="1" />
-            <Picker.Item label="2" value="2" />
-            <Picker.Item label="3" value="3" />
-            <Picker.Item label="4" value="4" />
-            <Picker.Item label="5" value="5" />
-            <Picker.Item label="6" value="6" />
-            <Picker.Item label="7" value="7" />
-            <Picker.Item label="8" value="8" />
-            <Picker.Item label="9" value="9" />
-          </Picker>
-          <Text>/</Text>
-          <Picker selectedValue={dateNumber5}
-            onValueChange={currentNumber => setDateNumber5(currentNumber)} 
-                  >
-            <Picker.Item label="0" value="0" />
-            <Picker.Item label="1" value="1" />
-            <Picker.Item label="2" value="2" />
-            <Picker.Item label="3" value="3" />
-            <Picker.Item label="4" value="4" />
-            <Picker.Item label="5" value="5" />
-            <Picker.Item label="6" value="6" />
-            <Picker.Item label="7" value="7" />
-            <Picker.Item label="8" value="8" />
-            <Picker.Item label="9" value="9" />
-          </Picker>
-          <Picker selectedValue={dateNumber6}
-            onValueChange={currentNumber => setDateNumber6(currentNumber)} 
-                  >
-            <Picker.Item label="0" value="0" />
-            <Picker.Item label="1" value="1" />
-            <Picker.Item label="2" value="2" />
-            <Picker.Item label="3" value="3" />
-            <Picker.Item label="4" value="4" />
-            <Picker.Item label="5" value="5" />
-            <Picker.Item label="6" value="6" />
-            <Picker.Item label="7" value="7" />
-            <Picker.Item label="8" value="8" />
-            <Picker.Item label="9" value="9" />
-          </Picker>
+       
 
   </View>
-     <Button title="Enter Weight" onPress={datechecker}></Button>
+     <Button title="Enter Weight" onPress={handleSubmission}></Button>
    {gainUser && (
       <View>
         <TotalGainBox />
