@@ -73,7 +73,6 @@ return (
 
   <View>
     <View>
-       <Button title="Enter Weight" onPress={datechecker}></Button>
       <Text>Enter Weight:</Text>
     <Picker selectedValue={weightNumber1}
             onValueChange={currentNumber => setWeightNumber1(currentNumber)} 

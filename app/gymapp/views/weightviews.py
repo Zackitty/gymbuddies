@@ -13,6 +13,7 @@ from django.core import serializers
 from django.conf import settings
 import json
 import bcrypt
+import datetime
 import requests
 from django.views.decorators.csrf import csrf_exempt
 from ..models import User, Loss, Gain, TodaysWeight, TotalGain, TotalLoss, Activity
@@ -128,10 +129,6 @@ def userWeight(request, id):
         newWeight = request.POST.get('weight')
         date = datetime.date.today()
         entry_date = date
-        errors = intChecker(newWeight, entry_date)
-        if len(errors) > 0:
-            return Response({'errors': errors}, 401)
-        print(entry_date)
         if userQs.goal == 'loss':
                 amount = int(userQs.weight) - int(newWeight)
                 url = f'http://127.0.0.1:8000/api/users/{int(id)}/loss'
@@ -141,7 +138,7 @@ def userWeight(request, id):
                 thisweight = TodaysWeight(weight=newWeight, entry_date=entry_date, 
                 userId_id=id)
                 thisweight.save()
-                activity = Activity(todayz_weight_id=dailyweight.id, entry_date=entry_date, user_id=id)
+                activity = Activity(todayz_weight_id=thisweight.id, entry_date=entry_date, user_id=id)
                 activity.save()
                 jsonWeight = serializers.serialize('json', [ thisweight, ])
                 totalUrl = f'http://127.0.0.1:8000/api/users/{int(id)}/totalloss'
@@ -156,7 +153,7 @@ def userWeight(request, id):
                 thisweight = TodaysWeight(weight=newWeight, entry_date=entry_date, 
                 userId_id=id)
                 thisweight.save()
-                activity = Activity(todayz_weight_id=dailyweight.id, entry_date=entry_date, user_id=id)
+                activity = Activity(todayz_weight_id=thisweight.id, entry_date=entry_date, user_id=id)
                 activity.save()
                 jsonWeight = serializers.serialize('json', [ thisweight, ])
                 totalUrl = f'http://127.0.0.1:8000/api/users/{int(id)}/totalgain'
@@ -225,12 +222,3 @@ def getTotalLoss(request, id):
         return HttpResponse(jsonLoss, content_type="application/x-javascript")
 
 
-def intChecker(data1, data2):
-    errors = []
-    for char in data1:
-        if not char.isdigit():
-            errors.append('Weight Must Be A Number')  
-    for char in data2:
-        if not char.isdigit():
-            errors.append('Date Must Be A Number')  
-    return errors 

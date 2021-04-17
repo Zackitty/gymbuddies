@@ -15,6 +15,7 @@ import json
 import bcrypt
 import crypto
 import requests
+import datetime
 from django.views.decorators.csrf import csrf_exempt
 from ..models import User, Lift, Friend, Loss, Gain, Exercise, LiftSet, Exerciser, TodaysWeight, TotalGain, TotalLoss, Activity
 from ..serializers import UserSerializer, FriendSerializer, ActivitySerializer

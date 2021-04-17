@@ -14,9 +14,9 @@ const FriendActivityBox = (props) => {
   useEffect(() => {
 
     if (props.user && (props.exercise || props.liftset || props.gain 
-      || props.totalgain || props.loss || props.totalloss || todaysweight))
+      || props.totalgain || props.loss || props.totalloss || props.todaysweight))
       {setShow(true)}
-
+      console.log(props.todayweight)
 
   }, [])
  
@@ -30,7 +30,7 @@ return (
 <View>
   
   <View>
-    <Text>{props.entry_date}</Text> <Text>| </Text>
+      <Text>{props.entry_date}</Text>
     <Text>{props.user.username}</Text> 
     {props.friend && (
       <View>
@@ -82,9 +82,9 @@ return (
     }
       {
       props.todaysweight && (
-        <Text>
-          weighed {props.todaysweight} lbs today! 
-        </Text>
+        <View>
+        <Text>weighed {props.todaysweight.weight} lbs today! </Text>
+        </View>
       )
     }
   </View>
