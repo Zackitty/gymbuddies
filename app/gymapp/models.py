@@ -15,7 +15,7 @@ class Exercise(models.Model):
 
 class Exerciser(models.Model):
     length_in_min = models.IntegerField()
-    entry_date = models.DateTimeField(auto_now_add=True)
+    entry_date = models.CharField(max_length=20, default="", unique=False)
     exerciser = models.ForeignKey(User, on_delete=models.CASCADE)
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
 
@@ -26,12 +26,12 @@ class Friend(models.Model):
 
 class Loss(models.Model):
     amount = models.IntegerField()
-    entry_date = models.DateTimeField(auto_now_add=True)
+    entry_date = models.CharField(max_length=20, default="", unique=False)
     loser = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Gain(models.Model): 
     amount = models.IntegerField()
-    entry_date = models.DateTimeField(auto_now_add=True)
+    entry_date = models.CharField(max_length=20, default="", unique=False)
     gainer = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Lift(models.Model):
@@ -41,14 +41,14 @@ class LiftSet(models.Model):
     weight = models.IntegerField()
     one_rep_max = models.IntegerField()
     reps = models.IntegerField()
-    entry_date = models.DateTimeField(auto_now_add=True)
+    entry_date = models.CharField(max_length=20, default="", unique=False)
     lifter = models.ForeignKey(User, on_delete=models.CASCADE)
     lift_name = models.ForeignKey(Lift, on_delete=models.CASCADE)
 
 
 class TodaysWeight(models.Model):
     weight = models.IntegerField()
-    entry_date = models.DateTimeField(auto_now_add=True)
+    entry_date = models.CharField(max_length=20, default="", unique=False)
     userId = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class TotalLoss(models.Model):
@@ -71,3 +71,4 @@ class Activity(models.Model):
     addfriend = models.ForeignKey(Friend, on_delete=models.CASCADE, null=True)
     exercize = models.ForeignKey(Exercise, on_delete=models.CASCADE, null=True)
     exercizes = models.ForeignKey(Exerciser, on_delete=models.CASCADE, null=True)
+    entry_date = models.CharField(max_length=20, default="", unique=False)

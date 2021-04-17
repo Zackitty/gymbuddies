@@ -3,7 +3,7 @@ from django.urls import path
 from .views.userviews import UserView, FriendView, getUser, getFriends, userSignIn, makeFriends, getUserId, ActivityView, friendActivity
 from .views.liftviews import LiftView, LiftSetView, getMyLiftsForDay, getMyLifts, getLiftSet, getLift, createLift, getALiftSet
 from .views.weightviews import LossView, GainView, userLoss, userWeight, getLoss, getTotalLoss, userGain, getGain, getTotalGain, aUserLoss, getATotalGain, getATotalLoss, userTodayWeight, getAGain
-from .views.exerciseviews import ExerciseView, ExerciserView, getExercise, getExercisers, getAnExerciser
+from .views.exerciseviews import ExerciseView, ExerciserView, getExercise, getExercisers, getAnExerciser, testes
 urlpatterns = [
     path('users', UserView.as_view()),
     path('users/<int:id>/get', getUser),
@@ -37,6 +37,7 @@ urlpatterns = [
     path('exercisers/<int:id>', getAnExerciser),
     path('activity', ActivityView.as_view()),
     path('activity/<int:id>', friendActivity),
+    path('testes', testes)
   
 
 

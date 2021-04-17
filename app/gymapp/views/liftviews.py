@@ -41,7 +41,7 @@ def getLift(request, id):
         serialized_obj = serializers.serialize('json', [ qs, ])
         return HttpResponse(serialized_obj, content_type="application/x-javascript")
     if request.method == 'POST':
-        qs = Lift.objects.get(name=path)
+        qs = Lift.objects.get(id=id)
         name = request.POST.get("name")
         qs.name = name
         qs.save()
@@ -78,17 +78,19 @@ def getLiftSet(request, id1, id2):
         serialized_obj = serializers.serialize('json', [ qs, ])
         return HttpResponse(serialized_obj, content_type="application/x-javascript")
     if request.method == 'POST':
+        date = datetime.date.today()
+        entry_date = date
         weight=int(request.POST.get('weight'))
         one_rep_max=request.POST.get('one_rep_max')
         reps=request.POST.get('reps')
-        entry_date=request.POST.get('entry_date')
+       
         liftSet = LiftSet(
             weight=weight, one_rep_max=one_rep_max,
             reps=reps, entry_date=entry_date,
             lift_name_id=id2, lifter_id=id1
         )
         liftSet.save()
-        activity = Activity(lift_zet_id=liftSet.id, user_id=id1)
+        activity = Activity(lift_zet_id=liftSet.id, user_id=id1, entry_date=date)
         activity.save()
         
         jsonLiftSet= serializers.serialize('json', [ liftSet, ])

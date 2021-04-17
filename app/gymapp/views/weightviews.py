@@ -49,7 +49,8 @@ def userLoss(request, id):
             qs = Loss.objects.all().filter(loser_id=id).last()
             userQs = User.objects.get(id=int(id))
             amount=int(request.POST.get('amount'))
-            entry_date=request.POST.get('entry_date')
+            date = datetime.date.today()
+            entry_date = date
             loss = Loss(
             amount=amount, entry_date=entry_date,
             loser_id=id
@@ -57,7 +58,7 @@ def userLoss(request, id):
             loss.save()
             userQs.weight = userQs.weight - amount
             userQs.save() 
-            activity = Activity(lozz_id=loss.id, user_id=id)
+            activity = Activity(lozz_id=loss.id, user_id=id, entry_date=entry_date)
             activity.save()
             jsonLoss = serializers.serialize('json', [ loss, ])
             return HttpResponse(jsonLoss, content_type="application/x-javascript")    
@@ -125,7 +126,11 @@ def userWeight(request, id):
     if request.method == 'POST':
         userQs = User.objects.get(id=id)
         newWeight = request.POST.get('weight')
-        entry_date = request.POST.get('entry_date')
+        date = datetime.date.today()
+        entry_date = date
+        errors = intChecker(newWeight, entry_date)
+        if len(errors) > 0:
+            return Response({'errors': errors}, 401)
         print(entry_date)
         if userQs.goal == 'loss':
                 amount = int(userQs.weight) - int(newWeight)
@@ -136,6 +141,8 @@ def userWeight(request, id):
                 thisweight = TodaysWeight(weight=newWeight, entry_date=entry_date, 
                 userId_id=id)
                 thisweight.save()
+                activity = Activity(todayz_weight_id=dailyweight.id, entry_date=entry_date, user_id=id)
+                activity.save()
                 jsonWeight = serializers.serialize('json', [ thisweight, ])
                 totalUrl = f'http://127.0.0.1:8000/api/users/{int(id)}/totalloss'
                 trl = requests.get(totalUrl)
@@ -149,6 +156,8 @@ def userWeight(request, id):
                 thisweight = TodaysWeight(weight=newWeight, entry_date=entry_date, 
                 userId_id=id)
                 thisweight.save()
+                activity = Activity(todayz_weight_id=dailyweight.id, entry_date=entry_date, user_id=id)
+                activity.save()
                 jsonWeight = serializers.serialize('json', [ thisweight, ])
                 totalUrl = f'http://127.0.0.1:8000/api/users/{int(id)}/totalgain'
                 trl = requests.get(totalUrl)
@@ -157,7 +166,7 @@ def userWeight(request, id):
             weight=newWeight, entry_date=entry_date,
                     userId_id=id)
         dailyweight.save()
-        activity = Activity(todayz_weight_id=dailyweight.id, user_id=id)
+        activity = Activity(todayz_weight_id=dailyweight.id, entry_date=entry_date, user_id=id)
         activity.save()
         jsonWeight = serializers.serialize('json', [ thisweight, ])
         return HttpResponse([jsonWeight], content_type="application/x-javascript")    
@@ -216,3 +225,12 @@ def getTotalLoss(request, id):
         return HttpResponse(jsonLoss, content_type="application/x-javascript")
 
 
+def intChecker(data1, data2):
+    errors = []
+    for char in data1:
+        if not char.isdigit():
+            errors.append('Weight Must Be A Number')  
+    for char in data2:
+        if not char.isdigit():
+            errors.append('Date Must Be A Number')  
+    return errors 

@@ -71,6 +71,10 @@ def getUser(request, id):
         age=int(request.POST.get('age'))
         gender=request.POST.get('gender')
         goal=request.POST.get('goal')
+        errors = validations_signup(username, full_name, age, weight,
+            gender, password, goal)
+        if len(errors) > 0:
+            return Response({'errors': errors}, 401)
         qs.username = username
         qs.full_name = full_name
         qs.password = password
@@ -94,9 +98,11 @@ def makeFriends(request,id1, id2):
       qs = serializers.serialize("json", [querySet,])
       return HttpResponse(qs, content_type="application/x-javascript")
     if request.method == 'POST':
+        date = datetime.date.today()
+        entry_date = date
         friendship = Friend(friends_id=id2, user_id=id1)
         friendship.save()
-        activity = Activity(addfriend_id=id2, user_id=id1)
+        activity = Activity(addfriend_id=id2, user_id=id1, entry_date=entry_date)
         activity.save()
 
         jsonFriend= serializers.serialize('json', [ friendship, ])

@@ -14,6 +14,7 @@ from django.conf import settings
 import json
 import bcrypt
 import requests
+import datetime
 from django.views.decorators.csrf import csrf_exempt
 from ..models import Exercise, Exerciser, Activity
 from ..serializers import ExerciseSerializer, ExerciserSerializer
@@ -46,14 +47,16 @@ def getExercisers(request, id1, id2):
         serialized_obj = serializers.serialize('json', [ qs, ])
         return HttpResponse(serialized_obj, content_type="application/x-javascript")
     if request.method == 'POST':
+        date = datetime.date.today()
+        entry_date = date
         length_in_min=int(request.POST.get('length_in_min'))
-        entry_date=request.POST.get('entry_date')
+       
         exerciser = Exerciser(
             length_in_min=length_in_min, entry_date=entry_date,
             exercise_id=id2, exerciser_id=id1
         )
         exerciser.save()
-        activity = Activity(exercizes_id=exerciser.id, user_id=id1)
+        activity = Activity(exercizes_id=exerciser.id, user_id=id1, entry_date=date)
         activity.save()
         jsonExerciser= serializers.serialize('json', [ exerciser, ])
         return HttpResponse(jsonExerciser, content_type="application/x-javascript")    
@@ -75,3 +78,8 @@ def getExercise(request, id):
         qs.save()
         jsonQs = serializers.serialize('json', [ qs, ])
         return HttpResponse(jsonQs, content_type="application/x-javascript")    
+
+def testes(request):
+    
+    date = datetime.date.today()
+    return HttpResponse(date, content_type="application/x-javascript")    
