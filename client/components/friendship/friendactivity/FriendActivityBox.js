@@ -30,6 +30,7 @@ return (
 <View>
   
   <View>
+    <Text>{props.entry_date}</Text> <Text>| </Text>
     <Text>{props.user.username}</Text> 
     {props.friend && (
       <View>
