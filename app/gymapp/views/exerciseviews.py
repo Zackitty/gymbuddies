@@ -78,8 +78,3 @@ def getExercise(request, id):
         qs.save()
         jsonQs = serializers.serialize('json', [ qs, ])
         return HttpResponse(jsonQs, content_type="application/x-javascript")    
-
-def testes(request):
-    
-    date = datetime.date.today()
-    return HttpResponse(date, content_type="application/x-javascript")    
