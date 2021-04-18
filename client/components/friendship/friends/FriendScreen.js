@@ -107,10 +107,7 @@ const FriendScreen = ({ navigation, route }) => {
         setActivityScroll(queryArray)
            
   }
-  // const fetchFriendsScroll = async(data) => {
-  //   // await setFriendsScroll(data)
-   
-  // }
+
 
 return (
 
@@ -119,7 +116,7 @@ return (
           <View>
         {activityScroll.map((activity, i) => 
        
-        <View>
+        <View i={i}>
           
           {activity["friend"] && (
             <View>
