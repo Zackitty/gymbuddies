@@ -53,7 +53,8 @@ const FriendScreen = ({ navigation, route }) => {
         keyObj['entry_date'] = data[key].entry_date
        
         if (data[key].addfriend_id){
-            await fetch(`${apiUrl}/users/${key.addfriend_id}`)
+        
+            await fetch(`${apiUrl}/users/${data[key].addfriend_id}/get`)
             .then(res => res.json())
             .then(data =>  keyObj["friend"] = data[0].fields.username)
                     }
@@ -89,17 +90,17 @@ const FriendScreen = ({ navigation, route }) => {
             await fetch(`${apiUrl}/users/dailyweight/${data[key].todayz_weight_id}`)
             .then(res => res.json())
             .then(data =>  keyObj['todaysweight'] = data[0].fields)   
-            console.log(keyObj['todaysweight'])        
+                   
         }
         if (data[key].total_gainz_id){
             await fetch(`${apiUrl}/users/totalgain/${data[key].total_gainz_id}`)
             .then(res => res.json())
-            .then(data =>data['totalgain'] = data[0].fields)               
+            .then(data =>keyObj['totalgain'] = data[0].fields.total_gain)           
                   }    
         if (data[key].total_lozz_id){  
             await fetch(`${apiUrl}/users/totalloss/${data[key].total_lozz_id}`)
             .then(res => res.json())
-            .then(data =>  keyObj['totalloss'] = data[0].fields)  
+            .then(data =>  keyObj['totalloss'] = data[0].fields.total_loss)  
                   }
         queryArray.push(keyObj)
                   }
@@ -116,7 +117,7 @@ return (
           <View>
         {activityScroll.map((activity, i) => 
        
-        <View i={i}>
+        <View key={i}>
           
           {activity["friend"] && (
             <View>

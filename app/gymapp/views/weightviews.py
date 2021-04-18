@@ -182,7 +182,9 @@ def getTotalGain(request, id):
         gainTotal = userLast.weight - userFirst.weight
         totalgain = TotalGain(total_gain=gainTotal, user_id=id)
         totalgain.save()  
-        activity = Activity(total_gainz_id=totalgain.id, user_id=id)
+        date = datetime.date.today()
+        entry_date = date
+        activity = Activity(total_gainz_id=totalgain.id, user_id=id, entry_date=entry_date)
         activity.save()
         jsongain = serializers.serialize('json', [ totalgain, ])
         return HttpResponse(jsongain, content_type="application/x-javascript")
@@ -191,7 +193,6 @@ def getTotalGain(request, id):
 def getATotalGain(request, id):
        if request.method == 'GET':
             qs = TotalGain.objects.get(id=id) 
-            print(qs)
             serialized_obj = serializers.serialize('json', [ qs, ])
             return HttpResponse(serialized_obj, content_type="application/x-javascript")
 
@@ -210,13 +211,14 @@ class TotalLossView(generics.ListCreateAPIView):
 @csrf_exempt
 def getTotalLoss(request, id):
     if request.method == 'GET':
-        
+        date = datetime.date.today()
+        entry_date = date
         userFirst = TodaysWeight.objects.filter(userId_id=id).order_by('id').first()
         userLast = TodaysWeight.objects.filter(userId_id=id).order_by('id').last()
         lossTotal = userFirst.weight - userLast.weight
         totalloss = TotalLoss(total_loss=lossTotal, user_id=id)
         totalloss.save()  
-        activity = Activity(total_lozz_id=totalloss.id, user_id=id)
+        activity = Activity(total_lozz_id=totalloss.id, user_id=id, entry_date=entry_date)
         activity.save()
         jsonLoss = serializers.serialize('json', [ totalloss, ])
         return HttpResponse(jsonLoss, content_type="application/x-javascript")

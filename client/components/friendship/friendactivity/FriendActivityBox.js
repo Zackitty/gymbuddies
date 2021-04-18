@@ -16,7 +16,7 @@ const FriendActivityBox = (props) => {
     if (props.user && (props.exercise || props.liftset || props.gain 
       || props.totalgain || props.loss || props.totalloss || props.todaysweight))
       {setShow(true)}
-      console.log(props.todayweight)
+     
 
   }, [])
  
@@ -34,7 +34,7 @@ return (
     <Text>{props.user.username}</Text> 
     {props.friend && (
       <View>
-        <Text>added{props.friend.friendName} as a friend!</Text>
+        <Text>added {props.friend} as a friend!</Text>
       </View>
     )}
     {
@@ -62,7 +62,7 @@ return (
       {
       props.totalgain && (
         <Text>
-            has gained a total of {props.totalgain.amount} lbs!
+            has gained a total of {props.totalgain} lbs!
         </Text>
       )
     }
@@ -76,7 +76,7 @@ return (
      {
       props.totalloss && (
         <Text>
-          has lot a total of {props.totalloss.total_loss} lbs!
+          has lot a total of {props.totalloss} lbs!
         </Text>
       )
     }
