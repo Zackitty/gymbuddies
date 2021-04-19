@@ -1,24 +1,40 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, Image } from 'react-native';
+import { StyleSheet, Text, View, Button, Image, ScrollView } from 'react-native';
 import { useSelector } from 'react-redux';
 import { CommonActions } from '@react-navigation/native';
-
+import { apiUrl } from '../../../../config';
+import LossesBox from "../lossesbox/LossesBox"
 const LossesScroll = ({ navigation, route }) => {
 
-  const [discoverFriendsScroll, setDiscoverFriendsScroll] = useState([])
-  
+  const [lossScroll, setLossScroll] = useState([])
+
   useEffect(() => {
-    gainsFeed()
+    
+    lossesFeed()
   }, [])
 
-const gainsFeed = async (e) => {
-  await fetch(`${apiUrl}/users/totalloss/${data[key].total_lozz_id}`)
-  .then(res => res.json())
-  .then(data =>  keyObj['totalloss'] = data[0].fields)   
-}
-return (<View>
-  
-</View>)
+const lossesFeed = async (e) => {
 
+  await fetch(`${apiUrl}/users/losses`)
+  .then(res => res.json())
+  .then(data =>setLossScroll(data))
 }
+return (
+
+  <View>
+  {lossScroll && (
+    <ScrollView>
+    {lossScroll.map((loss, i) =>
+     <View key={i}>
+      
+     <LossesBox key={i} amount={loss.amount} entry_date={loss.entry_date} loser_id={loss.loser}></LossesBox>
+       
+       
+     </View>
+     )}
+    </ScrollView>
+  )}
+ </View>
+
+)}
   export default LossesScroll;

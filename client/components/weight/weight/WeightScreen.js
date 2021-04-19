@@ -29,8 +29,7 @@ const WeightScreen = ({ navigation, route }) => {
        string += weightNumber2
        string += weightNumber3
        
-    
-   console.log(string)
+ 
   }
 
   useEffect(() => {
@@ -53,7 +52,6 @@ const WeightScreen = ({ navigation, route }) => {
 const handleSubmission = async(e) => {
   
     let stringWeight = ''
-    let stringDate = ''
     stringWeight += weightNumber1
     stringWeight += weightNumber2
     stringWeight += weightNumber3

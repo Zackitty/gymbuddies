@@ -2,7 +2,7 @@
 from django.urls import path
 from .views.userviews import UserView, FriendView, getUser, getFriends, userSignIn, makeFriends, getUserId, ActivityView, friendActivity
 from .views.liftviews import LiftView, LiftSetView, getMyLiftsForDay, getMyLifts, getLiftSet, getLift, createLift, getALiftSet
-from .views.weightviews import LossView, GainView, userLoss, userWeight, getLoss, getTotalLoss, userGain, getGain, getTotalGain, aUserLoss, getATotalGain, getATotalLoss, userTodayWeight, getAGain
+from .views.weightviews import LossView, GainView, userLoss, userWeight, getLoss, getTotalLoss, userGain, getGain, getTotalGain, getTotalFinalGain, getTotalFinalLoss, aUserLoss, getATotalGain, getATotalLoss, userTodayWeight, getAGain
 from .views.exerciseviews import ExerciseView, ExerciserView, getExercise, getExercisers, getAnExerciser
 urlpatterns = [
     path('users', UserView.as_view()),
@@ -16,6 +16,8 @@ urlpatterns = [
     path('users/<int:id>/friends', getFriends),
     path('users/<int:id>/loss', userLoss),  
     path('users/loss/<int:id>', aUserLoss),   
+    path('users/losses', LossView.as_view()),  
+    path('users/gains', GainView.as_view()),  
     path('users/<int:id1>/exerciser/<int:id2>', getExercisers),  
     path('users/<int:id1>/loss/<int:id2>', getLoss),
     path('users/<int:id>/totalloss', getTotalLoss), 
@@ -27,6 +29,8 @@ urlpatterns = [
     path('users/<int:id1>/gain/<int:id2>', getGain), 
     path('users/<int:id>/totalgain', getTotalGain),  
     path('users/totalgain/<int:id>', getATotalGain), 
+    path('users/<int:id>/finaltotalgain', getTotalFinalGain),
+    path('users/<int:id>/finaltotalloss', getTotalFinalLoss),
     path('lifts', LiftView.as_view()),
     path('lift/create', createLift),
     path('lifts/<int:id>', getLift),
@@ -37,7 +41,8 @@ urlpatterns = [
     path('exercisers/<int:id>', getAnExerciser),
     path('activity', ActivityView.as_view()),
     path('activity/<int:id>', friendActivity),
-   
+  
+
   
 
 

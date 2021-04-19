@@ -41,11 +41,9 @@ def aUserLoss(request, id):
 @csrf_exempt
 def userLoss(request, id):
         if request.method == 'GET':   
-            queryset = Loss.objects.all().filter(loser_id=int(id)) 
-            queryArray = []
-            for key in queryset:
-                queryArray.append(serializers.serialize('json', [ key, ]))
-            return HttpResponse(queryArray, content_type="application/x-javascript")
+            qs = Loss.objects.all() 
+            x = serializers.serialize('json', [ qs, ])
+            return HttpResponse(x, content_type="application/x-javascript")
         if request.method == 'POST':   
             qs = Loss.objects.all().filter(loser_id=id).last()
             userQs = User.objects.get(id=int(id))
@@ -87,10 +85,7 @@ def getAGain(request, id):
 def userGain(request, id):
         if request.method == 'GET':   
             queryset = User.objects.all().filter(gainer_id=int(id)) 
-            queryArray = []
-            for key in queryset:
-                queryArray.append(serializers.serialize('json', [ key, ]))
-            return HttpResponse(queryArray, content_type="application/x-javascript")
+            return HttpResponse(queryset, content_type="application/x-javascript")
         if request.method == 'POST':   
             qs = Gain.objects.all().filter(gainer_id=id).last()
             userQs = User.objects.get(id=int(id))
@@ -122,7 +117,7 @@ def userWeight(request, id):
         queryset = DailyWeight.objects.all().filter(user_id=id) 
         queryArray = []
         for key in queryset:
-            queryArray.append(serializers.serialize('json', [ key, ]))
+            queryArray.append(serializers.serialize('json', [ key, ]))    
         return HttpResponse(queryArray, content_type="application/x-javascript")
     if request.method == 'POST':
         userQs = User.objects.get(id=id)
@@ -224,3 +219,14 @@ def getTotalLoss(request, id):
         return HttpResponse(jsonLoss, content_type="application/x-javascript")
 
 
+@csrf_exempt
+def getTotalFinalLoss(request, id):
+    latest = TotalLoss.objects.filter(user_id=id).last()
+    jsonLoss = serializers.serialize('json', [ latest, ])
+    return HttpResponse(jsonLoss, content_type="application/x-javascript")
+
+@csrf_exempt
+def getTotalFinalGain(request, id):
+    latest = TotalGain.objects.filter(user_id=id).last()
+    jsonGain = serializers.serialize('json', [ latest, ])
+    return HttpResponse(jsonGain, content_type="application/x-javascript")
