@@ -69,7 +69,7 @@ const ProfileScreen = ({ navigation, route }) => {
       visible={modalVisible}
       onRequestClose={() => {
         Alert.alert("Modal has been closed.");
-        setModalVisible(!modalVisible);c
+        setModalVisible(!modalVisible);
       }}
     >
       <View style={ProfileCss.centeredView}>

@@ -4,13 +4,13 @@ import { useSelector } from 'react-redux';
 import { CommonActions } from '@react-navigation/native';
 import { apiUrl } from '../../../../config';
 
-const CreateExerciseModal = ({ navigation, route }) => {
+const CreateExerciseModal = ({ navigation, route, modalVisible, setModalVisible }) => {
   const {id} = useSelector(state => state.currentUser)
   const [exerciseName, setExerciseName] = useState(false)
   const [exerciseId, setExerciseId] = useState(false)
-  const [lengthNumber1, setLengthNumber1] = useState("")
-  const [lengthNumber2, setLengthNumber2] = useState("")
-  const [lengthNumber3, setLengthNumber3] = useState("")
+  const [lengthNumber1, setLengthNumber1] = useState(0)
+  const [lengthNumber2, setLengthNumber2] = useState(0)
+  const [lengthNumber3, setLengthNumber3] = useState(0)
 
 
   const handleExerciseName = async (e) => {
@@ -43,9 +43,9 @@ const CreateExerciseModal = ({ navigation, route }) => {
       body: formData
      
     }); 
-    const blank = await response.json()
-    let thisUser = blank[0]
-  console.log(thisUser)
+
+    setModalVisible(!modalVisible)
+    return response
   }
 
 return (
@@ -65,6 +65,7 @@ return (
             <View>
             <View>
             <Text>Enter Length In Minutes:</Text>
+            <Button title="Enter Workout" onPress={handleExerciseSession}></Button>
           <Picker selectedValue={lengthNumber1}
                   onValueChange={currentNumber => setLengthNumber1(currentNumber)} 
                         >
@@ -113,7 +114,7 @@ return (
                 </Picker>
              
             </View>
-            <Button title="Enter Workout" onPress={handleExerciseSession}></Button>
+  
         </View>
           )
         }

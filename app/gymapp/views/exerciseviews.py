@@ -72,7 +72,7 @@ class ExerciseView(generics.ListCreateAPIView):
     def create(self, request):
         name=self.request.POST.get('name')
         if Exercise.objects.filter(name=name).exists():
-            exercise = Exercise.objects.filter(name=name)
+            exercise = Exercise.objects.get(name=name)
             jsonQs = serializers.serialize('json', [ exercise, ])
             return HttpResponse(jsonQs, content_type="application/x-javascript")   
         exercise = Exercise(name=name)
