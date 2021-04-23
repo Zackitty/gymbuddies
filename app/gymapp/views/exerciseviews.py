@@ -64,6 +64,21 @@ def getExercisers(request, id1, id2):
 class ExerciseView(generics.ListCreateAPIView):
     queryset = Exercise.objects.all()
     serializer_class = ExerciseSerializer
+    class Meta:
+        
+        model = Exercise
+        fields = ('name',)
+    @csrf_exempt
+    def create(self, request):
+        name=self.request.POST.get('name')
+        if Exercise.objects.filter(name=name).exists():
+            exercise = Exercise.objects.filter(name=name)
+            jsonQs = serializers.serialize('json', [ exercise, ])
+            return HttpResponse(jsonQs, content_type="application/x-javascript")   
+        exercise = Exercise(name=name)
+        exercise.save()
+        jsonQs = serializers.serialize('json', [ exercise, ])
+        return HttpResponse(jsonQs, content_type="application/x-javascript")   
 
 @csrf_exempt
 def getExercise(request, id):
