@@ -39,7 +39,7 @@ class Lift(models.Model):
 
 class LiftSet(models.Model): 
     weight = models.IntegerField()
-    one_rep_max = models.IntegerField()
+    one_rep_max = models.IntegerField(null=True)
     reps = models.IntegerField()
     entry_date = models.CharField(max_length=20, default="", unique=False)
     lifter = models.ForeignKey(User, on_delete=models.CASCADE)

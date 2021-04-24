@@ -47,7 +47,7 @@ return (
     {
       props.liftset &&  (
         <Text>
-          did a {props.lift.name} lifting {props.liftset.weight} lbs for {props.liftset.reps}!
+          did a {props.lift.name} lifting {props.liftset.weight} lbs for {props.liftset.reps} reps!
         </Text>
       )
     }

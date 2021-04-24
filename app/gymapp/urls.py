@@ -9,7 +9,7 @@ urlpatterns = [
     path('users/<int:id>/get', getUser),
     path('users/signin', userSignIn),
     path('getusers/<username>', getUserId), 
-    path('users/<int:id1>/lifts', getMyLifts),
+    path('users/<int:id>/lifts', getMyLifts),
     path('users/<int:id1>/lifts/<int:id2>', getLiftSet),
     path('users/<int:id1>/lifts/date/<int:id2>', getMyLiftsForDay),
     path('users/<int:id1>/friends/<int:id2>', makeFriends),
@@ -42,6 +42,7 @@ urlpatterns = [
     path('exercisers/<int:id>', getAnExerciser),
     path('activity', ActivityView.as_view()),
     path('activity/<int:id>', friendActivity),
+    path('getlifts', LiftSetView.as_view()),
   
 
   

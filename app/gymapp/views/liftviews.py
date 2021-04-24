@@ -24,6 +24,21 @@ from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
 class LiftView(generics.ListCreateAPIView):
     queryset = Lift.objects.all()
     serializer_class = LiftSerializer
+    class Meta:
+        
+        model = Lift
+        fields = ('name',)
+    @csrf_exempt
+    def create(self, request):
+        name=self.request.POST.get('name')
+        if Lift.objects.filter(name=name).exists():
+            lift = Lift.objects.get(name=name)
+            jsonQs = serializers.serialize('json', [ lift, ])
+            return HttpResponse(jsonQs, content_type="application/x-javascript")   
+        lift = Lift(name=name)
+        lift.save()
+        jsonQs = serializers.serialize('json', [ lift, ])
+        return HttpResponse(jsonQs, content_type="application/x-javascript")   
 
 @csrf_exempt
 def createLift(request):
@@ -46,13 +61,7 @@ def getLift(request, id):
         qs = Lift.objects.get(id=id)
         serialized_obj = serializers.serialize('json', [ qs, ])
         return HttpResponse(serialized_obj, content_type="application/x-javascript")
-    if request.method == 'POST':
-        qs = Lift.objects.get(id=id)
-        name = request.POST.get("name")
-        qs.name = name
-        qs.save()
-        jsonQs = serializers.serialize('json', [ qs, ])
-        return HttpResponse(jsonQs, content_type="application/x-javascript")    
+  
 
 class LiftSetView(generics.ListCreateAPIView):
     queryset = LiftSet.objects.all()
@@ -61,9 +70,9 @@ class LiftSetView(generics.ListCreateAPIView):
 
 
 
-def getMyLifts(request, id1):
+def getMyLifts(request, id):
     if request.method == 'GET':
-        queryset = LiftSet.objects.all().filter(lifter=id1) 
+        queryset = LiftSet.objects.all().filter(lifter=id) 
         queryArray = []
         for key in queryset:
             queryArray.append(serializers.serialize('json', [ key, ]))

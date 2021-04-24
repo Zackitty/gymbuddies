@@ -48,6 +48,11 @@ const CreateExerciseModal = ({ navigation, route, modalVisible, setModalVisible 
     return response
   }
 
+
+  const handleCancel = (e) => {
+    setModalVisible(!modalVisible)
+  }
+
 return (
 
 <View>
@@ -57,6 +62,7 @@ return (
           value={exerciseName}
           autoCapitalize={'none'} />
 <Button title="Set Exercise Name" onPress={handleExerciseName}></Button>
+<Button title="Cancel" onPress={handleCancel}></Button>
 <View>
 
 </View>
@@ -66,6 +72,7 @@ return (
             <View>
             <Text>Enter Length In Minutes:</Text>
             <Button title="Enter Workout" onPress={handleExerciseSession}></Button>
+           
           <Picker selectedValue={lengthNumber1}
                   onValueChange={currentNumber => setLengthNumber1(currentNumber)} 
                         >
