@@ -19,10 +19,11 @@ from django.views.decorators.csrf import csrf_exempt
 from ..models import Exercise, Exerciser, Activity
 from ..serializers import ExerciseSerializer, ExerciserSerializer
 from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
+from django.db.models import F
 # Create your views here.
 
 class ExerciserView(generics.ListCreateAPIView):
-    queryset = Exerciser.objects.all()
+    queryset = Exerciser.objects.all().order_by(F('id').desc())
     serializer_class = ExerciserSerializer
 
 # def getMyExercisersForDay(request, id1, id2):
@@ -93,3 +94,10 @@ def getExercise(request, id):
         qs.save()
         jsonQs = serializers.serialize('json', [ qs, ])
         return HttpResponse(jsonQs, content_type="application/x-javascript")    
+
+@csrf_exempt
+def getExerciserExercises(request, id):
+    if request.method == 'GET':
+        qs = Exercise.objects.get(id=id)
+        serialized_obj = serializers.serialize('json', [ qs, ])
+        return HttpResponse(serialized_obj, content_type="application/x-javascript")    

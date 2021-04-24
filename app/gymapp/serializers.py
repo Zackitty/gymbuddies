@@ -13,7 +13,7 @@ class ExerciseSerializer(serializers.ModelSerializer):
 
 class ExerciserSerializer(serializers.ModelSerializer):
     class Meta:
-      model =  Exercise
+      model =  Exerciser
       fields = ("length_in_min", 
       "entry_date", "exerciser_id", "exercise_id")
 

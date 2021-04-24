@@ -6,7 +6,7 @@ import { apiUrl } from '../../../../config';
 
 const CreateExerciseModal = ({ navigation, route, modalVisible, setModalVisible }) => {
   const {id} = useSelector(state => state.currentUser)
-  const [exerciseName, setExerciseName] = useState(false)
+  const [exerciseName, setExerciseName] = useState([])
   const [exerciseId, setExerciseId] = useState(false)
   const [lengthNumber1, setLengthNumber1] = useState(0)
   const [lengthNumber2, setLengthNumber2] = useState(0)

@@ -3,7 +3,7 @@ from django.urls import path
 from .views.userviews import UserView, FriendView, getUser, getFriends, userSignIn, makeFriends, getUserId, ActivityView, friendActivity
 from .views.liftviews import LiftView, LiftSetView, getMyLiftsForDay, getMyLifts, getLiftSet, getLift, createLift, getALiftSet
 from .views.weightviews import LossView, GainView, userLoss, userWeight, getLoss, getTotalLoss, userGain, getGain, getTotalGain, getTotalFinalGain, getTotalFinalLoss, aUserLoss, getATotalGain, getATotalLoss, userTodayWeight, getAGain
-from .views.exerciseviews import ExerciseView, ExerciserView, getExercise, getExercisers, getAnExerciser
+from .views.exerciseviews import ExerciseView, ExerciserView, getExercise, getExercisers, getAnExerciser, getExerciserExercises
 urlpatterns = [
     path('users', UserView.as_view()),
     path('users/<int:id>/get', getUser),
@@ -19,6 +19,7 @@ urlpatterns = [
     path('users/losses', LossView.as_view()),  
     path('users/gains', GainView.as_view()),  
     path('users/<int:id1>/exerciser/<int:id2>', getExercisers),  
+    path('users/<int:id>/exerciserexercises', getExerciserExercises),
     path('users/<int:id1>/loss/<int:id2>', getLoss),
     path('users/<int:id>/totalloss', getTotalLoss), 
     path('users/totalloss/<int:id>', getATotalLoss), 
