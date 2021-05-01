@@ -18,15 +18,17 @@ import 'react-native-gesture-handler';
 import { createStackNavigator } from '@react-navigation/stack';
 import { PersistGate } from 'redux-persist/integration/react'
 import {store, persistor} from './store/configurestore';
+
 const Stack = createStackNavigator();
 export default function App() {
  
   return (
+   
     <Provider store={store}>
       <PersistGate  loading={null} persistor={persistor}>
         <NavigationContainer>
           <Stack.Navigator>
-            <Stack.Screen name="Splash" component={SplashScreen} />
+            <Stack.Screen name="Gym Buddies" component={SplashScreen} />
             <Stack.Screen name="Home" component={HomeScreen}/>
             <Stack.Screen name="Profile" component={ProfileScreen} />
             <Stack.Screen name="SignUp" component={SignUpScreen} />
@@ -41,6 +43,7 @@ export default function App() {
         </NavigationContainer>
       </PersistGate>
     </Provider>
+    
   );
 }
 

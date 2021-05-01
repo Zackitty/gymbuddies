@@ -16,13 +16,13 @@ const HomeScreen = ({ navigation }) => {
 
   useEffect(() => {
     if (needSignIn) {
-      navigation.navigate('Splash')
+      navigation.navigate('Gym Buddies')
     
      
     navigation.dispatch(CommonActions.reset({
       index: 1,
       routes: [
-        { name: 'Splash' },
+        { name: 'Gym Buddies' },
       ],
     }))
   }

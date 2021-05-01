@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { signIn} from '../../../store/auth'
 import ErrorBox from '../errorbox/ErrorBox'
 import { CommonActions } from '@react-navigation/native';
+import SignInCss from "./SignInCss"
 const SignInScreen = ({ navigation, route }) => {
 
   const [username, setUsername] = useState('')
@@ -57,21 +58,38 @@ const SignInScreen = ({ navigation, route }) => {
   }
 
   return ( 
-  <View>
+    <View style={SignInCss.centerView}>
      {authErrors && <ErrorBox />}
+     <View style={SignInCss.styleView}>
+     <View style={SignInCss.inputStyle}>
+          
+        <Text style={SignInCss.textStyle}>Username</Text>
+         <View style={SignInCss.justInputStyle}>
        <TextInput 
           placeholder="Username" 
           onChangeText={setUsername}
           value={username}
           autoCapitalize={'none'} />
+          </View>
+        </View>
+        <View style={SignInCss.inputStyle}>
+          
+          <Text style={SignInCss.textStyle}>Password</Text>
+          <View style={SignInCss.justInputStyle2}>
         <TextInput
           secureTextEntry={true}
-          placeholder="password"
+          placeholder="Password"
           onChangeText={setPassword}
           value={password}
           autoCapitalize={'none'} />
+
+
+        </View>
+        </View>
+        <View style={SignInCss.buttonCss2}>   
         <Button title="Sign In" onPress={handleSignInButtonPress}></Button>
-        <Button title="Guest Sign In" onPress={handleGuestOnPress}></Button>
+        </View>
+        </View>
   </View>
   )
 };

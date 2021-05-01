@@ -112,7 +112,7 @@ const FriendScreen = ({ navigation, route }) => {
 
 return (
 
-  <View>
+  <View >
     {activityScroll && (
           <View>
         {activityScroll.map((activity, i) => 

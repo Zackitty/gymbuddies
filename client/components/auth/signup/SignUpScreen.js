@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { signUp} from '../../../store/auth'
+import { signUp } from '../../../store/auth'
 import ErrorBox from '../errorbox/ErrorBox'
+import React, { useState, useEffect } from 'react';
 import { CommonActions } from '@react-navigation/native';
-import {  View, Text, TextInput, Button, Picker, AsyncStorage } from 'react-native';
+import { View, Text, TextInput, Button, TouchableOpacity, Pressable, Picker, AsyncStorage, TouchableHighlight } from 'react-native';
+import SignUpCss from "./SignUpCss"
+import SignUpScreenButton from './SignUpScreenButton/SignUpScreenButton'
 
 const SignUpScreen = ({ navigation, route }) => {
   const [full_name, setFullName] = useState('')
@@ -13,64 +15,162 @@ const SignUpScreen = ({ navigation, route }) => {
   const [age, setAge] = useState('');
   const [gender, setGender] = useState('Male');
   const [goal, setGoal] = useState('Loss');
+  const [enbyButtonColor, setEnbyButtonColor] = useState(SignUpCss.buttonCss);
+  const [femaleButtonColor, setFemaleButtonColor] = useState(SignUpCss.buttonCss);
+  const [maleButtonColor, setMaleButtonColor] = useState(SignUpCss.buttonCss);
+  const [lossButtonColor, setLossButtonColor] = useState(SignUpCss.buttonCss);
+  const [gainButtonColor, setGainButtonColor] = useState(SignUpCss.buttonCss);
   const dispatch = useDispatch();
   const { authErrors, needSignIn } = useSelector(state => state.currentUser)
-  
-  // useEffect(() => {
-  //   if (!needSignIn) {
-  //     navigation.navigate('Home')
-  //   }
-  // }, [needSignIn])
-  
+
+  useEffect(() => {
+    if (!needSignIn) {
+      navigation.navigate('Home')
+    }
+  }, [needSignIn])
+
+  const maleHandler = async (e) => {
+    e.preventDefault()
+    setGender('Male')
+    setEnbyButtonColor(SignUpCss.buttonCss)
+    setMaleButtonColor(SignUpCss.clickedButtonCss)
+    setFemaleButtonColor(SignUpCss.buttonCss)
+  }
+  const femaleHandler = async (e) => {
+    e.preventDefault()
+    setGender('Female')
+    setEnbyButtonColor(SignUpCss.buttonCss)
+    setMaleButtonColor(SignUpCss.buttonCss)
+    setFemaleButtonColor(SignUpCss.clickedButtonCss)
+    
+  }
+
+  const enbyHandler = async (e) => {
+    e.preventDefault()
+    setGender('Non-Binary')
+    setEnbyButtonColor(SignUpCss.clickedButtonCss)
+    setMaleButtonColor(SignUpCss.buttonCss)
+    setFemaleButtonColor(SignUpCss.buttonCss)
+   
+  }
+  const lossHandler = async (e) => {
+    e.preventDefault()
+    setGender('Loss')
+    setLossButtonColor(SignUpCss.clickedButtonCss)
+    setGainButtonColor(SignUpCss.buttonCss)
+  }
+  const gainHandler = async (e) => {
+    e.preventDefault()
+    setGender('Gain')
+    setLossButtonColor(SignUpCss.buttonCss)
+    setGainButtonColor(SignUpCss.clickedButtonCss)
+  }
   const handleSignUp = async (e) => {
     e.preventDefault();
     dispatch(signUp(username, full_name, age, weight,
       gender, password, goal))
- 
+
   }
 
-  return ( 
-    <View>
-      {authErrors && <ErrorBox />}
-       <TextInput 
-          placeholder="Full Name"
-          onChangeText={setFullName}
-          value={full_name} 
-          autoCapitalize={'none'}/>
-          <TextInput 
-          placeholder="Username"
-          onChangeText={setUsername}
-          value={username} 
-          autoCapitalize={'none'}/> 
-           <TextInput 
-          placeholder="Password"
-          onChangeText={setPassword}
-          value={password}
-          autoCapitalize={'none'} />
-          <TextInput 
-          placeholder="Age"
-          onChangeText={setAge}
-          value={age} />
-          <TextInput 
-          placeholder="Weight"
-          onChangeText={setWeight}
-          value={weight} />
-          <Picker
-            selectedValue={gender}
-            onValueChange={currentGender => setGender(currentGender)}>
-            <Picker.Item label="Male" value="Male" />
-            <Picker.Item label="Female" value="Female" />
-            <Picker.Item label="Non-Binary" value="Non-Binary" />
-          </Picker>
-          <Picker
-            selectedValue={goal}
+  return (
+    <View style={SignUpCss.centerView}>
+        <View style={SignUpCss.errorBox}>
+         {authErrors && <ErrorBox />}
+         </View>
+      <View style={SignUpCss.styleView}>
+       
+        <View style={SignUpCss.inputStyle}>
           
-            onValueChange={currentGoal => setGoal(currentGoal)}>
-            <Picker.Item label="Loss" value="Loss" />
-            <Picker.Item label="Gain" value="Gain" />
-          </Picker>
-        <Button title="Sign Up" onPress={handleSignUp}></Button>
-  </View>
+          <Text style={SignUpCss.textStyle}>Full Name</Text>
+          <View style={SignUpCss.justInputStyle}>
+          <TextInput
+            placeholder="Full Name"
+            onChangeText={setFullName}
+            value={full_name}
+            autoCapitalize={'none'} />
+        </View>
+        </View>
+        <View style={SignUpCss.inputStyle}>
+          <Text style={SignUpCss.textStyle}>UserName</Text>
+          <View style={SignUpCss.justInputStyleU}>
+          <TextInput
+            placeholder="Username"
+            onChangeText={setUsername}
+            value={username}
+            autoCapitalize={'none'} />
+        </View>
+        </View>
+        <View style={SignUpCss.inputStyle}>
+          <Text style={SignUpCss.textStyle}>Password</Text>
+          <View style={SignUpCss.justInputStyle}>
+          <TextInput
+            placeholder="Password"
+            onChangeText={setPassword}
+            value={password}
+            autoCapitalize={'none'} />
+        </View>
+        </View>
+        <View style={SignUpCss.inputStyle}>
+          <Text style={SignUpCss.textStyle}>Age</Text>
+          <View style={SignUpCss.justInputStyleA}>
+          <TextInput
+            placeholder="Age"
+            onChangeText={setAge}
+            value={age} />
+        </View>
+        </View>
+        <View style={SignUpCss.inputStyle}>
+          <Text style={SignUpCss.textStyle}>Weight</Text>
+       
+          <View style={SignUpCss.justInputStyleW}>
+          <TextInput
+            placeholder="Weight"
+            onChangeText={setWeight}
+            value={weight} />
+        </View>
+        
+        </View>
+       
+        <View>
+          <View style={SignUpCss.genderHandlerCss}>
+            <Text style={SignUpCss.textStyle}>Gender</Text>
+            <View style={SignUpCss.justtheGendercss}>
+           
+            <View style={SignUpCss.justInputStyle}>
+
+           
+           <SignUpScreenButton buttonStyle={maleButtonColor}
+              handler={maleHandler} textCss={SignUpCss.pressableText}text={'Male'} />
+
+          <SignUpScreenButton buttonStyle={femaleButtonColor}
+              handler={femaleHandler} textCss={SignUpCss.pressableText}text={'Female'} />
+          
+          <SignUpScreenButton buttonStyle={enbyButtonColor}
+              handler={enbyHandler} textCss={SignUpCss.pressableText}text={'Non-Binary'} />
+           
+            
+
+            </View>
+            </View>
+          </View>
+          <View style={SignUpCss.goalHandlerCss}>
+            <Text style={SignUpCss.textStyle}>Goal:</Text>
+            <View style={SignUpCss.justInputStyleG}>
+            <SignUpScreenButton buttonStyle={lossButtonColor}
+              handler={lossHandler} textCss={SignUpCss.pressableText}text={'Loss'} />
+
+            <SignUpScreenButton buttonStyle={gainButtonColor}
+              handler={gainHandler} textCss={SignUpCss.pressableText}text={'Gain'} />
+         
+            </View>
+          </View>
+        </View>
+        <View style={SignUpCss.signUpButtonCss}>
+        <Button title="Sign Up" onPress={handleSignUp}>Sign Up</Button>
+        </View>
+   </View>
+
+    </View>
   )
 };
 
