@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import {  View, Text, Button } from 'react-native';
+import {  View, Text, Button, Pressable } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { CommonActions } from '@react-navigation/native';
 import { signOut} from '../../../store/auth'
+import HomeCss from './HomeCss'
 
 const HomeScreen = ({ navigation }) => {
   const { needSignIn } = useSelector(state => state.currentUser)
@@ -30,53 +31,92 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View>
-      <View>
-        <Button title='Sign Out'  onPress={
-        handleSignOut} />
-
-      </View>
-    <Button
-      title="My Profile"
-      onPress={() =>
-        navigation.navigate('Profile')
-      }
-    ></Button>
-    <Button
-      title="Friends"
-      onPress={() =>
-        navigation.navigate('Friends')
-      }
-    />
-         <Button
-      title="Discover Friends"
-      onPress={() =>
-        navigation.navigate('DiscoverFriends')
-      }
-    />
-       <Button
-      title="Search"
-      onPress={() =>
-        navigation.navigate('Search')
-      }
-    />
-      <Button
-      title="Weight"
-      onPress={() =>
-        navigation.navigate('Weight')
-      }
-    />
-     <Button
-      title="Exercise"
-      onPress={() =>
-        navigation.navigate('Exercise')
-      }
-    />
-     <Button
-      title="Lift"
-      onPress={() =>
-        navigation.navigate('Lift')
-      }
-    />
+      <View style={HomeCss.buttonRows}>
+          <Pressable onPress={
+              handleSignOut}>
+          <View style={HomeCss.buttonCssSo}>
+              <Text title='Sign Out' 
+                style={HomeCss.textCss}>
+                  Sign out
+                </Text>
+          </View>
+          </Pressable>
+          <Pressable onPress={() =>
+              navigation.navigate('Profile')} >
+            <View style={HomeCss.buttonCssMp}>
+              <Text
+              title="My Profile"
+              style={HomeCss.textCss}
+              >My Profile</Text>
+            </View>
+            </Pressable>
+        </View>
+        <View style={HomeCss.buttonRows}>
+              <Pressable onPress={() =>
+                    navigation.navigate('Friends')
+                    }>
+              <View style={HomeCss.buttonCssF}>
+                <Text
+                    title="Friends"
+                    style={HomeCss.textCss}
+                      >Friends</Text>
+              </View>
+              </Pressable>
+              <Pressable onPress={() =>
+                    navigation.navigate('DiscoverFriends')
+                    }>
+              <View style={HomeCss.buttonCssDf} >
+                <Text
+                    title="Discover Friends"
+                    style={HomeCss.textCss}
+                     >Discover Friends</Text>
+               </View>
+               </Pressable>
+          </View>
+          <View style={HomeCss.buttonRows}>
+                <Pressable onPress={() =>
+                    navigation.navigate('Search')
+                    }>
+                <View style={HomeCss.buttonCssS}>
+                  <Text
+                    title="Search"
+                    style={HomeCss.textCss}
+                    >Search</Text>
+                </View>
+                </Pressable>
+                <Pressable  onPress={() =>
+                    navigation.navigate('Weight')
+                              }>
+                <View style={HomeCss.buttonCssW}>
+                  <Text
+                    title="Weight"
+                    style={HomeCss.textCss}
+                    >Weight</Text>
+                </View>
+                </Pressable>
+          </View> 
+          <View style={HomeCss.buttonRows}>
+            <Pressable onPress={() =>
+                      navigation.navigate('Exercise')
+                            }>
+                <View style={HomeCss.buttonCssE}>
+                     <Text
+                     title="Exercise"
+                    style={HomeCss.textCss}
+                            >Exercise</Text>
+                </View>
+                </Pressable>
+                <Pressable onPress={() =>
+                          navigation.navigate('Lift')
+                               }>
+                <View style={HomeCss.buttonCssL}>
+                      <Text
+                        title="Lift"
+                        style={HomeCss.textCss}
+                        >Lift</Text>
+                </View>
+                </Pressable>
+          </View>
     </View>
   );
 };

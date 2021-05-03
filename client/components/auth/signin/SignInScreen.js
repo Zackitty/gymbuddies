@@ -6,7 +6,7 @@ import { signIn} from '../../../store/auth'
 import ErrorBox from '../errorbox/ErrorBox'
 import { CommonActions } from '@react-navigation/native';
 import SignInCss from "./SignInCss"
-const SignInScreen = ({ navigation, route }) => {
+const SignInScreen = ({ navigation, route,  setModal1Invisible}) => {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -15,54 +15,42 @@ const SignInScreen = ({ navigation, route }) => {
   const dispatch = useDispatch();
   
   
-  useEffect(() => {
-    if (!needSignIn) {
-      navigation.navigate('Home')
+  // useEffect(() => {
+  //   if (!needSignIn) {
+  //     navigation.navigate('Home')
     
      
-    navigation.dispatch(CommonActions.reset({
-      index: 1,
-      routes: [
-        { name: 'Home' },
-      ],
-    }))
-  }
-  }, [needSignIn])
+  //   navigation.dispatch(CommonActions.reset({
+  //     index: 1,
+  //     routes: [
+  //       { name: 'Home' },
+  //     ],
+  //   }))
+  // }
+  // }, [needSignIn])
+
 
   const handleSignInButtonPress = async (e) => {
     e.preventDefault()
     dispatch(signIn(username, password))
-
+    
   }
  
 
-
-
-  const handleGuestOnPress = async (e) => {
-    e.preventDefault()
-    dispatch(signIn("Demo", "password"))
-    navigation.navigate('Home')
+  const handleModal1 = async(e) => {
+    setModal1Invisible()
   }
 
-  const addButton = async (e) => {
-
-    await AsyncStorage.setItem('item_key', "hello")
-    console.log('........this worked!......')
-  }
-  const checkButton = async (e) => {
-      
-     
-          let value = await AsyncStorage.getItem('item_key');
-        console.log(value)
-      
-  }
 
   return ( 
     <View style={SignInCss.centerView}>
+      <View style={SignInCss.errorBox}>
      {authErrors && <ErrorBox />}
+     </View>
      <View style={SignInCss.styleView}>
+     <View style={SignInCss.prettyIt}>
      <View style={SignInCss.inputStyle}>
-          
+      
         <Text style={SignInCss.textStyle}>Username</Text>
          <View style={SignInCss.justInputStyle}>
        <TextInput 
@@ -88,6 +76,10 @@ const SignInScreen = ({ navigation, route }) => {
         </View>
         <View style={SignInCss.buttonCss2}>   
         <Button title="Sign In" onPress={handleSignInButtonPress}></Button>
+        </View>
+        <View style={SignInCss.signInButtonCss}>
+        <Button title="Cancel" onPress={handleModal1}>Cancel</Button>
+        </View>
         </View>
         </View>
   </View>

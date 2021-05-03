@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Alert, Picker, Modal, StyleSheet, TextInput, Text, Pressable, View } from "react-native";
 import { apiUrl } from '../../../config';
 import ProfileCss from './ProfileCss'
-
+import SignUpScreenButton from "../signup/SignUpScreenButton/SignUpScreenButton"
 const ProfileScreen = ({ navigation, route }) => {
   const { id} = useSelector(state => state.currentUser)
   const [state, setState] = useState([])
@@ -15,12 +15,54 @@ const ProfileScreen = ({ navigation, route }) => {
   const [gender, setGender] = useState('')
   const [goal, setGoal] = useState('')
   const [modalVisible, setModalVisible] = useState(false);
+  const [enbyButtonColor, setEnbyButtonColor] = useState(ProfileCss.buttonCss);
+  const [femaleButtonColor, setFemaleButtonColor] = useState(ProfileCss.buttonCss);
+  const [maleButtonColor, setMaleButtonColor] = useState(ProfileCss.buttonCss);
+  const [lossButtonColor, setLossButtonColor] = useState(ProfileCss.buttonCss);
+  const [gainButtonColor, setGainButtonColor] = useState(ProfileCss.buttonCss);
 
   useEffect(() => {
     fetch(`${apiUrl}/users/${id}/get`)
     .then(res => res.json())
     .then(data => fetchStates(data))
   }, [])
+
+  const maleHandler = async (e) => {
+    e.preventDefault()
+    setGender('Male')
+    setEnbyButtonColor(ProfileCss.buttonCss)
+    setMaleButtonColor(ProfileCss.clickedButtonCss)
+    setFemaleButtonColor(ProfileCss.buttonCss)
+  }
+  const femaleHandler = async (e) => {
+    e.preventDefault()
+    setGender('Female')
+    setEnbyButtonColor(ProfileCss.buttonCss)
+    setMaleButtonColor(ProfileCss.buttonCss)
+    setFemaleButtonColor(ProfileCss.clickedButtonCss)
+    
+  }
+
+  const enbyHandler = async (e) => {
+    e.preventDefault()
+    setGender('Non-Binary')
+    setEnbyButtonColor(ProfileCss.clickedButtonCss)
+    setMaleButtonColor(ProfileCss.buttonCss)
+    setFemaleButtonColor(ProfileCss.buttonCss)
+   
+  }
+  const lossHandler = async (e) => {
+    e.preventDefault()
+    setGoal('Loss')
+    setLossButtonColor(ProfileCss.clickedButtonCss)
+    setGainButtonColor(ProfileCss.buttonCss)
+  }
+  const gainHandler = async (e) => {
+    e.preventDefault()
+    setGoal('Gain')
+    setLossButtonColor(ProfileCss.buttonCss)
+    setGainButtonColor(ProfileCss.clickedButtonCss)
+  }
 
   const fetchStates = async(data) => {
   await setFullName(data[0].fields.full_name)
@@ -55,14 +97,34 @@ const ProfileScreen = ({ navigation, route }) => {
 
      
   return ( 
+    <View style={ProfileCss.centerView}>
+    <View style={ProfileCss.styleView}>
+    <View style={ProfileCss.prettyIt}>
     <View style={ProfileCss.centeredView}>
-       <Text>Full Name: {fullName}</Text>
-        <Text>Username: {userName}</Text>
-        <Text>Password: {password}</Text>
-        <Text>Weight: {weight}</Text>
-        <Text>Age: {age}</Text>
-        <Text>Gender: {gender}</Text>
-        <Text>Goal: {goal}</Text>
+      <View style={ProfileCss.rowStyling}>
+       <Text style={{color: 'blue'}}>Full Name: {fullName}</Text>
+       </View>
+       <View style={ProfileCss.rowStyling}>
+        <Text style={{color: 'blue'}} >Username: {userName}</Text>
+        </View>
+        <View  style={ProfileCss.rowStyling}>
+        <Text  style={{color: 'blue'}}>Password: {password}</Text>
+        </View>
+        <View style={ProfileCss.rowStyling}>
+        <Text style={{color: 'blue'}}>Weight: {weight}</Text>
+        </View>
+        <View  style={ProfileCss.rowStyling}>
+        <Text  style={{color: 'blue'}}>Age: {age}</Text>
+        </View>
+        <View  style={ProfileCss.rowStyling}>
+        <Text  style={{color: 'blue'}}>Gender: {gender}</Text>
+        </View>
+        <View style={ProfileCss.rowStyling}>
+        <Text  style={{color: 'blue'}}>Goal: {goal}</Text>
+        </View>
+    </View>
+    </View> 
+    </View>
     <Modal
       animationType="slide"
       transparent={true}
@@ -72,73 +134,115 @@ const ProfileScreen = ({ navigation, route }) => {
         setModalVisible(!modalVisible);
       }}
     >
-      <View style={ProfileCss.centeredView}>
+      <View style={ProfileCss.editScreen}>
         <View style={ProfileCss.modalView}>
+        <View  style={ProfileCss.rowStylingEdit}>
         <Text>Full Name:</Text>   
         <TextInput 
+          style={ProfileCss.textInput}
           placeholder={fullName}
           onChangeText={setFullName}
           value={fullName}
           autoCapitalize={'none'} />
+          </View>
+          <View  style={ProfileCss.rowStylingEdit}>
         <Text>Username:</Text>
         <TextInput 
+          style={ProfileCss.textInput}
           placeholder={userName}
           onChangeText={setUsername}
           value={userName}
           autoCapitalize={'none'} />
+          </View>
+          <View  style={ProfileCss.rowStylingEdit}>
+          <Text>Password:</Text>
         <TextInput 
+          style={ProfileCss.textInput}
           placeholder={'.....'}
           onChangeText={setPassword}
           value={password}
           autoCapitalize={'none'} />
+          </View>
+          <View  style={ProfileCss.rowStylingEdit}>
         <Text>Weight:</Text>
         <TextInput 
+        style={ProfileCss.textInput}
          keyboardType = 'numeric'
           placeholder={weight}
           onChangeText={setWeight}
           value={weight}
           />
+          </View>
+          <View  style={ProfileCss.rowStylingEdit}>
         <Text>Age:</Text>
         <TextInput 
+            style={ProfileCss.textInput}
           placeholder={age}
           onChangeText={setAge}
           value={age}
            />
-       
+           </View>
+         
+           <View style={ProfileCss.buttonHolder}>
+           <View  style={ProfileCss.rowStylingEdit}>
+              <View style={ProfileCss.genderHandlerCss}>
+            <Text style={ProfileCss.textStyle}>Gender:</Text>
+            <View style={ProfileCss.justtheGendercss}>
+           
+            <View style={ProfileCss.justInputStyle}>
 
-          <Picker 
-            style={ProfileCss.picker1Style} 
-            itemStyle={ProfileCss.pick1Style}
-            selectedValue={gender}
-            onValueChange={currentGender => setGender(currentGender)}>
-            <Picker.Item label="Male" value="Male" />
-            <Picker.Item label="Female" value="Female" />
-            <Picker.Item label="Non-Binary" value="Non-Binary" />
-          </Picker>
-          <Picker
-            style={ProfileCss.picker2Style} 
-            itemStyle={ProfileCss.pick2Style}
-            selectedValue={goal}
+          <SignUpScreenButton buttonStyle={maleButtonColor}
+              handler={maleHandler} textCss={ProfileCss.pressableText}text={'Male'} />
+
+          <SignUpScreenButton buttonStyle={femaleButtonColor}
+              handler={femaleHandler} textCss={ProfileCss.pressableText}text={'Female'} />
           
-            onValueChange={currentGoal => setGoal(currentGoal)}>
-            <Picker.Item label="Loss" value="Loss" />
-            <Picker.Item label="Gain" value="Gain" />
-          </Picker>
+          <SignUpScreenButton buttonStyle={enbyButtonColor}
+              handler={enbyHandler} textCss={ProfileCss.pressableText}text={'Non-Binary'} />
+           
+           </View>
+            </View>
+          </View>
+          </View>
+          <View  style={ProfileCss.rowStylingEdit}>
+          <View style={ProfileCss.goalHandlerCss}>
+            <Text style={ProfileCss.textStyleG}>Goal:</Text>
+            <View style={ProfileCss.justInputStyleG}></View>
+           <SignUpScreenButton buttonStyle={lossButtonColor}
+              handler={lossHandler} textCss={ProfileCss.pressableText}text={'Loss'} />
+
+            <SignUpScreenButton buttonStyle={gainButtonColor}
+              handler={gainHandler} textCss={ProfileCss.pressableText}text={'Gain'} />
+         </View>
+         </View>
+        </View>
           <Pressable
-            style={[ProfileCss.button, ProfileCss.buttonClose]}
+            style={[ProfileCss.buttonSave, ProfileCss.buttonClose]}
             onPress={saveHandler}
           >
             <Text style={ProfileCss.textStyle}>save</Text>
           </Pressable>
+     
         </View>
+        <Pressable
+      style={[ProfileCss.button2, ProfileCss.buttonClose2]}
+      onPress={() => setModalVisible(false)}
+    >
+      <View style={ProfileCss.editButton2}>
+      <Text style={ProfileCss.textStyle}>Cancel</Text>
+      </View>
+    </Pressable>
       </View>
     </Modal>
     <Pressable
       style={[ProfileCss.button, ProfileCss.buttonOpen]}
       onPress={() => setModalVisible(true)}
     >
+      <View style={ProfileCss.editButton}>
       <Text style={ProfileCss.textStyle}>Edit</Text>
+      </View>
     </Pressable>
+  
   </View>
   )
 };

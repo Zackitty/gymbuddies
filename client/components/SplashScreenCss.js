@@ -35,7 +35,28 @@ const SplashScreenCss = StyleSheet.create({
     shadowRadius: 1,
     shadowOpacity: 1,
     shadowOffset:  {width: 0, height: 0},
-  }
+  }, 
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22
+  },
+  modalView: {
+    margin: 20,
+    height:100,
+    left: 45,
+    bottom: 400,
+    width: 300,
+    backgroundColor: "white",
+    borderRadius: 50,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    }},
 })
 
 

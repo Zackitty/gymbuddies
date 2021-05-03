@@ -3,16 +3,20 @@ import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native"
 import { ButtonStyles } from "react-native-material-kit";
 
 const SignUpCss = StyleSheet.create({
-   centerView: {width: 500,
-    height: 350, 
+   centerView: {
+    width: 600,
+    height: 1000, 
     alignItems: 'center',
-    justifyContent: 'center'},
+    justifyContent: 'center',
+    backgroundColor: 'rgba(52, 52, 52, 0.8)'
+  },
     pickerView: {
       flexDirection: 'row'
     },
+
     styleView: {
-      top: 170,
-      right: 30
+      bottom: 100,
+      right: 30,
   
     },
     textStyle: {
@@ -63,9 +67,9 @@ const SignUpCss = StyleSheet.create({
       backgroundColor: '#f0f8ff'
     },
     signUpButtonCss: {
-      top: 20,
+      top: 5,
       width: 125,
-      left: 30,
+      left: 40,
       borderColor: "blue",
       borderRadius: 15,
       backgroundColor: 'powderblue',
@@ -74,6 +78,7 @@ const SignUpCss = StyleSheet.create({
       shadowOpacity: 50,
       shadowOffset:  {width: 0, height: 0},
       alignItems: 'center',
+      margin: 10,
     },
     clickedButtonCss: {
       width: 50,
@@ -118,6 +123,7 @@ const SignUpCss = StyleSheet.create({
       shadowOpacity: 50,
       shadowOffset:  {width: 0, height: 0},
       alignItems: 'center',
+      margin: 10
     },
     pressedButtonCss: {
       top: 20,
@@ -131,9 +137,20 @@ const SignUpCss = StyleSheet.create({
       alignItems: 'center',
     },
     errorBox: {
-      top: 125,
+      bottom: 150,
       right: 20
-    }
+    },
+    prettyIt: {
+    left: -8,
+    borderRadius: 10,
+    borderColor: "#f0ffff",
+  width: 250,
+  backgroundColor: '#f0f8ff',
+  shadowColor: "#1e90ff", 
+  shadowOpacity: 1,
+  shadowRadius: 5,
+  padding: 10,
+  shadowOffset: {width: 1,height: 1}},
 })
 
 export default SignUpCss;

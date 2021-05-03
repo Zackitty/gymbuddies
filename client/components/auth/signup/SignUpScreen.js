@@ -7,7 +7,7 @@ import { View, Text, TextInput, Button, TouchableOpacity, Pressable, Picker, Asy
 import SignUpCss from "./SignUpCss"
 import SignUpScreenButton from './SignUpScreenButton/SignUpScreenButton'
 
-const SignUpScreen = ({ navigation, route }) => {
+const SignUpScreen = ({ navigation, route, setModal2Invisible }) => {
   const [full_name, setFullName] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('');
@@ -23,11 +23,7 @@ const SignUpScreen = ({ navigation, route }) => {
   const dispatch = useDispatch();
   const { authErrors, needSignIn } = useSelector(state => state.currentUser)
 
-  useEffect(() => {
-    if (!needSignIn) {
-      navigation.navigate('Home')
-    }
-  }, [needSignIn])
+
 
   const maleHandler = async (e) => {
     e.preventDefault()
@@ -55,13 +51,13 @@ const SignUpScreen = ({ navigation, route }) => {
   }
   const lossHandler = async (e) => {
     e.preventDefault()
-    setGender('Loss')
+    setGoal('Loss')
     setLossButtonColor(SignUpCss.clickedButtonCss)
     setGainButtonColor(SignUpCss.buttonCss)
   }
   const gainHandler = async (e) => {
     e.preventDefault()
-    setGender('Gain')
+    setGoal('Gain')
     setLossButtonColor(SignUpCss.buttonCss)
     setGainButtonColor(SignUpCss.clickedButtonCss)
   }
@@ -69,8 +65,14 @@ const SignUpScreen = ({ navigation, route }) => {
     e.preventDefault();
     dispatch(signUp(username, full_name, age, weight,
       gender, password, goal))
+      setModal2Visible(!modal2Visible)
 
   }
+
+const handleModal2 = async(e) => {
+  e.preventDefault()
+  setModal2Invisible()
+}
 
   return (
     <View style={SignUpCss.centerView}>
@@ -78,7 +80,7 @@ const SignUpScreen = ({ navigation, route }) => {
          {authErrors && <ErrorBox />}
          </View>
       <View style={SignUpCss.styleView}>
-       
+      <View style={SignUpCss.prettyIt}>
         <View style={SignUpCss.inputStyle}>
           
           <Text style={SignUpCss.textStyle}>Full Name</Text>
@@ -161,12 +163,16 @@ const SignUpScreen = ({ navigation, route }) => {
 
             <SignUpScreenButton buttonStyle={gainButtonColor}
               handler={gainHandler} textCss={SignUpCss.pressableText}text={'Gain'} />
-         
+       
             </View>
           </View>
         </View>
         <View style={SignUpCss.signUpButtonCss}>
         <Button title="Sign Up" onPress={handleSignUp}>Sign Up</Button>
+        </View>
+        <View style={SignUpCss.signUpButtonCss}>
+        <Button title="Cancel" onPress={handleModal2}>Cancel</Button>
+        </View>
         </View>
    </View>
 
