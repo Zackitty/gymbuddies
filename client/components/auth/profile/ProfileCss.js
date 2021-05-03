@@ -38,14 +38,14 @@ const ProfileCss = StyleSheet.create({
     backgroundColor: "#F194FF",
   },
   buttonClose: {
-    backgroundColor: "#2196F3",
+    backgroundColor: "#191970",
   },
   editButton: {
     bottom: 80,
-    borderColor: "blue",
+    borderColor: "powderblue",
     borderRadius: 15,
-    backgroundColor: 'powderblue',
-    shadowColor: "blue", 
+    backgroundColor: '#191970',
+    shadowColor: "powderblue", 
     shadowRadius: 2,
     shadowOpacity: 50,
     shadowOffset:  {width: 0, height: 0},
@@ -56,7 +56,7 @@ const ProfileCss = StyleSheet.create({
     height: 30,
   },
   textStyle: {
-    color: "blue",
+    color: "powderblue",
     fontWeight: "bold",
   },
   modalText: {
@@ -93,12 +93,12 @@ const ProfileCss = StyleSheet.create({
     top: 100,
   width: 300,
   height: 500,
-  backgroundColor: '#f0ffff',
+  backgroundColor: '#f0f8ff',
   shadowColor: "#1e90ff", 
   shadowOpacity: 1,
-  shadowRadius: 5,
+  shadowRadius: 3,
   padding: 10,
-  shadowOffset: {width: 1,height: 1},
+  shadowOffset: {width: 1,height: 22},
   },
   rowStyling: {
     borderRadius: 10,
@@ -118,20 +118,20 @@ const ProfileCss = StyleSheet.create({
   }, 
   pressableText: {
     fontSize: 9,
-    color: "blue"
+    color: "powderblue"
   }, 
   buttonCss: {
     width: 50,
     height: 20,
     color: "#f194ff",
     shadowColor: "blue", 
-    color: "blue",
+    color: "powderblue",
     shadowRadius: 2,
     shadowOpacity: 50,
     shadowOffset:  {width: 0, height: 0},
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#f0f8ff'
+    backgroundColor: '#191970'
   },
   clickedButtonCss: {
     width: 50,
@@ -159,7 +159,7 @@ const ProfileCss = StyleSheet.create({
   editbutton2: {
    bottom: 30,
    left: 20,
-   backgroundColor: "#2196F3",
+   backgroundColor: "#191970",
    borderRadius: 20,
     padding: 10,
 
@@ -172,7 +172,7 @@ const ProfileCss = StyleSheet.create({
     elevation: 5,
     width: 100,
     alignItems: 'center',
-    backgroundColor: "#2196F3",
+    backgroundColor: "#191970",
     borderRadius: 20,
      padding: 10,
   },
@@ -180,6 +180,7 @@ const ProfileCss = StyleSheet.create({
     top: 20,
     right: 70,
     width: 100,
+    backgroundColor: '#191970', 
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 20,
@@ -197,6 +198,7 @@ const ProfileCss = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     left: 1,
+    color: "black",
     bottom:5
     
   },
@@ -222,7 +224,7 @@ const ProfileCss = StyleSheet.create({
   textStyleG: {
     color: "blue",
     fontWeight: "bold",
-    right: 25
+    right: 60
   },
   buttonHolder: {
     top: 1,
@@ -231,10 +233,10 @@ const ProfileCss = StyleSheet.create({
   rowStylingEdit: {
     flexDirection: 'row',
     borderRadius: 10,
-    borderColor: "#f0ffff",
+    borderColor: "#191970",
    borderWidth: 20,
   shadowOpacity: 1,
-  shadowColor: "darkblue",
+  shadowColor: "powderblue",
   color: 'darkblue',
   shadowRadius: 5,
   width: 300,
@@ -246,7 +248,39 @@ const ProfileCss = StyleSheet.create({
   },
   textInput: {
     backgroundColor: 'white',
-    left: 19
+    left: 20
+  },
+  editTextStyle: {
+    color: "#191970",
+    right: 20
+  },
+  editTextStyle: {
+    color: "blue",
+    right: 33
+  },
+  editTextStyleGender: {
+    color: "blue",
+    right: 12
+  }, 
+  editTextStyleGoal: {
+    color: "blue",
+    right: 75
+  }, 
+  editTextStyleA: {
+    color: "blue",
+    right: 88
+  },
+  editTextStyleW: {
+    color: "blue",
+    right: 76
+  },
+  editTextStyleP: {
+    color: "blue",
+    right: 70
+  },
+  editTextStyleU: {
+    color: "blue",
+    right: 60
   }
 
 });

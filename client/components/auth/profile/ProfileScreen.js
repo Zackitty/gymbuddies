@@ -137,7 +137,7 @@ const ProfileScreen = ({ navigation, route }) => {
       <View style={ProfileCss.editScreen}>
         <View style={ProfileCss.modalView}>
         <View  style={ProfileCss.rowStylingEdit}>
-        <Text>Full Name:</Text>   
+        <Text style={ProfileCss.editTextStyle}>Full Name:</Text>   
         <TextInput 
           style={ProfileCss.textInput}
           placeholder={fullName}
@@ -146,7 +146,7 @@ const ProfileScreen = ({ navigation, route }) => {
           autoCapitalize={'none'} />
           </View>
           <View  style={ProfileCss.rowStylingEdit}>
-        <Text>Username:</Text>
+        <Text style={ProfileCss.editTextStyleU}>Username:</Text>
         <TextInput 
           style={ProfileCss.textInput}
           placeholder={userName}
@@ -155,7 +155,7 @@ const ProfileScreen = ({ navigation, route }) => {
           autoCapitalize={'none'} />
           </View>
           <View  style={ProfileCss.rowStylingEdit}>
-          <Text>Password:</Text>
+          <Text style={ProfileCss.editTextStyleP}>Password:</Text>
         <TextInput 
           style={ProfileCss.textInput}
           placeholder={'.....'}
@@ -164,7 +164,7 @@ const ProfileScreen = ({ navigation, route }) => {
           autoCapitalize={'none'} />
           </View>
           <View  style={ProfileCss.rowStylingEdit}>
-        <Text>Weight:</Text>
+        <Text style={ProfileCss.editTextStyleW}>Weight:</Text>
         <TextInput 
         style={ProfileCss.textInput}
          keyboardType = 'numeric'
@@ -174,7 +174,7 @@ const ProfileScreen = ({ navigation, route }) => {
           />
           </View>
           <View  style={ProfileCss.rowStylingEdit}>
-        <Text>Age:</Text>
+        <Text style={ProfileCss.editTextStyleA} >Age:</Text>
         <TextInput 
             style={ProfileCss.textInput}
           placeholder={age}
@@ -186,7 +186,7 @@ const ProfileScreen = ({ navigation, route }) => {
            <View style={ProfileCss.buttonHolder}>
            <View  style={ProfileCss.rowStylingEdit}>
               <View style={ProfileCss.genderHandlerCss}>
-            <Text style={ProfileCss.textStyle}>Gender:</Text>
+            <Text style={ProfileCss.editTextStyleGender}>Gender:</Text>
             <View style={ProfileCss.justtheGendercss}>
            
             <View style={ProfileCss.justInputStyle}>
@@ -206,7 +206,7 @@ const ProfileScreen = ({ navigation, route }) => {
           </View>
           <View  style={ProfileCss.rowStylingEdit}>
           <View style={ProfileCss.goalHandlerCss}>
-            <Text style={ProfileCss.textStyleG}>Goal:</Text>
+            <Text style={ProfileCss.editTextStyleGoal}>Goal:</Text>
             <View style={ProfileCss.justInputStyleG}></View>
            <SignUpScreenButton buttonStyle={lossButtonColor}
               handler={lossHandler} textCss={ProfileCss.pressableText}text={'Loss'} />
