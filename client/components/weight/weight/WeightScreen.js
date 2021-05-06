@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, Image, Picker } from 'react-native';
+import { StyleSheet, Text, View, Button, Image, Picker, Pressable} from 'react-native';
 import { useSelector } from 'react-redux';
 import { CommonActions } from '@react-navigation/native';
 import TotalLossBox from '../totalloss/TotalLossBox'
@@ -8,6 +8,7 @@ import LossesScroll from '../loss/lossesscroll/LossesScroll'
 import GainsScroll from '../gains/gainsscroll/GainsScroll'
 import NumberPickerHelper from "../../pickerhelper/NumberPickerHelper"
 import { apiUrl } from '../../../config';
+import WeightCss from "./WeightCss"
 const WeightScreen = ({ navigation, route }) => {
   const {id} = useSelector(state => state.currentUser)
   const [gainUser, setGainUser] = useState(false)
@@ -22,15 +23,8 @@ const WeightScreen = ({ navigation, route }) => {
   const [dateNumber5, setDateNumber5] = useState(0)
   const [dateNumber6, setDateNumber6] = useState(0)
   const [dateNumber7, setDateNumber7] = useState(0)
-  const handleStringNumber = async(e) => {
-      let string = ''
-   
-       string += weightNumber1
-       string += weightNumber2
-       string += weightNumber3
-       
+  const [buttonPressed, setButtonPressed] = useState(0)
  
-  }
 
   useEffect(() => {
     fetch(`${apiUrl}/users/${id}/get`)
@@ -64,6 +58,8 @@ const handleSubmission = async(e) => {
       method: 'post',
       body: formData
     });
+    let newNum = 
+    setButtonPressed(buttonPressed + 1)
 }
 
 
@@ -71,8 +67,8 @@ return (
 
   <View>
     <View>
-      <Text>Enter Weight:</Text>
-    <Picker selectedValue={weightNumber1}
+      
+    <Picker selectedValue={weightNumber1} style={WeightCss.picker1Style}
             onValueChange={currentNumber => setWeightNumber1(currentNumber)} 
                   >
             <Picker.Item label="0" value="0" />
@@ -89,6 +85,7 @@ return (
   </View>
   <View>
     <Picker selectedValue={weightNumber2}
+    style={WeightCss.picker2Style}
             onValueChange={currentNumber => setWeightNumber2(currentNumber)} 
                   >
             <Picker.Item label="0" value="0" />
@@ -105,6 +102,7 @@ return (
   </View>
   <View>
     <Picker selectedValue={weightNumber3}
+    style={WeightCss.picker3Style}
             onValueChange={currentNumber => setWeightNumber3(currentNumber)} 
                   >
             <Picker.Item label="0" value="0" />
@@ -121,17 +119,24 @@ return (
        
 
   </View>
-     <Button title="Enter Weight" onPress={handleSubmission}></Button>
+  <Pressable title="Enter Weight" onPress={handleSubmission}>
+    <View style={WeightCss.enterWeight}>
+    
+        <View style={WeightCss.viewText}>
+       <Text style={WeightCss.weightText}>Enter Weight</Text>
+       </View>
+    </View>
+    </Pressable>
    {gainUser && (
       <View>
-        <TotalGainBox />
-        <GainsScroll />
+        <TotalGainBox buttonPressed={buttonPressed}/>
+        <GainsScroll buttonPressed={buttonPressed} />
       </View>
     )}
      {lossUser && (
       <View>
-      <TotalLossBox />
-       <LossesScroll />
+      <TotalLossBox buttonPressed={buttonPressed} />
+       <LossesScroll buttonPressed={buttonPressed} />
       </View>
     )}
 

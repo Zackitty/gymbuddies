@@ -160,6 +160,8 @@ def userWeight(request, id):
         dailyweight.save()
         activity = Activity(todayz_weight_id=dailyweight.id, entry_date=entry_date, user_id=id)
         activity.save()
+        thisweight = TodaysWeight(weight=newWeight, entry_date=entry_date, 
+                userId_id=id)
         jsonWeight = serializers.serialize('json', [ thisweight, ])
         return HttpResponse([jsonWeight], content_type="application/x-javascript")    
         
