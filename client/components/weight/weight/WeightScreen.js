@@ -58,8 +58,8 @@ const handleSubmission = async(e) => {
       method: 'post',
       body: formData
     });
-    let newNum = 
-    setButtonPressed(buttonPressed + 1)
+    let newNum = buttonPressed + 1
+    setButtonPressed(newNum)
 }
 
 
@@ -135,8 +135,12 @@ return (
     )}
      {lossUser && (
       <View>
+        <View style={WeightCss.totalLossBox}>
       <TotalLossBox buttonPressed={buttonPressed} />
+        </View>
+        <View style={WeightCss.totalLossScroll}>
        <LossesScroll buttonPressed={buttonPressed} />
+        </View>
       </View>
     )}
 
