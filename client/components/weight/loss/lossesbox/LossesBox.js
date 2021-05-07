@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { useSelector } from 'react-redux';
 import { CommonActions } from '@react-navigation/native';
-
+import LossesBoxCss from './LossesBoxCss'
 const LossesBox = (props, { navigation, route }) => {
   const [loser, setLoser] = useState(false)
   const {id} = useSelector(state => state.currentUser)
@@ -17,9 +17,10 @@ return (
 
 <View>
   { loser && (
-    <View>
-  <Text>{props.entry_date} | Lost</Text>
-  <Text>{props.amount}</Text>
+  <View style={LossesBoxCss.viewBox}>
+
+  <Text style={LossesBoxCss.text}>{props.entry_date}   |     Lost    </Text>
+  <Text style={LossesBoxCss.text}>{props.amount}</Text>
   </View>
   )
 }

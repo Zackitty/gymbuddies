@@ -102,25 +102,32 @@ const ProfileScreen = ({ navigation, route }) => {
     <View style={ProfileCss.prettyIt}>
     <View style={ProfileCss.centeredView}>
       <View style={ProfileCss.rowStyling}>
-       <Text style={{color: 'blue'}}>Full Name: {fullName}</Text>
+       <Text style={ProfileCss.mainTextF}>Full Name:</Text>
+       <Text>{fullName}</Text>
        </View>
        <View style={ProfileCss.rowStyling}>
-        <Text style={{color: 'blue'}} >Username: {userName}</Text>
+        <Text style={ProfileCss.mainTextU} >Username: </Text>
+        <Text>{userName}</Text>
         </View>
         <View  style={ProfileCss.rowStyling}>
-        <Text  style={{color: 'blue'}}>Password: {password}</Text>
+        <Text  style={ProfileCss.mainTextP}>Password:</Text>
+       <Text> {password}</Text>
         </View>
         <View style={ProfileCss.rowStyling}>
-        <Text style={{color: 'blue'}}>Weight: {weight}</Text>
+        <Text style={ProfileCss.mainTextW}>Weight:</Text>
+       <Text> {weight}</Text>
         </View>
         <View  style={ProfileCss.rowStyling}>
-        <Text  style={{color: 'blue'}}>Age: {age}</Text>
+        <Text  style={ProfileCss.mainTextA}>Age: </Text>
+       <Text>{age}</Text>
         </View>
         <View  style={ProfileCss.rowStyling}>
-        <Text  style={{color: 'blue'}}>Gender: {gender}</Text>
+        <Text  style={ProfileCss.mainTextG}>Gender: </Text>
+       <Text>{gender}</Text>
         </View>
         <View style={ProfileCss.rowStyling}>
-        <Text  style={{color: 'blue'}}>Goal: {goal}</Text>
+        <Text  style={ProfileCss.mainTextGoal}>Goal: </Text>
+       <Text> {goal}</Text>
         </View>
     </View>
     </View> 

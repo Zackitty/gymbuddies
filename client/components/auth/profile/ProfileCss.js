@@ -101,19 +101,22 @@ const ProfileCss = StyleSheet.create({
   shadowOffset: {width: 1,height: 22},
   },
   rowStyling: {
+    flexDirection: 'row',
     borderRadius: 10,
-    borderColor: "#191970",
-   borderWidth: 20,
-  shadowOpacity: 1,
-  shadowColor: "#f0ffff",
-  color: 'darkblue',
+    borderColor: "powderblue",
+   borderWidth: 2,
+  shadowOpacity: 5,
+  shadowColor: "blue",
+  color: "powderblue",
   shadowRadius: 5,
-  width: 300,
+  margin: 5,
+  width: 270,
   alignItems: 'center',
   justifyContent: 'center',
-  height: 100,
+  height: 85,
   padding: 10,
-  shadowOffset: {width: 1,height: 1},
+  shadowOffset: {width: 0,height: 0},
+  backgroundColor: '#191970'
 
   }, 
   pressableText: {
@@ -222,7 +225,7 @@ const ProfileCss = StyleSheet.create({
     flexDirection: 'row'
   },
   textStyleG: {
-    color: "blue",
+    color: "powderblue",
     fontWeight: "bold",
     right: 60
   },
@@ -237,7 +240,7 @@ const ProfileCss = StyleSheet.create({
    borderWidth: 20,
   shadowOpacity: 1,
   shadowColor: "powderblue",
-  color: 'darkblue',
+  color: "powderblue",
   shadowRadius: 5,
   width: 300,
   alignItems: 'center',
@@ -251,37 +254,75 @@ const ProfileCss = StyleSheet.create({
     left: 20
   },
   editTextStyle: {
-    color: "#191970",
+    color: "powderblue",
     right: 20
   },
   editTextStyle: {
-    color: "blue",
+    color: "powderblue",
     right: 33
   },
   editTextStyleGender: {
-    color: "blue",
+    color: "powderblue",
     right: 12
   }, 
   editTextStyleGoal: {
-    color: "blue",
+    color: "powderblue",
     right: 75
   }, 
   editTextStyleA: {
-    color: "blue",
+    color: "powderblue",
     right: 88
   },
   editTextStyleW: {
-    color: "blue",
+    color: "powderblue",
     right: 76
   },
   editTextStyleP: {
-    color: "blue",
+    color: "powderblue",
     right: 70
   },
   editTextStyleU: {
-    color: "blue",
+    color: "powderblue",
     right: 60
-  }
+  },
+  mainTextU: {
+    color: "powderblue",
+    right: 33
+  },
+  mainTextG: {
+    color: "powderblue",
+    right: 12
+  }, 
+  mainTextGoal: {
+    color: "powderblue",
+    right: 75,
+    fontWeight: "bold",
+    fontSize: 15
+  }, 
+ mainTextA: {
+    color: "powderblue",
+    right: 88, 
+    fontWeight: "bold",
+    fontSize: 15
+  },
+ mainTextW: {
+    color: "powderblue",
+    right: 76,
+    fontWeight: "bold",
+    fontSize: 15
+  },
+  mainTextP: {
+    color: "powderblue",
+    right: 70, 
+    fontWeight: "bold",
+    fontSize: 15
+  },
+  mainTextF: {
+    color: "powderblue",
+    right: 30,
+    fontWeight: "bold",
+    fontSize: 15
+  },
 
 });
 

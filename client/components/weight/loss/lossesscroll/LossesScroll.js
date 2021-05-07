@@ -26,9 +26,9 @@ return (
     <ScrollView>
     {lossScroll.map((loss, i) =>
      <View key={i}>
-      
+      <View>
      <LossesBox key={i} amount={loss.amount} entry_date={loss.entry_date} loser_id={loss.loser}></LossesBox>
-       
+     </View>
        
      </View>
      )}

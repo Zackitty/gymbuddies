@@ -51,10 +51,10 @@ const WeightCss = StyleSheet.create({
     
   }, 
   totalLossScroll: {
-    left: 150,
+    left: 80,
     top: 220,
  height: 500,
-    width: 500
+    width: 600
   },
   totalLossBox: {
     left: 150,
