@@ -8,25 +8,24 @@ const WeightCss = StyleSheet.create({
     height: 20,
     width: 50,
     left: 145,
-    top: 50
+    top: -20
   },
   picker2Style: {
-
+    top: -40,
     height: 20,
     width: 50,
     left: 185,
-    top: 30
   }, 
   picker3Style: {
 
     height: 20,
     width: 50,
     left: 225,
-    top: 10
+    top: -60
     
   },
   enterWeight: {
-    top: 25,
+    top: -40,
       borderColor: "blue",
       borderRadius: 15,
       shadowColor: "blue", 

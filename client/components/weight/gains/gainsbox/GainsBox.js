@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { CommonActions } from '@react-navigation/native';
 
 const GainsBox = (props, { navigation, route }) => {
-  const [gainer, setGainerId] = useState(false)
+  const [gainer, setGainer] = useState(false)
   const {id} = useSelector(state => state.currentUser)
 
   useEffect(() => {

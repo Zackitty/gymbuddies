@@ -65,8 +65,10 @@ return (
           />
    {gainUser && (
       <View>
+        <View style={WeightCss.totalLossBox}>
         <TotalGainBox buttonPressed={buttonPressed}/>
-        <ScrollView>
+        </View>
+        <ScrollView style={WeightCss.totalLossScroll}>
         <GainsScroll buttonPressed={buttonPressed} />
         </ScrollView>
       </View>

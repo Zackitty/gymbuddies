@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { useSelector } from 'react-redux';
 import { CommonActions } from '@react-navigation/native';
 import { apiUrl } from '../../../config';
-
+import  TotalGainCss from "./TotalGainCss"
 const TotalGainBox = (props, { navigation, route }) => {
   const {id} = useSelector(state => state.currentUser)
   const [totalGain, setTotalGain] = useState([])
@@ -22,8 +22,8 @@ return (
 <View>
 {
     totalGain && (
-      <View>
-       <Text>Gain Total: {totalGain}</Text>
+      <View style={TotalGainCss.totalView}>
+       <Text style={TotalGainCss.text}>Gain Total: {totalGain}</Text>
         </View>
     )
   }
