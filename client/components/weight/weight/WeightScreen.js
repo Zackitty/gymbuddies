@@ -79,9 +79,13 @@ return (
         <ScrollView style={WeightCss.totalLossScroll}>
        <LossesScroll buttonPressed={buttonPressed} />
         </ScrollView>
-        <View>
+        
       
-      <Picker selectedValue={weightNumber1} style={WeightCss.picker1Style}
+     
+      </View>
+    )}
+    <View>
+     <Picker selectedValue={weightNumber1} style={WeightCss.picker1Style}
               onValueChange={currentNumber => setWeightNumber1(currentNumber)} 
                     >
               <Picker.Item label="0" value="0" />
@@ -140,8 +144,6 @@ return (
          </View>
       </View>
       </Pressable>
-      </View>
-    )}
 
   </View>
 
