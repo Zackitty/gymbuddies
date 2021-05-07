@@ -3,27 +3,28 @@ import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { useSelector } from 'react-redux';
 import { CommonActions } from '@react-navigation/native';
 import { apiUrl } from '../../../config';
-
-const TotalLossBox = ({ navigation, route }) => {
+import TotalLossCss from './TotalLossCss'
+const TotalLossBox = ({ navigation, route, buttonPressed }) => {
   const {id} = useSelector(state => state.currentUser)
   const [totalLoss, setTotalLoss] = useState([])
   useEffect(() => {
     getTotalLoss()
-  }, [])
+    
+  }, [buttonPressed])
 
 const getTotalLoss = async (e) => {
 
   await fetch(`${apiUrl}/users/${id}/finaltotalloss`)
   .then(res => res.json())
-  .then(data => setTotalLoss(data[0].fields.total_loss))
+  .then(data => setTotalLoss(data[0].fields.total_loss.toString()))
 }
 return (
 
 <View>
   {
     totalLoss && (
-      <View>
-       <Text>Loss Total: {totalLoss}</Text>
+      <View style={TotalLossCss.totalView}>
+       <Text style={TotalLossCss.text}>Loss Total: {totalLoss}</Text>
         </View>
     )
   }

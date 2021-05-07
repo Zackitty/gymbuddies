@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, Image, Picker, Pressable} from 'react-native';
+import { StyleSheet, ScrollView, Text, View, Button, Image, Picker, Pressable} from 'react-native';
 import { useSelector } from 'react-redux';
 import { CommonActions } from '@react-navigation/native';
 import TotalLossBox from '../totalloss/TotalLossBox'
@@ -16,13 +16,6 @@ const WeightScreen = ({ navigation, route }) => {
   const [weightNumber1, setWeightNumber1] = useState(0)
   const [weightNumber2, setWeightNumber2] = useState(0)
   const [weightNumber3, setWeightNumber3] = useState(0)
-  const [dateNumber1, setDateNumber1] = useState(0)
-  const [dateNumber2, setDateNumber2] = useState(0)
-  const [dateNumber3, setDateNumber3] = useState(0)
-  const [dateNumber4, setDateNumber4] = useState(0)
-  const [dateNumber5, setDateNumber5] = useState(0)
-  const [dateNumber6, setDateNumber6] = useState(0)
-  const [dateNumber7, setDateNumber7] = useState(0)
   const [buttonPressed, setButtonPressed] = useState(0)
  
 
@@ -66,71 +59,16 @@ const handleSubmission = async(e) => {
 return (
 
   <View>
-    <View>
-      
-    <Picker selectedValue={weightNumber1} style={WeightCss.picker1Style}
-            onValueChange={currentNumber => setWeightNumber1(currentNumber)} 
-                  >
-            <Picker.Item label="0" value="0" />
-            <Picker.Item label="1" value="1" />
-            <Picker.Item label="2" value="2" />
-            <Picker.Item label="3" value="3" />
-            <Picker.Item label="4" value="4" />
-            <Picker.Item label="5" value="5" />
-            <Picker.Item label="6" value="6" />
-            <Picker.Item label="7" value="7" />
-            <Picker.Item label="8" value="8" />
-            <Picker.Item label="9" value="9" />
-          </Picker>
-  </View>
-  <View>
-    <Picker selectedValue={weightNumber2}
-    style={WeightCss.picker2Style}
-            onValueChange={currentNumber => setWeightNumber2(currentNumber)} 
-                  >
-            <Picker.Item label="0" value="0" />
-            <Picker.Item label="1" value="1" />
-            <Picker.Item label="2" value="2" />
-            <Picker.Item label="3" value="3" />
-            <Picker.Item label="4" value="4" />
-            <Picker.Item label="5" value="5" />
-            <Picker.Item label="6" value="6" />
-            <Picker.Item label="7" value="7" />
-            <Picker.Item label="8" value="8" />
-            <Picker.Item label="9" value="9" />
-          </Picker>
-  </View>
-  <View>
-    <Picker selectedValue={weightNumber3}
-    style={WeightCss.picker3Style}
-            onValueChange={currentNumber => setWeightNumber3(currentNumber)} 
-                  >
-            <Picker.Item label="0" value="0" />
-            <Picker.Item label="1" value="1" />
-            <Picker.Item label="2" value="2" />
-            <Picker.Item label="3" value="3" />
-            <Picker.Item label="4" value="4" />
-            <Picker.Item label="5" value="5" />
-            <Picker.Item label="6" value="6" />
-            <Picker.Item label="7" value="7" />
-            <Picker.Item label="8" value="8" />
-            <Picker.Item label="9" value="9" />
-          </Picker>
-       
-
-  </View>
-  <Pressable title="Enter Weight" onPress={handleSubmission}>
-    <View style={WeightCss.enterWeight}>
-    
-        <View style={WeightCss.viewText}>
-       <Text style={WeightCss.weightText}>Enter Weight</Text>
-       </View>
-    </View>
-    </Pressable>
+       <Image
+            style={WeightCss.imageCss}
+            source={require('../../../images/weight.jpeg')}
+          />
    {gainUser && (
       <View>
         <TotalGainBox buttonPressed={buttonPressed}/>
+        <ScrollView>
         <GainsScroll buttonPressed={buttonPressed} />
+        </ScrollView>
       </View>
     )}
      {lossUser && (
@@ -138,9 +76,70 @@ return (
         <View style={WeightCss.totalLossBox}>
       <TotalLossBox buttonPressed={buttonPressed} />
         </View>
-        <View style={WeightCss.totalLossScroll}>
+        <ScrollView style={WeightCss.totalLossScroll}>
        <LossesScroll buttonPressed={buttonPressed} />
-        </View>
+        </ScrollView>
+        <View>
+      
+      <Picker selectedValue={weightNumber1} style={WeightCss.picker1Style}
+              onValueChange={currentNumber => setWeightNumber1(currentNumber)} 
+                    >
+              <Picker.Item label="0" value="0" />
+              <Picker.Item label="1" value="1" />
+              <Picker.Item label="2" value="2" />
+              <Picker.Item label="3" value="3" />
+              <Picker.Item label="4" value="4" />
+              <Picker.Item label="5" value="5" />
+              <Picker.Item label="6" value="6" />
+              <Picker.Item label="7" value="7" />
+              <Picker.Item label="8" value="8" />
+              <Picker.Item label="9" value="9" />
+            </Picker>
+    </View>
+    <View>
+      <Picker selectedValue={weightNumber2}
+      style={WeightCss.picker2Style}
+              onValueChange={currentNumber => setWeightNumber2(currentNumber)} 
+                    >
+              <Picker.Item label="0" value="0" />
+              <Picker.Item label="1" value="1" />
+              <Picker.Item label="2" value="2" />
+              <Picker.Item label="3" value="3" />
+              <Picker.Item label="4" value="4" />
+              <Picker.Item label="5" value="5" />
+              <Picker.Item label="6" value="6" />
+              <Picker.Item label="7" value="7" />
+              <Picker.Item label="8" value="8" />
+              <Picker.Item label="9" value="9" />
+            </Picker>
+    </View>
+    <View>
+      <Picker selectedValue={weightNumber3}
+      style={WeightCss.picker3Style}
+              onValueChange={currentNumber => setWeightNumber3(currentNumber)} 
+                    >
+              <Picker.Item label="0" value="0" />
+              <Picker.Item label="1" value="1" />
+              <Picker.Item label="2" value="2" />
+              <Picker.Item label="3" value="3" />
+              <Picker.Item label="4" value="4" />
+              <Picker.Item label="5" value="5" />
+              <Picker.Item label="6" value="6" />
+              <Picker.Item label="7" value="7" />
+              <Picker.Item label="8" value="8" />
+              <Picker.Item label="9" value="9" />
+            </Picker>
+         
+  
+    </View>
+    <Pressable title="Enter Weight" onPress={handleSubmission}>
+      <View style={WeightCss.enterWeight}>
+      
+          <View style={WeightCss.viewText}>
+         <Text style={WeightCss.weightText}>Enter Weight</Text>
+         </View>
+      </View>
+      </Pressable>
       </View>
     )}
 

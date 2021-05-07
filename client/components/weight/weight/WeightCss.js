@@ -8,24 +8,25 @@ const WeightCss = StyleSheet.create({
     height: 20,
     width: 50,
     left: 145,
-    top: 40
+    bottom: 600
   },
   picker2Style: {
 
     height: 20,
     width: 50,
     left: 185,
-    top: 20
+    bottom: 620
   }, 
   picker3Style: {
 
     height: 20,
     width: 50,
     left: 225,
+    bottom: 640
     
   },
   enterWeight: {
-    top: 5,
+    bottom: 625,
       borderColor: "blue",
       borderRadius: 15,
       shadowColor: "blue", 
@@ -43,8 +44,6 @@ const WeightCss = StyleSheet.create({
   weightText: {
     color: 'powderblue',
     borderColor: 'white',
- 
-
 
   },
   viewText: {
@@ -54,14 +53,20 @@ const WeightCss = StyleSheet.create({
   }, 
   totalLossScroll: {
     left: 150,
-    top: 250,
-    height: 500,
+    top: 220,
+ 
     width: 500
   },
   totalLossBox: {
     left: 150,
-    top: 205,
+    top: 190,
     
+  }, 
+  imageCss: {
+    width: 150,
+    height: 150,
+    top: 50,
+    left: 135
   }
  
  
