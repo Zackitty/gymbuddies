@@ -7,13 +7,14 @@ const ProfileCss = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 22,
-    bottom: 90
+    bottom: 90,
+   
   },
   modalView: {
     margin: 20,
     height: 700,
     width: 300,
-    backgroundColor: "white",
+    backgroundColor: "#191970",
     borderRadius: 50,
     padding: 35,
     alignItems: "center",
@@ -41,19 +42,23 @@ const ProfileCss = StyleSheet.create({
     backgroundColor: "#191970",
   },
   editButton: {
-    bottom: 80,
-    borderColor: "powderblue",
-    borderRadius: 15,
-    backgroundColor: '#191970',
-    shadowColor: "powderblue", 
-    shadowRadius: 2,
-    shadowOpacity: 50,
-    shadowOffset:  {width: 0, height: 0},
-    alignItems: 'center',
+    bottom: 455,
     justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 20,
+    padding: 10,
+    elevation: 5,
+  shadowOffset: {width: 0,height: 0},
+  backgroundColor: '#191970',
+    borderColor: "powderblue",
+   borderWidth: 2,
+  shadowOpacity: 5,
+  shadowColor: "blue",
+  color: "powderblue",
+  shadowRadius: 5,
     margin: 5,
-    width: 50,
-    height: 30,
+    width: 75,
+    height: 40,
   },
   textStyle: {
     color: "powderblue",
@@ -80,25 +85,12 @@ const ProfileCss = StyleSheet.create({
     fontSize: 10
   },
   centerView: {
-   top: 100,
    alignItems: 'center',
    justifyContent: 'center',
+   backgroundColor: '#afeeee',
+   height: 1000
   
  
-   },
-   prettyIt: {
-    left: 5,
-    borderRadius: 10,
-    borderColor: "#f0ffff",
-    top: 100,
-  width: 300,
-  height: 500,
-  backgroundColor: '#f0f8ff',
-  shadowColor: "#1e90ff", 
-  shadowOpacity: 1,
-  shadowRadius: 3,
-  padding: 10,
-  shadowOffset: {width: 1,height: 22},
   },
   rowStyling: {
     flexDirection: 'row',
@@ -134,7 +126,9 @@ const ProfileCss = StyleSheet.create({
     shadowOffset:  {width: 0, height: 0},
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#191970'
+    borderWidth: 2,
+    borderColor: 'white'
+  
   },
   clickedButtonCss: {
     width: 50,
@@ -148,6 +142,7 @@ const ProfileCss = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'blue'
+
     
   },
   editScreen: {
@@ -165,6 +160,7 @@ const ProfileCss = StyleSheet.create({
    backgroundColor: "#191970",
    borderRadius: 20,
     padding: 10,
+    
 
   }, 
   button2: {
@@ -175,20 +171,39 @@ const ProfileCss = StyleSheet.create({
     elevation: 5,
     width: 100,
     alignItems: 'center',
-    backgroundColor: "#191970",
-    borderRadius: 20,
+     justifyContent: 'center',
      padding: 10,
+     elevation: 5,
+   padding: 10,
+   shadowOffset: {width: 0,height: 0},
+   backgroundColor: '#191970',
+
+     borderColor: "powderblue",
+    borderWidth: 2,
+   shadowOpacity: 5,
+   shadowColor: "blue",
+   color: "powderblue",
+   shadowRadius: 5,
   },
   buttonSave: {
-    top: 20,
+    top: -15,
     right: 70,
     width: 100,
-    backgroundColor: '#191970', 
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 20,
     padding: 10,
     elevation: 5,
+  padding: 10,
+  shadowOffset: {width: 0,height: 0},
+  backgroundColor: '#191970',
+    borderColor: "powderblue",
+   borderWidth: 2,
+  shadowOpacity: 5,
+  shadowColor: "blue",
+  color: "powderblue",
+  shadowRadius: 5,
+
   }, 
   genderHandlerCss: {
     display: 'flex',
@@ -234,20 +249,24 @@ const ProfileCss = StyleSheet.create({
     
   },
   rowStylingEdit: {
-    flexDirection: 'row',
-    borderRadius: 10,
-    borderColor: "#191970",
-   borderWidth: 20,
-  shadowOpacity: 1,
-  shadowColor: "powderblue",
-  color: "powderblue",
-  shadowRadius: 5,
-  width: 300,
-  alignItems: 'center',
-  justifyContent: 'center',
-  height: 85,
-  padding: 10,
-  shadowOffset: {width: 1,height: 1},
+  
+      flexDirection: 'row',
+      borderRadius: 10,
+      borderColor: "powderblue",
+     borderWidth: 2,
+    shadowOpacity: 5,
+    shadowColor: "blue",
+    color: "powderblue",
+    shadowRadius: 5,
+    margin: 5,
+    width: 270,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 80,
+    bottom: 15,
+    padding: 10,
+    shadowOffset: {width: 0,height: 0},
+    backgroundColor: '#191970'
   },
   textInput: {
     backgroundColor: 'white',
@@ -287,27 +306,31 @@ const ProfileCss = StyleSheet.create({
   },
   mainTextU: {
     color: "powderblue",
-    right: 33
+    right: 60, 
+    fontWeight: "bold",
+    fontSize: 15
   },
   mainTextG: {
     color: "powderblue",
-    right: 12
+    right: 65, 
+    fontWeight: "bold",
+    fontSize: 15
   }, 
   mainTextGoal: {
     color: "powderblue",
-    right: 75,
+    right: 80,
     fontWeight: "bold",
     fontSize: 15
   }, 
  mainTextA: {
     color: "powderblue",
-    right: 88, 
+    right: 90, 
     fontWeight: "bold",
     fontSize: 15
   },
  mainTextW: {
     color: "powderblue",
-    right: 76,
+    right: 80,
     fontWeight: "bold",
     fontSize: 15
   },
@@ -322,6 +345,35 @@ const ProfileCss = StyleSheet.create({
     right: 30,
     fontWeight: "bold",
     fontSize: 15
+  },
+  resultText: {
+    fontWeight: "bold",
+    fontSize: 15,
+    color: "powderblue",
+  },
+  resultTextW: {
+    fontWeight: "bold",
+    fontSize: 15,
+    right: -8,
+    color: "powderblue",
+  },
+  resultTextA: {
+    fontWeight: "bold",
+    fontSize: 15,
+    right: -20,
+    color: "powderblue",
+  },
+  resultTextG: {
+    fontWeight: "bold",
+    fontSize: 15,
+    right: -15,
+    color: "powderblue",
+  },
+  resultTextGoal: {
+    fontWeight: "bold",
+    fontSize: 15,
+    right: -20,
+    color: "powderblue",
   },
 
 });

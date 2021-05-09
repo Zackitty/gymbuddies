@@ -55,7 +55,7 @@ const createExerciseScroll = async(data) =>{
       }}
     >
         <View style={ExerciseCss.centeredView}>
-        <View style={ExerciseCss.modalView}>
+        <View>
   <CreateExerciseModal modalVisible={modalVisible} setModalVisible={setModalVisible}/>
   </View>
   </View>

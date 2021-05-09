@@ -4,18 +4,23 @@ import { useSelector } from 'react-redux';
 import { CommonActions } from '@react-navigation/native';
 import { apiUrl } from '../../../config';
 import FriendCss from './FriendCss'
-const FriendBox = ({ username, weight, age, gender, goal, userid, update }) => {
+const FriendBox = ({ username, weight, age, gender, goal, userid, update, rerender, setButtonPressed, buttonPressed }) => {
   const [friends, setFriends] = useState([])
   const [friendId, setFriendId] = useState([])
   const [isFriend, setIsFriend] = useState(false)
   const { id } = useSelector(state => state.currentUser)
-  const [, forceUpdate] = useReducer(x => x + 1, 0);
+ 
 
 
   useEffect(() => {
-   
+    
     handleEffect()
-  }, [goal])
+  
+  }, [])
+
+ 
+
+  
  
   const handleEffect = async (e) => {
     await fetch(`${apiUrl}/users/${id}/friends`)
@@ -31,17 +36,18 @@ const FriendBox = ({ username, weight, age, gender, goal, userid, update }) => {
   }
 
   const handleAdd = async (e) => {
-    fetch(`${apiUrl}/users/${id}/friends/${friendId}`,
+    await fetch(`${apiUrl}/users/${id}/friends/${friendId}`,
       { method: 'post' })
-
+    await friendsHandler()
+    let newTotal = buttonPressed + 1
+    setButtonPressed(newTotal)
   }
 
   const friendsHandler = async (e) => {
     
     for (let i = 0; i < friends.length; i++) {
-      console.log(friends[i].fields.friends_id)
-      console.log(friendId)
-      if (friends[i].fields.friends_id === friendId) {
+     
+      if (friends[i].fields.friends_id.toString() === friendId.toString()) {
         setIsFriend(true)
       }
 
@@ -62,19 +68,19 @@ const FriendBox = ({ username, weight, age, gender, goal, userid, update }) => {
           </View>
           </View>
           <View style={FriendCss.restStyle}>
-          <View style={FriendCss.dividerStyle}><Text style={FriendCss.textDividerStyle}>|</Text></View>
+          <View style={FriendCss.dividerStyle}><Text style={FriendCss.textDividerStyle}>|   </Text></View>
           <View>
             <Text style={FriendCss.textStyle}>{age}</Text>
           </View>
-          <View style={FriendCss.dividerStyle}><Text style={FriendCss.textDividerStyle}>|</Text></View>
+          <View style={FriendCss.dividerStyle}><Text style={FriendCss.textDividerStyle}> |  </Text></View>
           <View>
             <Text style={FriendCss.textStyle}>{weight}</Text>
           </View>
-          <View style={FriendCss.dividerStyle}><Text style={FriendCss.textDividerStyle}>|</Text></View>
+          <View style={FriendCss.dividerStyle}><Text style={FriendCss.textDividerStyle}> | </Text></View>
           <View>
             <Text style={FriendCss.textStyle}>{gender}</Text>
           </View>
-          <View style={FriendCss.dividerStyle}><Text style={FriendCss.textDividerStyle}>|</Text></View>
+          <View style={FriendCss.dividerStyle}><Text style={FriendCss.textDividerStyle}> | </Text></View>
           <View>
             <Text style={FriendCss.textStyle}>{goal}</Text>
           </View>

@@ -6,23 +6,35 @@ const DiscoverFriendsCss = StyleSheet.create({
   username: {
     flexDirection: "row",
     justifyContent: "space-between",
-    top: 125,
+    top: 127,
     width: 170,
-    left: 40,
+    right: 70,
+    color: "blue"
   },
   categories: {
     flexDirection: "row",
     justifyContent: "space-between",
     top: 108,
     width: 140,
-    left: 115,
+    left: -5,
 
   },
   boxView: {
-    top: 120,
+    top: 130,
+    left: 55,
+    width: 500
   },
   text: {
-    fontSize: 15
+    fontSize: 15,
+    color: 'blue',
+    fontWeight: 'bold'
+  }, 
+  fullPage: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#afeeee',
+    height: 1000
+   
   }
 })
 

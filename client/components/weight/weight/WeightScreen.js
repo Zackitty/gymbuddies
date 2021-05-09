@@ -58,7 +58,7 @@ const handleSubmission = async(e) => {
 
 return (
 
-  <View>
+  <View style={WeightCss.fullScreen}>
        <Image
             style={WeightCss.imageCss}
             source={require('../../../images/weight.jpeg')}

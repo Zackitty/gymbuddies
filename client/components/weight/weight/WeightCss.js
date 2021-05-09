@@ -66,6 +66,10 @@ const WeightCss = StyleSheet.create({
     height: 150,
     top: 50,
     left: 135
+  },
+  fullScreen: {
+    backgroundColor: '#afeeee',
+    height: 1000
   }
  
  

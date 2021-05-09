@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, Image, TextInput, Picker} from 'react-native';
+import { StyleSheet, Pressable, Text, View, Button, Image, TextInput, Picker} from 'react-native';
 import { useSelector } from 'react-redux';
 import { CommonActions } from '@react-navigation/native';
 import { apiUrl } from '../../../../config';
-
+import CreateExerciseCss from './CreateExerciseCss'
+import ExerciseScreen from '../exercise/ExerciseScreen';
 const CreateExerciseModal = ({ navigation, route, modalVisible, setModalVisible }) => {
   const {id} = useSelector(state => state.currentUser)
-  const [exerciseName, setExerciseName] = useState([])
+  const [exerciseName, setExerciseName] = useState('')
   const [exerciseId, setExerciseId] = useState(false)
   const [lengthNumber1, setLengthNumber1] = useState(0)
   const [lengthNumber2, setLengthNumber2] = useState(0)
@@ -55,14 +56,24 @@ const CreateExerciseModal = ({ navigation, route, modalVisible, setModalVisible 
 
 return (
 
-<View>
+<View style={CreateExerciseCss.keepEdit}>
+  <View style={CreateExerciseCss.modalView}>
 <TextInput 
+style={CreateExerciseCss.inputName}
           placeholder="Name" 
           onChangeText={setExerciseName}
           value={exerciseName}
           autoCapitalize={'none'} />
-<Button title="Set Exercise Name" onPress={handleExerciseName}></Button>
-<Button title="Cancel" onPress={handleCancel}></Button>
+<Pressable title="Set Exercise Name" onPress={handleExerciseName}>
+  <View style={CreateExerciseCss.setButton}>
+  <Text style={CreateExerciseCss.setText}>Set Exercise Name</Text>
+  </View>
+  </Pressable>
+<Pressable title="Cancel" onPress={handleCancel}>
+  <View style={CreateExerciseCss.cancelButton}>
+  <Text style={CreateExerciseCss.cancelText}>Cancel</Text>
+  </View>
+  </Pressable>
 <View>
 
 </View>
@@ -70,10 +81,14 @@ return (
           exerciseId && (
             <View>
             <View>
-            <Text>Enter Length In Minutes:</Text>
-            <Button title="Enter Workout" onPress={handleExerciseSession}></Button>
+            <Text style={CreateExerciseCss.lengthText}>Enter Length In Minutes:</Text>
+            <Pressable title="Enter Workout" onPress={handleExerciseSession}>
+              <View style={CreateExerciseCss.enterWorkout}>
+              <Text style={CreateExerciseCss.eWText}>Enter Workout</Text>
+              </View>
+            </Pressable>
            
-          <Picker selectedValue={lengthNumber1}
+          <Picker selectedValue={lengthNumber1} style={CreateExerciseCss.picker1}
                   onValueChange={currentNumber => setLengthNumber1(currentNumber)} 
                         >
                   <Picker.Item label="0" value="0" />
@@ -89,7 +104,7 @@ return (
                 </Picker>
         </View>
         <View>
-          <Picker selectedValue={lengthNumber2}
+          <Picker selectedValue={lengthNumber2} style={CreateExerciseCss.picker2}
                   onValueChange={currentNumber => setLengthNumber2(currentNumber)} 
                         >
                   <Picker.Item label="0" value="0" />
@@ -105,7 +120,7 @@ return (
                 </Picker>
         </View>
         <View>
-          <Picker selectedValue={lengthNumber3}
+          <Picker selectedValue={lengthNumber3} style={CreateExerciseCss.picker3}
                   onValueChange={currentNumber => setLengthNumber3(currentNumber)} 
                         >
                   <Picker.Item label="0" value="0" />
@@ -125,7 +140,7 @@ return (
         </View>
           )
         }
-
+</View>
   </View>
 
 )
