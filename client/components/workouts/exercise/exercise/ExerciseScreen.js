@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, Image, Modal, Pressable } from 'react-native';
+import { StyleSheet, Text, ScrollView, View, Button, Image, Modal, Pressable } from 'react-native';
 import { useSelector } from 'react-redux';
 import { CommonActions } from '@react-navigation/native';
 import CreateExerciseModal from "../createexercise/CreateExerciseModal"
 import ExerciseCss from "./ExerciseCss"
 import ExerciseBox from "../exercisebox/ExerciseBox"
 import { apiUrl } from '../../../../config';
+import CreateExerciseCss from '../createexercise/CreateExerciseCss';
 
 const ExerciseScreen = ({ navigation, route }) => {
 
@@ -38,13 +39,11 @@ const createExerciseScroll = async(data) =>{
 
   return (
 
-<View>
-<Pressable
-      
-      onPress={() => setModalVisible(true)}
-    >
-      <Text >Enter New Workout</Text>
-    </Pressable>
+<View style={ExerciseCss.fullView}>
+<Image    style={ExerciseCss.imageCss}
+            source={require('../../../../images/squat.jpeg')}
+          ></Image>
+
 <Modal
       animationType="slide"
       transparent={true}
@@ -62,7 +61,8 @@ const createExerciseScroll = async(data) =>{
   </Modal>
       <View> 
       {exerciseScroll && (
-        <View>
+        <ScrollView style={ExerciseCss.scrollViewStyle}>
+             <View style={ExerciseCss.exerciseScroll}>
         {exerciseScroll.map((exercise, i) => 
        
         <View key={i}>
@@ -71,9 +71,16 @@ const createExerciseScroll = async(data) =>{
          
       )}
       </View>
+      </ScrollView>
       )}
       </View>
+      <Pressable
       
+      onPress={() => setModalVisible(true)}
+    ><View style={ExerciseCss.viewText}>
+      <Text style={ExerciseCss.workoutText}>Enter New Workout</Text>
+      </View>
+    </Pressable>
   </View>
 
 )

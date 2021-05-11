@@ -69,11 +69,13 @@ style={CreateExerciseCss.inputName}
   <Text style={CreateExerciseCss.setText}>Set Exercise Name</Text>
   </View>
   </Pressable>
+  {!exerciseId && (
 <Pressable title="Cancel" onPress={handleCancel}>
   <View style={CreateExerciseCss.cancelButton}>
   <Text style={CreateExerciseCss.cancelText}>Cancel</Text>
   </View>
   </Pressable>
+  )}
 <View>
 
 </View>
@@ -87,7 +89,11 @@ style={CreateExerciseCss.inputName}
               <Text style={CreateExerciseCss.eWText}>Enter Workout</Text>
               </View>
             </Pressable>
-           
+            <Pressable title="Cancel" onPress={handleCancel}>
+          <View style={CreateExerciseCss.cancelButton2}>
+          <Text style={CreateExerciseCss.cancelText}>Cancel</Text>
+          </View>
+           </Pressable>
           <Picker selectedValue={lengthNumber1} style={CreateExerciseCss.picker1}
                   onValueChange={currentNumber => setLengthNumber1(currentNumber)} 
                         >

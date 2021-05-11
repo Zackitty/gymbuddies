@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { useSelector } from 'react-redux';
 import { CommonActions } from '@react-navigation/native';
 import { apiUrl } from '../../../../config';
+import LiftBoxCss from './LiftBoxCss'
 const LiftBox = (props, { navigation, route }) => {
 
 const [name, setName]= useState([])
@@ -19,8 +20,8 @@ const fetchLiftName= async (e) => {
 return (
 <View>
 {name && (
-  <View>
-<Text> {props.entry_date} did a {name}, lifting {props.weight} lbs for {props.reps} reps</Text>
+  <View style={LiftBoxCss.viewBox}>
+<Text style={LiftBoxCss.text}> {props.entry_date} did a {name}, lifting {props.weight} lbs for {props.reps} reps</Text>
 </View>
 )
 }

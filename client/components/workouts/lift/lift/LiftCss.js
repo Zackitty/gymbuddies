@@ -62,6 +62,52 @@ const LiftCss = StyleSheet.create({
   },
   pick2Style: {
     fontSize: 10
+  }, 
+  imageCss: {
+    width: 150,
+    height: 150,
+    top: 80,
+    left: 140
+  },
+  exerciseScroll: {
+    left: 80,
+    top: 220,
+ height: 500,
+    width: 600
+  },
+  viewText: {
+    borderRadius: 20,
+  padding: 10,
+  elevation: 5,
+ 
+  left: 140,
+  width: 150,
+  alignItems: 'center',
+   justifyContent: 'center',
+   padding: 10,
+   elevation: 5,
+   top: -870,
+ padding: 10,
+ shadowOffset: {width: 0,height: 0},
+ backgroundColor: '#afeeee',
+   borderColor: "powderblue",
+  borderWidth: 2,
+ shadowOpacity: 5,
+ shadowColor: "blue",
+ color: "blue",
+ shadowRadius: 5,
+
+  }, 
+  workoutText: {
+    color: 'blue',
+    borderColor: 'white',
+  },
+  fullView: {
+    backgroundColor: '#afeeee',
+    height:1000
+  },
+  scrollViewStyle: {
+    height: 1000
   }
 });
 

@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { useSelector } from 'react-redux';
 import { CommonActions } from '@react-navigation/native';
 import { apiUrl } from '../../../../config';
+import ExerciseBoxCss from './ExerciseBoxCss';
 const ExerciseBox = (props, { navigation, route }) => {
 
 const [name, setName]= useState([])
@@ -18,9 +19,10 @@ const fetchExerciseName= async (e) => {
 
 return (
 <View>
+  
 {name && (
-  <View>
-<Text>{props.entry_date} did {name} for {props.length_in_min} minutes!</Text>
+  <View style={ExerciseBoxCss.viewBox}>
+<Text style={ExerciseBoxCss.text}>{props.entry_date} did {name} for {props.length_in_min} minutes!</Text>
 </View>
 )
 }

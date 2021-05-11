@@ -85,6 +85,7 @@ cancelButton: {
  color: "powderblue",
  shadowRadius: 5,
 },
+
 cancelText: {
   fontSize: 10,
   color: 'powderblue'
@@ -94,6 +95,28 @@ lengthText: {
   fontWeight: 'bold',
   color: "powderblue",
   top: 75
+},
+cancelButton2: {
+  top: 300,
+  left: 50, 
+  borderRadius: 20,
+  padding: 10,
+  elevation: 5,
+  width: 125,
+  alignItems: 'center',
+   justifyContent: 'center',
+   padding: 10,
+   elevation: 5,
+ padding: 10,
+ shadowOffset: {width: 0,height: 0},
+ backgroundColor: '#6495ed',
+   borderColor: "powderblue",
+  borderWidth: 2,
+ shadowOpacity: 5,
+ shadowColor: "blue",
+ color: "powderblue",
+ shadowRadius: 5,
+ height: 40
 },
 picker1: {
 width: 50,

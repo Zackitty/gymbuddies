@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, Image, Pressable, Modal} from 'react-native';
+import { StyleSheet, ScrollView, Text, View, Button, Image, Pressable, Modal} from 'react-native';
 import { useSelector } from 'react-redux';
 import { CommonActions } from '@react-navigation/native';
 import CreateLiftModal from "../createlift/CreateLiftModal"
@@ -42,13 +42,10 @@ const createLiftScroll = async(data) =>{
   
     return (
   
-  <View>
-  <Pressable
-        
-        onPress={() => setModalVisible(true)}
-      >
-        <Text >Enter New Lift</Text>
-      </Pressable>
+      <View style={LiftCss.fullView}>
+          <Image    style={LiftCss.imageCss}
+            source={require('../../../../images/liftweight.jpeg')}
+          ></Image>
   <Modal
         animationType="slide"
         transparent={true}
@@ -66,7 +63,8 @@ const createLiftScroll = async(data) =>{
     </Modal>
         <View> 
         {liftScroll && (
-          <View>
+           <ScrollView style={LiftCss.scrollViewStyle}>
+           <View style={LiftCss.exerciseScroll}>
           {liftScroll.map((lift, i) => 
          
           <View key={i}>
@@ -75,9 +73,16 @@ const createLiftScroll = async(data) =>{
            
         )}
         </View>
+        </ScrollView>
         )}
         </View>
+        <Pressable
         
+        onPress={() => setModalVisible(true)}
+      ><View style={LiftCss.viewText}>
+        <Text style={LiftCss.workoutText} >Enter New Lift</Text>
+        </View>
+      </Pressable>
     </View>
   
   )

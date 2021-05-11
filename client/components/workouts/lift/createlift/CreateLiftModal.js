@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, Image, TextInput, Picker } from 'react-native';
+import { StyleSheet, Text, Pressable,  View, Button, Image, TextInput, Picker } from 'react-native';
 import { useSelector } from 'react-redux';
 import { CommonActions } from '@react-navigation/native';
 import { apiUrl } from '../../../../config';
-
+import CreateLiftCss from './CreateLiftCss'
 const CreateLiftModal = ({ navigation, route, modalVisible, setModalVisible }) => {
   const {id} = useSelector(state => state.currentUser)
   const [liftName, setLiftName] = useState([])
@@ -60,24 +60,92 @@ const CreateLiftModal = ({ navigation, route, modalVisible, setModalVisible }) =
   }
 return (
 
-<View>
+<View style={CreateLiftCss.keepEdit}>
+<View style={CreateLiftCss.modalView}>
 <TextInput 
           placeholder="Name" 
+          style={CreateLiftCss.inputName}
           onChangeText={setLiftName}
           value={liftName}
           autoCapitalize={'none'} />
-<Button title="Set Lift Name" onPress={handleLiftName}></Button>
-<Button title="Cancel" onPress={handleCancel}></Button>
-<View>
+          <Pressable title="Set Lift Name" onPress={handleLiftName}>
+  <View style={CreateLiftCss.setButton}>
+  <Text style={CreateLiftCss.setText}>Set Lift Name</Text>
+  </View>
+  </Pressable>
+  {!liftId && (
+<Pressable title="Cancel" onPress={handleCancel}>
+  <View style={CreateLiftCss.cancelButton}>
+  <Text style={CreateLiftCss.cancelText}>Cancel</Text>
+  </View>
+  </Pressable>)}
 
-</View>
         {
           liftId && (
             <View>
             <View>
-            <Text>Enter Weight In Lbs:</Text>
-            <Button title="Enter Workout" onPress={handleLiftSession}></Button>
+            <Text style={CreateLiftCss.lengthText}>Enter Weight In Lbs:</Text>
+            <Pressable title="Enter Workout" onPress={handleLiftSession}>
+              <View style={CreateLiftCss.enterWorkout}>
+              <Text style={CreateLiftCss.eWText}>Enter Lift</Text>
+              </View>
+            </Pressable>
+            
+            </View>
+            <View>
+              <View style={CreateLiftCss.repsView} >
+                <Text style={CreateLiftCss.repsText}>Enter Reps:</Text>
+                </View>
+                <View style={CreateLiftCss.repsHolder}>
+                  <View>
+          <Picker selectedValue={repsNumber1}
+              style={CreateLiftCss.picker4}
+                  onValueChange={currentNumber => setRepsNumber1(currentNumber)} 
+                        >
+                  <Picker.Item label="0" value="0" />
+                  <Picker.Item label="1" value="1" />
+                  <Picker.Item label="2" value="2" />
+                  <Picker.Item label="3" value="3" />
+                  <Picker.Item label="4" value="4" />
+                  <Picker.Item label="5" value="5" />
+                  <Picker.Item label="6" value="6" />
+                  <Picker.Item label="7" value="7" />
+                  <Picker.Item label="8" value="8" />
+                  <Picker.Item label="9" value="9" />
+                </Picker>
+             </View>
+         
+            <View>
+          <Picker selectedValue={repsNumber2}
+                  style={CreateLiftCss.picker5}
+                  onValueChange={currentNumber => setRepsNumber2(currentNumber)} 
+                        >
+                  <Picker.Item label="0" value="0" />
+                  <Picker.Item label="1" value="1" />
+                  <Picker.Item label="2" value="2" />
+                  <Picker.Item label="3" value="3" />
+                  <Picker.Item label="4" value="4" />
+                  <Picker.Item label="5" value="5" />
+                  <Picker.Item label="6" value="6" />
+                  <Picker.Item label="7" value="7" />
+                  <Picker.Item label="8" value="8" />
+                  <Picker.Item label="9" value="9" />
+                </Picker>
+
+                
+             
+            </View>
+            </View>
+            </View>
+            <Pressable title="Cancel" onPress={handleCancel}>
+          <View style={CreateLiftCss.cancelButton2}>
+          <Text style={CreateLiftCss.cancelText}>Cancel</Text>
+          </View>
+          </Pressable>
+          <View style={CreateLiftCss.weightHolder}>
+              <View>
           <Picker selectedValue={weightNumber1}
+                  style={CreateLiftCss.picker1}
                   onValueChange={currentNumber => setWeightNumber1(currentNumber)} 
                         >
                   <Picker.Item label="0" value="0" />
@@ -94,6 +162,7 @@ return (
         </View>
         <View>
           <Picker selectedValue={weightNumber2}
+                  style={CreateLiftCss.picker2}
                   onValueChange={currentNumber => setWeightNumber2(currentNumber)} 
                         >
                   <Picker.Item label="0" value="0" />
@@ -110,6 +179,7 @@ return (
         </View>
         <View>
           <Picker selectedValue={weightNumber3}
+                  style={CreateLiftCss.picker3}
                   onValueChange={currentNumber => setWeightNumber3(currentNumber)} 
                         >
                   <Picker.Item label="0" value="0" />
@@ -125,45 +195,13 @@ return (
                 </Picker>
              
             </View>
-            <View>
-          <Picker selectedValue={repsNumber1}
-                  onValueChange={currentNumber => setRepsNumber1(currentNumber)} 
-                        >
-                  <Picker.Item label="0" value="0" />
-                  <Picker.Item label="1" value="1" />
-                  <Picker.Item label="2" value="2" />
-                  <Picker.Item label="3" value="3" />
-                  <Picker.Item label="4" value="4" />
-                  <Picker.Item label="5" value="5" />
-                  <Picker.Item label="6" value="6" />
-                  <Picker.Item label="7" value="7" />
-                  <Picker.Item label="8" value="8" />
-                  <Picker.Item label="9" value="9" />
-                </Picker>
-             
             </View>
-            <View>
-          <Picker selectedValue={repsNumber2}
-                  onValueChange={currentNumber => setRepsNumber2(currentNumber)} 
-                        >
-                  <Picker.Item label="0" value="0" />
-                  <Picker.Item label="1" value="1" />
-                  <Picker.Item label="2" value="2" />
-                  <Picker.Item label="3" value="3" />
-                  <Picker.Item label="4" value="4" />
-                  <Picker.Item label="5" value="5" />
-                  <Picker.Item label="6" value="6" />
-                  <Picker.Item label="7" value="7" />
-                  <Picker.Item label="8" value="8" />
-                  <Picker.Item label="9" value="9" />
-                </Picker>
-             
-            </View>
-  
         </View>
+
+
           )
         }
-
+</View>
   </View>
 
 )
