@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { useSelector } from 'react-redux';
 import { CommonActions } from '@react-navigation/native';
+import FriendActivityCss from './FriendActivityCss';
 
 const FriendActivityBox = (props) => {
   // const [addedFriend, setAddedFriend] = useState(false)
@@ -29,24 +30,26 @@ return (
 
 <View>
   
-  <View>
-      <Text>{props.entry_date}</Text>
-    <Text>{props.user.username}</Text> 
+  <View style={FriendActivityCss.viewBox}>
+      <Text style={FriendActivityCss.text}>{props.entry_date}  |  </Text>
+      {props.user.username && (
+    <Text style={FriendActivityCss.text}>{props.user.username} </Text> 
+)}
     {props.friend && (
       <View>
-        <Text>added {props.friend} as a friend!</Text>
+        <Text style={FriendActivityCss.text}>added {props.friend} as a friend!</Text>
       </View>
     )}
     {
       props.exercise && (
-        <Text>
+        <Text style={FriendActivityCss.text}>
           did {props.exercise.name} for {props.exerciser.length_in_min} minutes!
         </Text>
       )
     }
     {
       props.liftset &&  (
-        <Text>
+        <Text style={FriendActivityCss.text}>
           did a {props.lift.name} lifting {props.liftset.weight} lbs for {props.liftset.reps} reps!
         </Text>
       )
@@ -54,28 +57,28 @@ return (
   
     {
       props.gain && (
-        <Text>
+        <Text style={FriendActivityCss.text}>
        gained {props.gain.amount} lbs! 
         </Text>
       )
     }
       {
       props.totalgain && (
-        <Text>
+        <Text style={FriendActivityCss.text}>
             has gained a total of {props.totalgain} lbs!
         </Text>
       )
     }
     {
       props.loss && (
-        <Text>
+        <Text style={FriendActivityCss.text}>
           lost {props.loss.amount} lbs!
         </Text>
       )
     }
      {
       props.totalloss && (
-        <Text>
+        <Text style={FriendActivityCss.text}>
           has lot a total of {props.totalloss} lbs!
         </Text>
       )
@@ -83,7 +86,7 @@ return (
       {
       props.todaysweight && (
         <View>
-        <Text>weighed {props.todaysweight.weight} lbs today! </Text>
+        <Text style={FriendActivityCss.text}>weighed {props.todaysweight.weight} lbs today! </Text>
         </View>
       )
     }

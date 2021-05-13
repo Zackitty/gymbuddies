@@ -14,7 +14,7 @@ const ProfileCss = StyleSheet.create({
     margin: 20,
     height: 700,
     width: 300,
-    backgroundColor: "#191970",
+    backgroundColor: "#afeeee",
     borderRadius: 50,
     padding: 35,
     alignItems: "center",

@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { apiUrl } from '../../../config';
-import { StyleSheet, Text, View, Button, Image } from 'react-native';
+import { StyleSheet, ScrollView, Text, View, Button, Image } from 'react-native';
 import { useSelector } from 'react-redux';
 import { CommonActions } from '@react-navigation/native';
 import FriendActivityBox from "../friendactivity/FriendActivityBox"
+import FriendCss from './FriendCss'
 const FriendScreen = ({ navigation, route }) => {
 
   const {id} = useSelector(state => state.currentUser)
-  const [activityScroll, setActivityScroll] = useState([])
+  const [activityScroll, setActivityScroll] = useState(false)
 
     useEffect(() => {
       fetchFriends()
@@ -51,6 +52,7 @@ const FriendScreen = ({ navigation, route }) => {
         .then(res => res.json())
         .then(data => keyObj["user"] = data[0].fields)
         keyObj['entry_date'] = data[key].entry_date
+        
        
         if (data[key].addfriend_id){
         
@@ -95,12 +97,12 @@ const FriendScreen = ({ navigation, route }) => {
         if (data[key].total_gainz_id){
             await fetch(`${apiUrl}/users/totalgain/${data[key].total_gainz_id}`)
             .then(res => res.json())
-            .then(data =>keyObj['totalgain'] = data[0].fields.total_gain)           
+            .then(data =>keyObj['totalgain'] = data[0].fields.total_gain.toString())           
                   }    
         if (data[key].total_lozz_id){  
             await fetch(`${apiUrl}/users/totalloss/${data[key].total_lozz_id}`)
             .then(res => res.json())
-            .then(data =>  keyObj['totalloss'] = data[0].fields.total_loss)  
+            .then(data =>  keyObj['totalloss'] = data[0].fields.total_loss.toString())  
                   }
         queryArray.push(keyObj)
                   }
@@ -112,9 +114,13 @@ const FriendScreen = ({ navigation, route }) => {
 
 return (
 
-  <View >
+  <View style={FriendCss.totalView} >
+    {!activityScroll && (
+      <Text>Loading</Text>
+)}
     {activityScroll && (
-          <View>
+          <ScrollView>
+            <View style={FriendCss.activityBox}>
         {activityScroll.map((activity, i) => 
        
         <View key={i}>
@@ -161,8 +167,8 @@ return (
           )}
           </View>
             )}
-      
         </View>
+        </ScrollView>
     )}
   </View>
 

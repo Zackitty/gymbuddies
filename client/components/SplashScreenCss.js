@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native"
 
 const SplashScreenCss = StyleSheet.create({
+  container: {
+    backgroundColor: "#afeeee",
+  },
   buttonCss: {
     width:150,
     height: 40,

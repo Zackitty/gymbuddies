@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Alert, Picker, Modal, StyleSheet, TextInput, Text, Pressable, View } from "react-native";
+import { Alert, Picker, Animated, Modal, StyleSheet, TextInput, Text, Pressable, View } from "react-native";
 import { apiUrl } from '../../../config';
 import ProfileCss from './ProfileCss'
 import SignUpScreenButton from "../signup/SignUpScreenButton/SignUpScreenButton"
@@ -26,6 +26,16 @@ const ProfileScreen = ({ navigation, route }) => {
     .then(res => res.json())
     .then(data => fetchStates(data))
   }, [])
+
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+
+  const fadeIn = () => {
+   
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 5000
+    }).start();
+  };
 
   const maleHandler = async (e) => {
     e.preventDefault()
@@ -95,7 +105,13 @@ const ProfileScreen = ({ navigation, route }) => {
     });
   }
 
-     
+  const handleEdit = async (e) =>
+  {
+    e.preventDefault()
+    fadeIn()
+    setModalVisible(true)
+      
+  }
   return ( 
     <View style={ProfileCss.centerView}>
     <View style={ProfileCss.styleView}>
@@ -243,7 +259,7 @@ const ProfileScreen = ({ navigation, route }) => {
     </Modal>
     <Pressable
       style={[ProfileCss.button, ProfileCss.buttonOpen]}
-      onPress={() => setModalVisible(true)}
+      onPress={() =>[setModalVisible(true), fadeIn()]}
     >
       <View style={ProfileCss.editButton}>
       <Text style={ProfileCss.textStyle}>Edit</Text>

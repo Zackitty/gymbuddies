@@ -62,4 +62,4 @@ class ActivitySerializer(serializers.ModelSerializer):
       model =  Activity
       fields = ("addfriend_id", "exercize_id", "exercizes_id", "gainz_id",
         "lift_zet_id", "liftz_id", "lozz_id", "todayz_weight_id",
-        "total_gainz_id", "total_lozz_id", "user_id") 
+        "total_gainz_id", "total_lozz_id", "user_id", 'entry_date') 

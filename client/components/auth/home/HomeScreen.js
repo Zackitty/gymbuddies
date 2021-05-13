@@ -13,6 +13,7 @@ const HomeScreen = ({ navigation }) => {
   const handleSignOut = async (e) => {
     e.preventDefault()  
   dispatch(signOut())
+ 
   }
 
   useEffect(() => {
@@ -28,10 +29,15 @@ const HomeScreen = ({ navigation }) => {
     }))
   }
   }, [needSignIn])
+const trythis = async(e) => {
 
+  console.log("success")
+}
   return (
-    <View>
-      <View style={HomeCss.buttonRows}>
+    <View style={HomeCss.background}>
+     
+      <View style={HomeCss.topBar}>
+        <View >
           <Pressable onPress={
               handleSignOut}>
           <View style={HomeCss.buttonCssSo}>
@@ -41,16 +47,10 @@ const HomeScreen = ({ navigation }) => {
                 </Text>
           </View>
           </Pressable>
-          <Pressable onPress={() =>
-              navigation.navigate('Profile')} >
-            <View style={HomeCss.buttonCssMp}>
-              <Text
-              title="My Profile"
-              style={HomeCss.textCss}
-              >My Profile</Text>
-            </View>
-            </Pressable>
+          </View>
+          
         </View>
+        
         <View style={HomeCss.buttonRows}>
               <Pressable onPress={() =>
                     navigation.navigate('Friends')
@@ -74,16 +74,15 @@ const HomeScreen = ({ navigation }) => {
                </Pressable>
           </View>
           <View style={HomeCss.buttonRows}>
-                <Pressable onPress={() =>
-                    navigation.navigate('Search')
-                    }>
-                <View style={HomeCss.buttonCssS}>
-                  <Text
-                    title="Search"
-                    style={HomeCss.textCss}
-                    >Search</Text>
-                </View>
-                </Pressable>
+          <Pressable onPress={() =>
+              navigation.navigate('Profile')} >
+            <View style={HomeCss.buttonCssMp}>
+              <Text
+              title="My Profile"
+              style={HomeCss.textCss}
+              >My Profile</Text>
+            </View>
+            </Pressable>
                 <Pressable  onPress={() =>
                     navigation.navigate('Weight')
                               }>
