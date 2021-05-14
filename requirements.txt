@@ -1,0 +1,8 @@
+psycopg2=="*"
+bcrypt=="*"
+requests=="*"
+django=="*"
+install=="*"
+djangorestframework-jsonapi=="*"
+django-cors-headers=="*"
+crypto=="*"
