@@ -19,6 +19,7 @@ from django.views.decorators.csrf import csrf_exempt
 from ..models import User, Loss, Gain, TodaysWeight, TotalGain, TotalLoss, Activity
 from ..serializers import UserSerializer, LossSerializer, GainSerializer, TodaysWeightSerializer, TotalGainSerializer, TotalLossSerializer
 from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
+from .config import apiUrl
 # Create your views here.
 
 class LossView(generics.ListCreateAPIView):
@@ -126,7 +127,7 @@ def userWeight(request, id):
         entry_date = date
         if userQs.goal == 'loss':
                 amount = int(userQs.weight) - int(newWeight)
-                url = f'http://127.0.0.1:8000/api/users/{int(id)}/loss'
+                url = f'https://gym-buddiesapp.herokuapp.com/api/users/{int(id)}/loss'
                 lossObj = {"amount":  amount, "entry_date": entry_date,
                 "loser_id": int(id) }
                 x = requests.post(url, data = lossObj)
@@ -136,12 +137,12 @@ def userWeight(request, id):
                 activity = Activity(todayz_weight_id=thisweight.id, entry_date=entry_date, user_id=id)
                 activity.save()
                 jsonWeight = serializers.serialize('json', [ thisweight, ])
-                totalUrl = f'http://127.0.0.1:8000/api/users/{int(id)}/totalloss'
+                totalUrl = f'https://gym-buddiesapp.herokuapp.com/api/users/{int(id)}/totalloss'
                 trl = requests.get(totalUrl)
                 return HttpResponse([x, jsonWeight, trl], content_type="application/x-javascript")    
         if userQs.goal == 'gain':
                 amount = int(newWeight) - int(userQs.weight)
-                url = f'http://127.0.0.1:8000/api/users/{id}/gain'
+                url = f'https://gym-buddiesapp.herokuapp.com/api/users/{id}/gain'
                 gainObj = {"amount":  amount, "entry_date": entry_date,
                 "gainer_id": int(id) }
                 x = requests.post(url, data = gainObj)
@@ -151,7 +152,7 @@ def userWeight(request, id):
                 activity = Activity(todayz_weight_id=thisweight.id, entry_date=entry_date, user_id=id)
                 activity.save()
                 jsonWeight = serializers.serialize('json', [ thisweight, ])
-                totalUrl = f'http://127.0.0.1:8000/api/users/{int(id)}/totalgain'
+                totalUrl = f'https://gym-buddiesapp.herokuapp.com/api/users/{int(id)}/totalgain'
                 trl = requests.get(totalUrl)
                 return HttpResponse([x, jsonWeight, trl], content_type="application/x-javascript")    
         dailyweight = TodaysWeight(

@@ -20,5 +20,6 @@ from django.contrib import admin
 from gymapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('/', include('gymapp.urls')),
     path('api/', include('gymapp.urls'))
 ]
