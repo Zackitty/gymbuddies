@@ -17,7 +17,7 @@
      const formData = new FormData();
      formData.append("username", username)
      formData.append("password", password)
-     const response = await fetch(`${apiUrl}/users/signin`, {
+     const response = await fetch(`http://gym-buddiesapp.herokuapp.com/api/users/signin`, {
        method: 'post',
        headers: { 'Content-Type': 'application/json' },
        body: formData
@@ -61,7 +61,7 @@
      // }
 
  
-     const response = await fetch(`${apiUrl}/users`, {
+     const response = await fetch(`http://gym-buddiesapp.herokuapp.com/api/users`, {
        method: 'post',
        body: formData
      });
@@ -92,7 +92,7 @@
  
  //FETCH USER DETAILS 
  export const fetchUserDetails = (id) => async dispatch => {
-   const res = await fetch(`${apiUrl}/users/${id}`, {
+   const res = await fetch(`http://gym-buddiesapp.herokuapp.com/api/users/${id}`, {
    })
    dispatch(setUser( id))
  }

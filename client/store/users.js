@@ -7,7 +7,7 @@ const GET_USERS = 'GymBuddies/users/GET_USERS';
 
 //GET USERS
 export const fetchUsers = () => async dispatch => {
-  const response = await fetch(`${apiUrl}/users`)
+  const response = await fetch(`http://gym-buddiesapp.herokuapp.com/api/users`)
   if (!response.ok) {
     throw response;
   }
