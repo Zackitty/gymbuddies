@@ -15,7 +15,7 @@ const LossesScroll = ({ navigation, route }) => {
 
 const lossesFeed = async (e) => {
 
-  await fetch(`${apiUrl}/users/losses`)
+  await fetch(`https://gym-buddiesapp.herokuapp.com/api/users/losses`)
   .then(res => res.json())
   .then(data =>setLossScroll(data))
 }

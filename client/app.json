@@ -1,9 +1,18 @@
 {
-  "name": "client",
-  "displayName": "client",
+  "name": "Gym Buddies",
+  "displayName": "Gym Buddies",
   "expo": {
-    "name": "client",
+    "name": "Gym Buddies",
+    "icon": "./images/gb.png",
     "slug": "client",
+    "ios": {
+      "bundleIdentifier": "com.appacademy.gymbuddies",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.appacademy.gymbuddies",
+      "versionCode": 1
+    },
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"

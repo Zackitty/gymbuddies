@@ -15,7 +15,7 @@ const GainsScroll = ({ navigation, route }) => {
 
 const gainsFeed = async (e) => {
 
-  await fetch(`${apiUrl}/users/gains`)
+  await fetch(`https://gym-buddiesapp.herokuapp.com/api/users/gains`)
   .then(res => res.json())
   .then(data =>setGainsScroll(data))
 }
@@ -27,7 +27,7 @@ return (
     {gainsScroll.map((gain, i) =>
     <View key={i}>
   
-     <GainsBox key={i} amount={gain.amount} entry_date={gain.entry_date} gainer_id={gain.gainer}></GainsBox>
+     <GainsBox key={i} amount={gain.amount.toString()} entry_date={gain.entry_date} gainer_id={gain.gainer}></GainsBox>
       
     
     </View>

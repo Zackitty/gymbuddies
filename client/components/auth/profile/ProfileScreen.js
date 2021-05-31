@@ -22,7 +22,7 @@ const ProfileScreen = ({ navigation, route }) => {
   const [gainButtonColor, setGainButtonColor] = useState(ProfileCss.buttonCss);
 
   useEffect(() => {
-    fetch(`${apiUrl}/users/${id}/get`)
+    fetch(`https://gym-buddiesapp.herokuapp.com/api/users/${id}/get`)
     .then(res => res.json())
     .then(data => fetchStates(data))
   }, [])
@@ -99,7 +99,7 @@ const ProfileScreen = ({ navigation, route }) => {
  
     
     setModalVisible(!modalVisible)
-    return   await fetch(`${apiUrl}/users/${id}/get`, {
+    return   await fetch(`https://gym-buddiesapp.herokuapp.com/apo/users/${id}/get`, {
       method: 'post',
       body: formData
     });

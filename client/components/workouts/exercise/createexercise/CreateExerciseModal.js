@@ -17,7 +17,7 @@ const CreateExerciseModal = ({ navigation, route, modalVisible, setModalVisible 
   const handleExerciseName = async (e) => {
     const formData = new FormData();
     formData.append("name", exerciseName)
-    const response = await fetch(`${apiUrl}/exercises`, {
+    const response = await fetch(`https://gym-buddiesapp.herokuapp.com/api/exercises`, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: formData
@@ -38,7 +38,7 @@ const CreateExerciseModal = ({ navigation, route, modalVisible, setModalVisible 
     const formData = new FormData();
     formData.append("name", exerciseName)
     formData.append("length_in_min", stringLength)
-    const response = await fetch(`${apiUrl}/users/${id}/exerciser/${exerciseId}`, {
+    const response = await fetch(`https://gym-buddiesapp.herokuapp.com/api/users/${id}/exerciser/${exerciseId}`, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: formData

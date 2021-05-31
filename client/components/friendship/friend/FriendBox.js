@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { CommonActions } from '@react-navigation/native';
 import { apiUrl } from '../../../config';
 import FriendCss from './FriendCss'
-const FriendBox = ({ username, weight, age, gender, goal, userid, update, rerender, setButtonPressed, buttonPressed }) => {
+const FriendBox = ({ username, userid, weight, age, gender, goal, update, rerender, setButtonPressed, buttonPressed, isMe }) => {
   const [friends, setFriends] = useState([])
   const [friendId, setFriendId] = useState([])
   const [isFriend, setIsFriend] = useState(false)
@@ -15,6 +15,7 @@ const FriendBox = ({ username, weight, age, gender, goal, userid, update, rerend
   useEffect(() => {
     
     handleEffect()
+    
   
   }, [])
 
@@ -23,20 +24,21 @@ const FriendBox = ({ username, weight, age, gender, goal, userid, update, rerend
   
  
   const handleEffect = async (e) => {
-    await fetch(`${apiUrl}/users/${id}/friends`)
+    await fetch(`https://gym-buddiesapp.herokuapp.com/api/users/${id}/friends`)
       .then(res => res.json())
       .then(data => setFriends(data))
 
 
-    await fetch(`${apiUrl}/getusers/${username}`)
+    await fetch(`https://gym-buddiesapp.herokuapp.com/api/getusers/${username}`)
       .then(res => res.json())
       .then(data => setFriendId(data))
+
 
     await friendsHandler()
   }
 
   const handleAdd = async (e) => {
-    await fetch(`${apiUrl}/users/${id}/friends/${friendId}`,
+    await fetch(`https://gym-buddiesapp.herokuapp.com/api/users/${id}/friends/${friendId}`,
       { method: 'post' })
     await friendsHandler()
     let newTotal = buttonPressed + 1
@@ -55,7 +57,8 @@ const FriendBox = ({ username, weight, age, gender, goal, userid, update, rerend
 
   }
   return (
-
+    <View>
+    { id !== friendId && (
     <View style={FriendCss.boxView}>
 
       <View style={[FriendCss.viewStyle, FriendCss.rowStyling]} >
@@ -104,7 +107,8 @@ const FriendBox = ({ username, weight, age, gender, goal, userid, update, rerend
         </View>
       </View>
     </View>
-
+     ) }
+        </View>
 
   )
 

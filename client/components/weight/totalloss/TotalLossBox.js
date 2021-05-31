@@ -14,7 +14,7 @@ const TotalLossBox = ({ navigation, route, buttonPressed }) => {
 
 const getTotalLoss = async (e) => {
 
-  await fetch(`${apiUrl}/users/${id}/finaltotalloss`)
+  await fetch(`https://gym-buddiesapp.herokuapp.com/api/users/${id}/finaltotalloss`)
   .then(res => res.json())
   .then(data => setTotalLoss(data[0].fields.total_loss.toString()))
 }

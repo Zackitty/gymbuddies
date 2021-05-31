@@ -12,7 +12,7 @@ useEffect(() => {
 }, [])
 
 const fetchExerciseName= async (e) => {
- await fetch(`${apiUrl}/users/${props.exercise_id}/exerciserexercises`)
+ await fetch(`https://gym-buddiesapp.herokuapp.com/api/users/${props.exercise_id}/exerciserexercises`)
           .then(res => res.json())
           .then(data =>  setName(data[0].fields.name))
 }

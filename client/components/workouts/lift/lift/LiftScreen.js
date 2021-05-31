@@ -23,7 +23,7 @@ const LiftScreen = ({ navigation, route }) => {
 
 
 const fetchLifts = async (e) => {
-  await fetch(`${apiUrl}/getlifts`)
+  await fetch(`https://gym-buddiesapp.herokuapp.com/api/getlifts`)
            .then(res => res.json())
            .then(data =>  createLiftScroll(data))
 }

@@ -51,13 +51,13 @@ const SignUpScreen = ({ navigation, route, setModal2Invisible }) => {
   }
   const lossHandler = async (e) => {
     e.preventDefault()
-    setGoal('Loss')
+    setGoal('loss')
     setLossButtonColor(SignUpCss.clickedButtonCss)
     setGainButtonColor(SignUpCss.buttonCss)
   }
   const gainHandler = async (e) => {
     e.preventDefault()
-    setGoal('Gain')
+    setGoal('gain')
     setLossButtonColor(SignUpCss.buttonCss)
     setGainButtonColor(SignUpCss.clickedButtonCss)
   }
@@ -65,7 +65,7 @@ const SignUpScreen = ({ navigation, route, setModal2Invisible }) => {
     e.preventDefault();
     dispatch(signUp(username, full_name, age, weight,
       gender, password, goal))
-      setModal2Visible(!modal2Visible)
+      setModal2Invisible()
 
   }
 

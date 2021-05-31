@@ -20,7 +20,7 @@ const WeightScreen = ({ navigation, route }) => {
  
 
   useEffect(() => {
-    fetch(`${apiUrl}/users/${id}/get`)
+    fetch(`https://gym-buddiesapp.herokuapp.com/api/users/${id}/get`)
     .then(res => res.json())
     .then(data => fetchWeight(data))
   }, [])
@@ -47,7 +47,7 @@ const handleSubmission = async(e) => {
     formData.append("weight", stringWeight)
 
 
-    await fetch(`${apiUrl}/users/${id}/dailyweight`, {
+    await fetch(`https://gym-buddiesapp.herokuapp.com/api/users/${id}/dailyweight`, {
       method: 'post',
       body: formData
     });

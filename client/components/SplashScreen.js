@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import SplashScreenCss from './SplashScreenCss';
 import SignUpScreen from './auth/signup/SignUpScreen';
 import SignInScreen from './auth/signin/SignInScreen';
-
+import { signIn} from '../store/auth'
 const SplashScreen = ({ navigation }) => {
   const { authErrors, needSignIn } = useSelector(state => state.currentUser)
   const dispatch = useDispatch();
@@ -85,7 +85,7 @@ const SplashScreen = ({ navigation }) => {
           style={SplashScreenCss.buttonCss}>
           <Button
             title="Demo Login"
-            onPress={() =>
+            onPress={
               demoLogin
             }
           > Demo Login </Button>

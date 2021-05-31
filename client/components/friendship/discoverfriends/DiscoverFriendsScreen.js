@@ -11,13 +11,14 @@ const DiscoverFriendsScreen = ({ navigation, route }) => {
     const [discoverFriendsScroll, setDiscoverFriendsScroll] = useState([])
     const dispatch = useDispatch();
     const [buttonPressed, setButtonPressed] = useState(0)
+    const { id } = useSelector(state => state.currentUser)
     const rerender = async (e) => {
       
       let newTotal = buttonPressed + 1
       setButtonPressed(newTotal)
     }
       useEffect(() => {
-        fetch(`${apiUrl}/users`)
+        fetch(`https://gym-buddiesapp.herokuapp.com/api/users`)
         .then(res => res.json())
         .then(data => fetchScroll(data))
 
@@ -44,7 +45,7 @@ return (
       <Text style={DiscoverFriendsCss.text}>Goal</Text>
       </View>
      <ScrollView style={DiscoverFriendsCss.boxView}>
-     {discoverFriendsScroll.map((friend, i) => <FriendBox key={i} userid={friend} age={friend.age} username={friend.username} gender={friend.gender} goal={friend.goal} weight={friend.weight} update={discoverFriendsScroll} rerender={rerender} setButtonPressed={setButtonPressed} buttonPressed={buttonPressed}></FriendBox>)}
+     {discoverFriendsScroll.map((friend, i) => <FriendBox key={i} userid={friend} isMe={friend.pk} age={friend.age} username={friend.username} gender={friend.gender} goal={friend.goal} weight={friend.weight} update={discoverFriendsScroll} rerender={rerender} setButtonPressed={setButtonPressed} buttonPressed={buttonPressed}></FriendBox>)}
      </ScrollView>
      </View>
    )}

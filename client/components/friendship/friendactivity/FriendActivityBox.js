@@ -79,7 +79,7 @@ return (
      {
       props.totalloss && (
         <Text style={FriendActivityCss.text}>
-          has lot a total of {props.totalloss} lbs!
+          has lost a total of {props.totalloss} lbs!
         </Text>
       )
     }

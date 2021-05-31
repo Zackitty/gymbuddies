@@ -6,7 +6,7 @@ import { apiUrl } from '../../../../config';
 import CreateLiftCss from './CreateLiftCss'
 const CreateLiftModal = ({ navigation, route, modalVisible, setModalVisible }) => {
   const {id} = useSelector(state => state.currentUser)
-  const [liftName, setLiftName] = useState([])
+  const [liftName, setLiftName] = useState('')
   const [liftId, setLiftId] = useState(false)
   const [weightNumber1, setWeightNumber1] = useState(0)
   const [weightNumber2, setWeightNumber2] = useState(0)
@@ -18,7 +18,7 @@ const CreateLiftModal = ({ navigation, route, modalVisible, setModalVisible }) =
   const handleLiftName = async (e) => {
     const formData = new FormData();
     formData.append("name", liftName)
-    const response = await fetch(`${apiUrl}/lifts`, {
+    const response = await fetch(`https://gym-buddiesapp.herokuapp.com/api/lifts`, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: formData
@@ -44,7 +44,7 @@ const CreateLiftModal = ({ navigation, route, modalVisible, setModalVisible }) =
     formData.append("weight", stringWeight)
     
     formData.append("reps", stringReps)
-    const response = await fetch(`${apiUrl}/users/${id}/lifts/${liftId}`, {
+    const response = await fetch(`https://gym-buddiesapp.herokuapp.com/api/users/${id}/lifts/${liftId}`, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: formData

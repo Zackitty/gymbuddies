@@ -13,9 +13,9 @@ const TotalGainBox = (props, { navigation, route }) => {
 
 const getTotalGain = async (e) => {
 
-  await fetch(`${apiUrl}/users/${id}/finaltotalgain`)
+  await fetch(`https://gym-buddiesapp.herokuapp.com/api/users/${id}/finaltotalgain`)
   .then(res => res.json())
-  .then(data =>setTotalGain(data[0].fields.total_gain))
+  .then(data =>setTotalGain(data[0].fields.total_gain.toString()))
 }
 return (
 

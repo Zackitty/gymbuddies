@@ -20,7 +20,7 @@ const [modalVisible, setModalVisible] = useState(false);
   }, [])
 
 const fetchExercises = async (e) => {
-   await fetch(`${apiUrl}/exercisers`)
+   await fetch(`https://gym-buddiesapp.herokuapp.com/api/exercisers`)
             .then(res => res.json())
             .then(data =>  createExerciseScroll(data))
 }

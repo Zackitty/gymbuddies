@@ -18,7 +18,7 @@ const FriendScreen = ({ navigation, route }) => {
       const friends = {}
       let friendData = []
 
-      await fetch(`${apiUrl}/users/${id}/friends`)
+      await fetch(`https://gym-buddiesapp.herokuapp.com/api/users/${id}/friends`)
       .then(res => res.json())
       .then(data => friendData = data)
      for (key in friendData){
@@ -32,7 +32,7 @@ const FriendScreen = ({ navigation, route }) => {
     const fetchActivity = async(friends) => {
     
 
-    await fetch(`${apiUrl}/activity`)
+    await fetch(`https://gym-buddiesapp.herokuapp.com/api/activity`)
     .then(res => res.json())
     .then(data => activityHandler(data, friends))
     // await fetch(`${apiUrl}/users/${id}/get`)
@@ -48,7 +48,7 @@ const FriendScreen = ({ navigation, route }) => {
       
       if (friends[data[key].user_id]) {
         keyObj = {}
-        await fetch(`${apiUrl}/users/${data[key].user_id}/get`)
+        await fetch(`https://gym-buddiesapp.herokuapp.com/api/users/${data[key].user_id}/get`)
         .then(res => res.json())
         .then(data => keyObj["user"] = data[0].fields)
         keyObj['entry_date'] = data[key].entry_date
@@ -56,51 +56,51 @@ const FriendScreen = ({ navigation, route }) => {
        
         if (data[key].addfriend_id){
         
-            await fetch(`${apiUrl}/users/${data[key].addfriend_id}/get`)
+            await fetch(`https://gym-buddiesapp.herokuapp.com/api/users/${data[key].addfriend_id}/get`)
             .then(res => res.json())
             .then(data =>  keyObj["friend"] = data[0].fields.username)
                     }
         if (data[key].exercizes_id){
-            await fetch(`${apiUrl}/exercisers/${data[key].exercizes_id}`)
+            await fetch(`https://gym-buddiesapp.herokuapp.com/api/exercisers/${data[key].exercizes_id}`)
             .then(res => res.json())
             .then(data => keyObj['exerciser']  = data[0].fields)
                       
-            await fetch(`${apiUrl}/exercises/${keyObj['exerciser'].exercise}`)
+            await fetch(`https://gym-buddiesapp.herokuapp.com/api/exercises/${keyObj['exerciser'].exercise}`)
             .then(res => res.json())
             .then(data => keyObj['exercise'] = data[0].fields)    
                     }
         if (data[key].gainz_id){
-            await fetch(`${apiUrl}/users/gain/${data[key].gainz_id}`)
+            await fetch(`https://gym-buddiesapp.herokuapp.com/api/users/gain/${data[key].gainz_id}`)
             .then(res => res.json())
             .then(data => keyObj['gain'] = data[0].fields)  
                   }
         if (data[key].lift_zet_id){         
-            await fetch(`${apiUrl}/liftsets/${data[key].lift_zet_id}`)
+            await fetch(`https://gym-buddiesapp.herokuapp.com/api/liftsets/${data[key].lift_zet_id}`)
             .then(res => res.json())
             .then(data =>   keyObj['liftset'] =data[0].fields)
                   
-            await fetch(`${apiUrl}/lifts/${keyObj['liftset'].lift_name}`)
+            await fetch(`https://gym-buddiesapp.herokuapp.com/api/lifts/${keyObj['liftset'].lift_name}`)
             .then(res => res.json())
             .then(data =>  keyObj['lift'] = data[0].fields)    
                   }    
         if (data[key].lozz_id){               
-            await fetch(`${apiUrl}/users/loss/${data[key].lozz_id}`)
+            await fetch(`https://gym-buddiesapp.herokuapp.com/api/users/loss/${data[key].lozz_id}`)
             .then(res => res.json())
             .then(data => keyObj['loss'] = data[0].fields)
                   }    
         if (data[key].todayz_weight_id){
-            await fetch(`${apiUrl}/users/dailyweight/${data[key].todayz_weight_id}`)
+            await fetch(`https://gym-buddiesapp.herokuapp.com/api/users/dailyweight/${data[key].todayz_weight_id}`)
             .then(res => res.json())
             .then(data =>  keyObj['todaysweight'] = data[0].fields)   
                    
         }
         if (data[key].total_gainz_id){
-            await fetch(`${apiUrl}/users/totalgain/${data[key].total_gainz_id}`)
+            await fetch(`https://gym-buddiesapp.herokuapp.com/api/users/totalgain/${data[key].total_gainz_id}`)
             .then(res => res.json())
             .then(data =>keyObj['totalgain'] = data[0].fields.total_gain.toString())           
                   }    
         if (data[key].total_lozz_id){  
-            await fetch(`${apiUrl}/users/totalloss/${data[key].total_lozz_id}`)
+            await fetch(`https://gym-buddiesapp.herokuapp.com/api/users/totalloss/${data[key].total_lozz_id}`)
             .then(res => res.json())
             .then(data =>  keyObj['totalloss'] = data[0].fields.total_loss.toString())  
                   }
