@@ -139,33 +139,72 @@ I used React-Native because I wanted to quickly learn mobile development and fel
 ## The BackEnd
 
 #### Django
-I used a Python's Django framework for the backend server. I chose this framework because I had never used it before and wanted to learn it and also felt that that all the built in functionality would allow me to
-be able to set up such a verbose backend quickly without having to write so much of my own boilerplate code.
-
-#### SQL-Alchemy 
-I used this because it was another lightweight choice for a very simple back end application. I used the database to store users, all messages created in the chat, and all the blocks created between users. The reason I stored all the messages in a database was pool the last 10 messages and send them through the same process a message sent in real time through sockets would along the frontend react components. This allows users navigating to the website to be able to continue the chat even if they weren't in the room at the time another user sent a message.
-
-### Flask-SocketIO
-I used Flask-SocketIO to use allow the Flask server to facilitate communications between the backend with the the front end Socket.IO-client.
-
+I used a Python's Django framework for the backend server. I chose this framework because I had never used it before and wanted to learn it and also felt that that all the built in functionality would allow me to be able to set up such a verbose backend quickly without having to write so much of my own boilerplate code. I was able to use the functionality combined with some boilerplate coding to make create complex Views that accessed several tables at once and took the responsibility off the user from manually typing certain information allowing them a convient experience.
 
 ```
-@bp.route('')
-def get_chat():
-    response = db.session.query(
-        Comment
-    ).order_by(Comment.id.desc()).limit(10)
-    
-    return  {result.id: { "user": result.username, "text": result.content, "avatar": result.avatar, "belt_color": result.belt_color, "user_id": result.user_id } for result in response}
- ```
- ### Docker
- I used a docker container and eventlet to create a container for the environment to automate consistent deployment of the application.
+def userWeight(request, id):
+    if request.method == 'GET':
+        queryset = DailyWeight.objects.all().filter(user_id=id) 
+        queryArray = []
+        for key in queryset:
+            queryArray.append(serializers.serialize('json', [ key, ]))    
+        return HttpResponse(queryArray, content_type="application/x-javascript")
+    if request.method == 'POST':
+        userQs = User.objects.get(id=id)
+        newWeight = request.POST.get('weight')
+        date = datetime.date.today()
+        entry_date = date
+        if userQs.goal == 'loss':
+                amount = int(userQs.weight) - int(newWeight)
+                url = f'https://gym-buddiesapp.herokuapp.com/api/users/{int(id)}/loss'
+                lossObj = {"amount":  amount, "entry_date": entry_date,
+                "loser_id": int(id) }
+                x = requests.post(url, data = lossObj)
+                thisweight = TodaysWeight(weight=newWeight, entry_date=entry_date, 
+                userId_id=id)
+                thisweight.save()
+                activity = Activity(todayz_weight_id=thisweight.id, entry_date=entry_date, user_id=id)
+                activity.save()
+                jsonWeight = serializers.serialize('json', [ thisweight, ])
+                totalUrl = f'https://gym-buddiesapp.herokuapp.com/api/users/{int(id)}/totalloss'
+                trl = requests.get(totalUrl)
+                return HttpResponse([x, jsonWeight, trl], content_type="application/x-javascript")    
+        if userQs.goal == 'gain':
+                amount = int(newWeight) - int(userQs.weight)
+                url = f'https://gym-buddiesapp.herokuapp.com/api/users/{id}/gain'
+                gainObj = {"amount":  amount, "entry_date": entry_date,
+                "gainer_id": int(id) }
+                x = requests.post(url, data = gainObj)
+                thisweight = TodaysWeight(weight=newWeight, entry_date=entry_date, 
+                userId_id=id)
+                thisweight.save()
+                activity = Activity(todayz_weight_id=thisweight.id, entry_date=entry_date, user_id=id)
+                activity.save()
+                jsonWeight = serializers.serialize('json', [ thisweight, ])
+                totalUrl = f'https://gym-buddiesapp.herokuapp.com/api/users/{int(id)}/totalgain'
+                trl = requests.get(totalUrl)
+                return HttpResponse([x, jsonWeight, trl], content_type="application/x-javascript")    
+        dailyweight = TodaysWeight(
+            weight=newWeight, entry_date=entry_date,
+                    userId_id=id)
+        dailyweight.save()
+        activity = Activity(todayz_weight_id=dailyweight.id, entry_date=entry_date, user_id=id)
+        activity.save()
+        thisweight = TodaysWeight(weight=newWeight, entry_date=entry_date, 
+                userId_id=id)
+        jsonWeight = serializers.serialize('json', [ thisweight, ])
+        return HttpResponse([jsonWeight], content_type="application/x-javascript")    
+        
+```
+
+#### Postgress-SQL
+I optioned for this rather than the built-in SQLite because it was much easier to access the data information as I debugged and troubleshooted my API calls.
+
+
   
 ## Challenges and The Future
 
-I created this application because I wanted a way I could talk to my friends during the pandemic and watch jiujitsu videos with them in real time. I'm always creating new applications with the mindset of something I know that I or other users would want to be able to use in every day life or to defeat an obstacle we're currently facing.
-
-Creating this app was an incredibly fun being able to work with using the full stack in many different ways from front to back sockets as well as changing the entire UI using both references in the front end store and the back end database. I made the bulk of the website with technologies I had only learned a few weeks prior from the sockets to the Python language along with its Flask framework.
+I created this application because I knew I wanted to work with new technologies to continue growing my understanding of different types of software development beyond strictly web development. Some early challenges came from starting the backend. While the amount of built in technology that came with Django was super helpful later on, just going through all the documentation and learning what I needed and what I could do without took some time. Learning how to use screens rather than webpages within mobile technology, having to use React-Natives stylesheets to create RAW css rather than relying on bootstrap and built in CSS tools,  and using async storage rather than cookies also presented a brand new set of learning moments for myself. Finally figuring out how to deploy a backend on its own for the Mobile App to make API calls to rather than having them bundled together like you do for web development took me some time to figure out.
 
 #### The Future
-I definitely want to continue working with Docker and be able to have it contain a video playlist that it can stream rather than relying on OBS and Twitch to host the video. I'd also like to ocntinue working to bring a more pleasing UI as I study more styles people implement in CSS.
+One thing I'm happy about with this app is the room for growth. Giving the user an even more indepth experience such as posting videos, searching, gathering nutrition and caloric intake through API calls without taking away from the simplistic design. I believe I could also add in more research into packages that would allow more modern design that we see in Bootstrapped-CSS. Finally I think working on some performance bottlenecks would be good especially in areas like the Activity screen to where it wouldn't have to query the entire database or make so many api calls all at once.
