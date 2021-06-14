@@ -1,5 +1,5 @@
 # Gym Buddies
-*by Zachery Haley* | [Download App From Expo](https://expo.io/artifacts/a14a8029-a43c-4407-a19c-4b1e93795024)
+*by Zachery Haley* | [Download App From Expo](https://expo.io/artifacts/3de79d74-dc8d-4d7d-8bd8-a13a10c2a1a6)
 
 ### Table of Contents
 - [The User Interface](https://github.com/Zackitty/gymbuddies#the-user-interface)
