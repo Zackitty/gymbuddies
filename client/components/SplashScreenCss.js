@@ -6,8 +6,9 @@ const SplashScreenCss = StyleSheet.create({
     backgroundColor: "#afeeee",
   },
   buttonCss: {
-    width:150,
-    height: 40,
+    width: "30%",
+    height: "11%",
+    margin: 10,
     backgroundColor: 'powderblue',
     color: "#f194ff",
     shadowColor: "blue", 
@@ -17,15 +18,16 @@ const SplashScreenCss = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 15,
+    bottom: "10%"
   },
   centerContainer: {
-    width: 500,
-    height: 350, 
+    width: "100%",
+    height: "55%", 
     alignItems: 'center',
     justifyContent: 'space-between'
   },
   imageCss: {
-    height: 200, 
+    height: "76%", 
     width: 250, 
     resizeMode : 'stretch',
     shadowColor: "blue", 

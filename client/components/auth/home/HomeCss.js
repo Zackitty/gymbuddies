@@ -4,8 +4,8 @@ import { ButtonStyles } from "react-native-material-kit";
 
 const HomeCss = StyleSheet.create({
   buttonCssSo: {
-    width: 100,
-    height: 50,
+    width: 101,
+    height: "90%",
     borderRadius: 20,
     shadowColor: "blue",
     borderColor: 'blue', 
@@ -16,68 +16,69 @@ const HomeCss = StyleSheet.create({
     backgroundColor: '#afeeee',
     alignItems: 'center',
     justifyContent: 'center',
-    top: 15,
-    left: 300,
+    top: "15%",
+    left: "400%",
   },
   buttonRows: {
     flexDirection: 'row',
   },
   buttonCssMp:{
-    width: 215,
-    height: 250,
+    width: '197%',
+    height: '45%',
+    bottom: "55.4%",
     backgroundColor: '#191970',
     alignItems: 'center',
     justifyContent: 'center'
   }, 
   buttonCssF: {
-    width: 215,
-    height: 250,
+    width: '270%',
+    height: '45.5%',
     backgroundColor: '#1e90ff',
     alignItems: 'center',
     justifyContent: 'center'
   },
   buttonCssDf: {
-    width: 215,
-    height: 250,
+    width: '115%',
+    height: '45.5%',
     backgroundColor: '#20b2aa',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    left: "73%"
   },
   buttonCssS: {
-    width: 215,
-    height: 250,
+    width: '150%',
+    height: '50.5%',
     backgroundColor: '#7fffd4',
     alignItems: 'center',
     justifyContent: 'center'
   },
+
   buttonCssW: {
-    width: 215,
-    height: 250,
-    backgroundColor: '#00008b',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  buttonCssW: {
-    width: 215,
-    height: 250,
+    width: '266%',
+    height: '45%',
+    bottom: "55.4%",
+    left: "135%",
     backgroundColor: '#00008b',
     alignItems: 'center',
     justifyContent: 'center'
   },
   buttonCssE: {
-    width: 215,
-    height: 250,
     backgroundColor: '#6495ed',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    width: "228%",
+    height: "46.2%",
+    left: "232%",
+    bottom: "107.5%",
   },
   buttonCssL: {
-    width: 215,
-    height: 250,
+    width: "572%",
+    height: "46%",
+    bottom: "107.5%",
+    right: "250%",
     backgroundColor: '#afeeee',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 20,
   },
   textCss: {
     fontSize: 25,
@@ -86,12 +87,12 @@ const HomeCss = StyleSheet.create({
 
   },
   topBar: {
-   width: 0,
-    height: 75,
+   width: "18%",
+    height: "7.5%",
     backgroundColor: '#afeeee',
   },
   background: {
-  
+      
      backgroundColor: '#afeeee',
    }
  

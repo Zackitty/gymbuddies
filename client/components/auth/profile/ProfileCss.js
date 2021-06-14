@@ -7,12 +7,12 @@ const ProfileCss = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 22,
-    bottom: 90,
+    bottom: "10%",
    
   },
   modalView: {
     margin: 20,
-    height: 700,
+    height: "65%",
     width: 300,
     backgroundColor: "#afeeee",
     borderRadius: 50,
@@ -28,7 +28,7 @@ const ProfileCss = StyleSheet.create({
     elevation: 5
   },
   button: {
-    top: 210,
+    top: "20%",
     right: 0,
     borderRadius: 20,
     padding: 10,
@@ -42,7 +42,7 @@ const ProfileCss = StyleSheet.create({
     backgroundColor: "#191970",
   },
   editButton: {
-    bottom: 455,
+    bottom: "900%",
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 20,
@@ -69,8 +69,8 @@ const ProfileCss = StyleSheet.create({
     textAlign: "center"
   },
   picker1Style: {
-    height: 20, 
-    width: 100,
+    height: "20%", 
+    width: "100%",
     marginVertical: 70
     
   },
@@ -88,7 +88,7 @@ const ProfileCss = StyleSheet.create({
    alignItems: 'center',
    justifyContent: 'center',
    backgroundColor: '#afeeee',
-   height: 1000
+   height: "125%"
   
  
   },
@@ -102,10 +102,10 @@ const ProfileCss = StyleSheet.create({
   color: "powderblue",
   shadowRadius: 5,
   margin: 5,
-  width: 270,
+  width: "97%",
   alignItems: 'center',
   justifyContent: 'center',
-  height: 85,
+  height: "9%",
   padding: 10,
   shadowOffset: {width: 0,height: 0},
   backgroundColor: '#191970'
@@ -146,10 +146,10 @@ const ProfileCss = StyleSheet.create({
     
   },
   editScreen: {
-    width: 600,
-    height: 1000, 
-    right: 90,
-    bottom: 25,
+    width: "150%",
+    height: "120%", 
+    right: "25%",
+    bottom: "5%",
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'rgba(52, 52, 52, 0.8)'
