@@ -9,7 +9,7 @@
 - [Challenges & The Future](https://github.com/Zackitty/gymbuddies#challenges-and-the-future)
 
 ## The User Interface
-GymBuddies is a Mobile App created using [React-Native](https://reactnative.dev/) to make API calls toe  with a [Django](https://www.djangoproject.com/) Backend server that allows users to record their workouts, lifts, and weight and see both their progress and the progress of friends that they add. 
+GymBuddies is a Mobile App created using [React-Native](https://reactnative.dev/) to make API calls to a [Django](https://www.djangoproject.com/) Backend server that allows users to record their workouts, lifts, and weight and see both their progress and the progress of friends that they add. 
 
 Users will view a splash with pressable buttons allowing them to sign up or in. Upon signing in or up, the the [Redux Store](https://redux.js.org/api/store) changes the current state and sets the key NeedSignIn to false. This will trigger a useEffect on the splash screen that will push the Home Screen to the top of the top of the screen stack and reset it as the bottom of the stack to prevent unwanted side effects from a logged in user heading back to the Splash Screen. 
 
